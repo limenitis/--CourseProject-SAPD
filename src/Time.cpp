@@ -41,8 +41,6 @@ void Time::convert_str2int(char str[6])
 
 Time::Time()
 {
-    delete[] time_str;
-    time_str = new char[6]{'0', '0', ':', '0', '0', '\0'};
     hour = 0;
     minute = 0;
 }

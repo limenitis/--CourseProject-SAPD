@@ -31,10 +31,10 @@ char* Date::convert_int2str(int day, int month, int year)
 
     date_str[5] = '.';
 
-    date_str[6] = num2char(year / 1000);
-    date_str[7] = num2char(year / 100 );
-    date_str[8] = num2char(year / 10  );
-    date_str[9] = num2char(year % 10  );
+    date_str[6] = num2char(year / 1000 % 10 );
+    date_str[7] = num2char(year / 100  % 10 );
+    date_str[8] = num2char(year / 10   % 10 );
+    date_str[9] = num2char(year % 1    % 10 );
 
     return date_str;
 }
@@ -51,11 +51,9 @@ void Date::convert_str2int(char str[11])
 
 Date::Date()
 {
-    delete[] date_str;
-    date_str = new char[11]{'0', '0', '.', '0', '0', '.', '0', '0', '0', '0', '\0'};
-    day = 0;
-    month = 0;
-    year = 0;
+    day = 1;
+    month = 1;
+    year = 2000;
 }
 
 Date::Date(char str[11])
