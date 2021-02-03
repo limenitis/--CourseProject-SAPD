@@ -6,14 +6,16 @@ class Time
 {
 private:
     // format time: char str[6] = {'0','0',':','0','0','\0'};
-    int hour;
-    int minute;
+    char* time_str;
+    int  hour;
+    int  minute;
 
     char* convert_int2str(int hour, int minute);
     void convert_str2int(char str[6]);
 
 public:
     Time();
+    ~Time();
     Time(char str[6]);
     Time(int hour, int minute);
 

@@ -1,33 +1,93 @@
+#pragma once
 #include ".\..\include\Time.h"
+#include ".\..\include\str-tools.h"
 
 using namespace std;
 
 char* Time::convert_int2str(int hour, int minute)
-{}
+{
+    if(hour / 10 == 0) // one-digit number
+    {
+        time_str[0] = '0';
+        time_str[1] = num2char(hour);
+    }
+    else // two-digit number
+    {
+        time_str[0] = num2char(hour / 10);
+        time_str[1] = num2char(hour % 10);
+    }
+
+    time_str[2] = ':';
+
+    if(minute / 10 == 0)
+    {
+        time_str[3] = '0';
+        time_str[4] = num2char(minute);
+    }
+    else
+    {
+        time_str[3] = num2char(minute / 10);
+        time_str[4] = num2char(minute % 10);
+    }
+
+    return time_str;
+}
 
 void Time::convert_str2int(char str[6])
-{}
+{
+    hour   = char2int(str[0]) * 10 + char2int(str[1]);
+    minute = char2int(str[3]) * 10 + char2int(str[4]);
+}
 
 Time::Time()
-{}
+{
+    time_str = new char[6]{'0', '0', ':', '0', '0', '\0'};
+    hour = 0;
+    minute = 0;
+}
 
 Time::Time(char str[6])
-{}
+{
+    time_str = new char[6]{'\0'};    
+    convert_str2int(str);
+}
 
-Time::Time(int hour, int minute)
-{}
+Time::Time(int h, int m)
+{
+    time_str = new char[6]{'\0'};
+    hour = h;
+    minute = m;
+}
 
-void Time::set_time(int hour, int minute)
-{}
+Time::~Time()
+{
+    delete time_str;
+}
+
+void Time::set_time(int h, int m)
+{
+    if ( (0 <= h) && (h < 60) ) { hour = h; }
+    else                        { hour = 0; }
+
+    if ( (0 <= m) && (m < 60) ) { minute = h; }
+    else                        { minute = 0; }
+}
 
 void Time::set_time(char str[6])
-{}
+{
+    convert_str2int(str);
+}
 
 char* Time::get_time()
-{}
+{
+    return convert_int2str(hour, minute);
+}
 
 bool Time::check_time()
-{}
+{
+    if ( 0 <= hour && hour < 60 && 0 <= minute && minute < 60 ) { return true; }
+    else { return false; }
+}
 
 bool operator< (Time t1, Time t2)
 {
@@ -130,102 +190,23 @@ bool operator>=(Time t1, Time t2)
 
 
 std::ostream& operator<< (std::ostream& out, Time &obj)
-{}
+{
+    char* str = obj.convert_int2str(obj.hour, obj.minute);
+
+    int i = 0;
+    while (str[i] != '\0')
+    {
+        out << str[i];
+        i++;
+    }
+   
+    return out;
+}
 
 std::istream& operator>> (std::istream& in,  Time &obj)
-{}
+{
+    cout << "hour   : "; in >> obj.hour;
+    cout << "minute : "; in >> obj.minute;
+    return in;
+}
 
-
-
-
-
-// std::ostream  &operator<<(std::ostream &out,   Time &t)
-// {
-//     convert_time(t);
-//     out << t.str;
-
-//     return out;
-// }
-
-// std::istream  &operator>>(std::istream &in,    Time &t)
-// {
-//     cout << "hour   : "; in >> t.hour;
-//     cout << "minute : "; in >> t.minute;
-//     cout << "second : "; in >> t.second;
-//     convert_time(t);
-//     return in;
-// }
-
-// std::ofstream &operator<<(std::ofstream &fout, Time &t)
-// {
-//     fout << t.str;
-
-//     return fout;
-// }
-
-// std::ifstream &operator>>(std::ifstream &fin,  Time &t)
-// {
-//     char symbol = ' ';
-//     char tmp[2] = {' ', ' '};
-
-//     fin >> tmp[0];
-//     fin >> tmp[1];
-//     t.hour   = char2int(tmp[0])*10 + char2int(tmp[1]);
-//     fin >> symbol; // get ':'
-//     fin >> tmp[0];
-//     fin >> tmp[1];
-//     t.minute = char2int(tmp[0])*10 + char2int(tmp[1]);
-//     fin >> symbol; // get ':'
-//     fin >> tmp[0];
-//     fin >> tmp[1];
-//     t.second = char2int(tmp[0])*10 + char2int(tmp[1]);
-//     convert_time(t);
-//     return fin;
-// }
-
-// void convert_time(Time &t)
-// {
-//     // ints to str
-//     char temp[2] = {'0','0'};
-//     if(t.hour / 10 == 0) // one-digit number
-//     {
-//         temp[0] = '0';
-//         temp[1] = num2char(t.hour);
-//     }
-//     else // two-digit number
-//     {
-//         temp[0] = num2char(t.hour / 10);
-//         temp[1] = num2char(t.hour % 10);
-//     }
-
-//     t.str[0] = temp[0];
-//     t.str[1] = temp[1];
-
-//     if(t.minute / 10 == 0)
-//     {
-//         temp[0] = '0';
-//         temp[1] = num2char(t.minute);
-//     }
-//     else
-//     {
-//         temp[0] = num2char(t.minute / 10);
-//         temp[1] = num2char(t.minute % 10);
-//     }
-
-//     t.str[3] = temp[0];
-//     t.str[4] = temp[1];
-
-//     if(t.second / 10 == 0)
-//     {
-//         temp[0] = '0';
-//         temp[1] = num2char(t.second);
-//     }
-//     else
-//     {
-//         temp[0] = num2char(t.second / 10);
-//         temp[1] = num2char(t.second % 10);
-//     }
-
-//     t.str[6] = temp[0];
-//     t.str[7] = temp[1];
-// }
