@@ -6,7 +6,7 @@ class Time
 {
 private:
     // format time: char str[6] = {'0','0',':','0','0','\0'};
-    char* time_str;
+    char* time_str = new char[6]{'\0'};
     int  hour;
     int  minute;
 

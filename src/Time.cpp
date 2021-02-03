@@ -41,6 +41,7 @@ void Time::convert_str2int(char str[6])
 
 Time::Time()
 {
+    delete[] time_str;
     time_str = new char[6]{'0', '0', ':', '0', '0', '\0'};
     hour = 0;
     minute = 0;
@@ -48,20 +49,18 @@ Time::Time()
 
 Time::Time(char str[6])
 {
-    time_str = new char[6]{'\0'};    
     convert_str2int(str);
 }
 
 Time::Time(int h, int m)
 {
-    time_str = new char[6]{'\0'};
     hour = h;
     minute = m;
 }
 
 Time::~Time()
 {
-    delete time_str;
+    delete[] time_str;
 }
 
 void Time::set_time(int h, int m)
