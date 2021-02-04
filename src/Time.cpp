@@ -9,12 +9,12 @@ char* Time::convert_int2str(int hour, int minute)
     if(hour / 10 == 0) // one-digit number
     {
         time_str[0] = '0';
-        time_str[1] = num2char(hour);
+        time_str[1] = int2char(hour);
     }
     else // two-digit number
     {
-        time_str[0] = num2char(hour / 10);
-        time_str[1] = num2char(hour % 10);
+        time_str[0] = int2char(hour / 10);
+        time_str[1] = int2char(hour % 10);
     }
 
     time_str[2] = ':';
@@ -22,12 +22,12 @@ char* Time::convert_int2str(int hour, int minute)
     if(minute / 10 == 0)
     {
         time_str[3] = '0';
-        time_str[4] = num2char(minute);
+        time_str[4] = int2char(minute);
     }
     else
     {
-        time_str[3] = num2char(minute / 10);
-        time_str[4] = num2char(minute % 10);
+        time_str[3] = int2char(minute / 10);
+        time_str[4] = int2char(minute % 10);
     }
 
     return time_str;
