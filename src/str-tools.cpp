@@ -1,4 +1,6 @@
-bool is_num_c(char num)
+#include <iostream>
+
+bool is_int_char(char num)
 {
     char nums[] = {'1', '2', '3', '4', '5', '6', '7', '8', '9', '0'};
     for (auto i : nums)
@@ -11,7 +13,7 @@ bool is_num_c(char num)
     return false;
 }
 
-bool is_num_i(int num)
+bool is_int(int num)
 {
     int nums[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 0};
     for (auto i : nums)
@@ -24,9 +26,13 @@ bool is_num_i(int num)
     return false;
 }
 
-bool is_char(int c)
+bool is_char(char c)
 {
-    if ((64 < c) && (c < 91) || (96 < c) && (c < 123))
+    if (('a' <= c) && (c <= 'z') || ('A' <= c) && (c <= 'Z'))
+    {
+        return true;
+    }
+    else if (('а' <= c) && (c <= 'я') || ('А' <= c) && (c <= 'Я'))
     {
         return true;
     }
@@ -36,12 +42,93 @@ bool is_char(int c)
     }
 }
 
-char num2char(int i) // 48 char == 0 int
+char int2char(int i) // 48 char == 0 int (ASCII)
 {
     return i + 48;
 }
 
-int char2int(char c) // 48 char == 0 int
+int char2int(char c) // 48 char == 0 int (ASCII)
 {
     return c - 48;
+}
+
+int len_num(int num)
+{
+    int i = 1;
+    while (num / int(pow(10, i)) != 0) { i++; }
+    return i;
+}
+
+int len_str(char* str)
+{
+    int i = 0;
+    while (str[i] != '\0') { i++; }
+    return i;
+}
+
+char* num2str(int num)
+{
+    int len = len_num(num);
+    char* str = new char[len+1]{'\0'};
+
+    for (int i = len-1; i >= 0; i--)
+    {
+        str[len-i-1] = int2char(num / int(pow(10, i)) % 10);
+    }
+
+    return str;
+}
+
+int str2num(char* str)
+{
+    int num = 0;
+    int len = len_str(str);
+
+    int i = 0;
+    while (str[i] != '\0')
+    {
+        num += char2int(str[i]) * pow(10, len-i-1);
+        i++;
+    }
+
+    return num;
+}
+
+bool is_numstr(char* str)
+{
+    int i = 0;
+    while (str[i] != '\0')
+    {
+        if (is_int_char(str[i]) == false)
+        {
+            return false;
+        }
+        i++;
+    }
+    return true;
+}
+
+bool is_charstr(char* str)
+{
+    int i = 0;
+    while (str[i] != '\0')
+    {
+        if (is_char(str[i]) == false)
+        {
+            return false;
+        }
+        i++;
+    }
+    return true;
+}
+
+void outstr(char* str)
+{
+    int i = 0;
+    while (str[i] != '\0')
+    {
+        std::cout << str[i];
+        i++;
+    }
+    std::cout << '\n';
 }
