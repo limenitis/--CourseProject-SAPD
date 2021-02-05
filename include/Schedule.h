@@ -22,7 +22,7 @@ public:
     void  set_schedule(Time start_time, Time finish_time);
     void  set_schedule(char str[12]);
     char* get_schedule();
-    bool  check_sched();
+    bool  check_schedule();
 
     friend std::ostream&  operator<< (std::ostream&  out,  Schedule &obj);
     friend std::istream&  operator>> (std::istream&  in,   Schedule &obj);
