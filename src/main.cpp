@@ -30,7 +30,7 @@ int main()
         char str[11]{ '1', '2', '-', '3', '4', '5', '6', '7', '8', '9', '\0' };
 
         Schedule t1;
-        Schedule t2(8, 235758);
+        Schedule t2(8, 235758); 
         Schedule t3(str);
 
         char* time1 = t1.get_schedule();
