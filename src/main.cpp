@@ -42,9 +42,9 @@ int main()
         cout << t3 << endl;
         cout << endl;
 
-        t1.set_reg(12, 3414);
-        t2.set_reg(10, 334352);
-        t3.set_reg(5 , 2002);
+        t1.set_schedule(12, 3414);
+        t2.set_schedule(10, 334352);
+        t3.set_schedule(5 , 2002);
 
         cout << t1 << endl;
         cout << t2 << endl;
