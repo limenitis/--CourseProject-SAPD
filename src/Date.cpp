@@ -8,12 +8,12 @@ char* Date::convert_int2str(int day, int month, int year)
     if (day / 10 == 0) // one-digit number
     {
         date_str[0] = '0';
-        date_str[1] = num2char(day);
+        date_str[1] = int2char(day);
     }
     else // two-digit number
     {
-        date_str[0] = num2char(day / 10);
-        date_str[1] = num2char(day % 10);
+        date_str[0] = int2char(day / 10);
+        date_str[1] = int2char(day % 10);
     }
 
     date_str[2] = '.';
@@ -21,20 +21,20 @@ char* Date::convert_int2str(int day, int month, int year)
     if (month / 10 == 0) // one-digit number
     {
         date_str[3] = '0';
-        date_str[4] = num2char(month);
+        date_str[4] = int2char(month);
     }
     else // two-digit number
     {
-        date_str[3] = num2char(month / 10);
-        date_str[4] = num2char(month % 10);
+        date_str[3] = int2char(month / 10);
+        date_str[4] = int2char(month % 10);
     }
 
     date_str[5] = '.';
 
-    date_str[6] = num2char(year / 1000 % 10 );
-    date_str[7] = num2char(year / 100  % 10 );
-    date_str[8] = num2char(year / 10   % 10 );
-    date_str[9] = num2char(year % 1    % 10 );
+    date_str[6] = int2char(year / 1000 % 10 );
+    date_str[7] = int2char(year / 100  % 10 );
+    date_str[8] = int2char(year / 10   % 10 );
+    date_str[9] = int2char(year % 1    % 10 );
 
     return date_str;
 }
