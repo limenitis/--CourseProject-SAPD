@@ -1,5 +1,7 @@
 #include <iostream>
-#include ".\..\include\Date.h"
+#include ".\..\include\Schedule.h"
+#include ".\..\include\str-tools.h"
+
 using namespace std;
 
 #define _CRTDBG_MAP_ALLOC
@@ -25,56 +27,30 @@ int main()
 {
 
     {
-        char str[11]{ '1','5','.','0','1', '.', '2', '0', '2', '0', '\0' };
+        char str[11]{ '1', '2', '-', '3', '4', '5', '6', '7', '8', '9', '\0' };
 
-        Date t1;
-        Date t2(12, 1, 2021);
-        Date t3(str);
+        Schedule t1;
+        Schedule t2(8, 235758);
+        Schedule t3(str);
 
-        char* time1 = t1.get_date();
-        char* time2 = t2.get_date();
-        char* time3 = t3.get_date();
-
-        cout << t1 << endl;
-        cout << t2 << endl;
-        cout << t3 << endl;
-
-        cout << endl;
-
-        t1.set_date(80, 80, -100);
-        t2.set_date(-1, -1, -10);
-        t3.set_date(30, 2, 2002);
+        char* time1 = t1.get_reg();
+        char* time2 = t2.get_reg();
+        char* time3 = t3.get_reg();
 
         cout << t1 << endl;
         cout << t2 << endl;
         cout << t3 << endl;
-
         cout << endl;
 
-        int i;
-        i = 0;
-        while(time1[i] != '\0')
-        {
-            cout << time1[i];
-            i++;
-        }
+        t1.set_reg(12, 3414);
+        t2.set_reg(10, 334352);
+        t3.set_reg(5 , 2002);
+
+        cout << t1 << endl;
+        cout << t2 << endl;
+        cout << t3 << endl;
         cout << endl;
 
-        i = 0;
-        while(time2[i] != '\0')
-        {
-            cout << time2[i];
-            i++;
-        }
-        cout << endl;
-
-        i = 0;
-        while(time3[i] != '\0')
-        {
-            cout << time3[i];
-            i++;
-        }
-        cout << endl;
     }
 
     DumpMemoryLeaks
