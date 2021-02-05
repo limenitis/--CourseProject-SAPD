@@ -33,9 +33,9 @@ int main()
         Schedule t2(8, 235758);
         Schedule t3(str);
 
-        char* time1 = t1.get_reg();
-        char* time2 = t2.get_reg();
-        char* time3 = t3.get_reg();
+        char* time1 = t1.get_schedule();
+        char* time2 = t2.get_schedule();
+        char* time3 = t3.get_schedule();
 
         cout << t1 << endl;
         cout << t2 << endl;
