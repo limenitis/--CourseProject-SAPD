@@ -5,6 +5,9 @@ class RegistrationNumber
 {
 private:
     // format reg: char str[11] = {'1', '2', '-', '3', '4', '5', '6', '7', '8', '9', '\0'};
+
+    // char* reg_str = new char[11] {'\0'};
+    char* reg_str = new char[11] {'0', '0', '-', '0', '0', '0', '0', '0', '0', '0', '\0'};
     int area_number;
     int serial_number;
 
@@ -13,6 +16,7 @@ private:
 
 public:
     RegistrationNumber();
+    ~RegistrationNumber();
     RegistrationNumber(char str[11]);
     RegistrationNumber(int area_number, int serial_number);
 
