@@ -8,6 +8,7 @@ class Schedule
 {
 private:
     // format Schedule: char str[12] = {'1', '0', ':', '0', '0', '-', '1', '8', ':', '0', '0', '\0'};
+    char* schedule_str = new char[12] {'0', '0', ':', '0', '0', '-', '0', '0', ':', '0', '0', '\0'};
     Time start_time;
     Time finish_time;
 
