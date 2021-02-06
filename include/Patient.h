@@ -1,3 +1,4 @@
+#pragma once
 #include ".\..\include\RegistrationNumber.h"
 
 class Patient
@@ -11,6 +12,13 @@ protected:
 
 public:
     Patient();
-    Patient(/* params */);
+
+    void set_reg_num   (int area_number, int serial_number);
+    void set_name      (char* patient_name);
+    void set_work      (char* work_place);
+    void set_addres    (char* addres);
+    void set_year_born (int year_born);
+
     bool check_patient_data();
 };
+
