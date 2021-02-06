@@ -27,6 +27,4 @@ public:
 
     friend std::ostream&  operator<< (std::ostream&  out,  Schedule &obj);
     friend std::istream&  operator>> (std::istream&  in,   Schedule &obj);
-    // friend std::ofstream& operator<< (std::ofstream& fout, Schedule &obj);
-    // friend std::ifstream& operator>> (std::ifstream& fin,  Schedule &obj);
 };
