@@ -30,6 +30,8 @@ char* Time::convert_int2str(int hour, int minute)
         time_str[4] = int2char(minute % 10);
     }
 
+    time_str[5] = '\0';
+
     return time_str;
 }
 
@@ -43,6 +45,7 @@ Time::Time()
 {
     hour = 0;
     minute = 0;
+    time_str = convert_int2str(hour, minute);
 }
 
 Time::Time(char str[6])
@@ -58,7 +61,7 @@ Time::Time(int h, int m)
 
 Time::~Time()
 {
-    delete[] time_str;
+    // delete[] time_str;
 }
 
 void Time::set_time(int h, int m)
