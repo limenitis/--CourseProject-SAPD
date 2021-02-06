@@ -4,17 +4,6 @@
 
 using namespace std;
 
-// class Doctor
-// {
-// private:
-//     char*  doctor_name[25]  {'\0'};
-//     char*  post[255]        {'\0'};
-//     int    cabinet_number   {  0 };
-
-// public:
-
-// };
-
 class Data
 {
 public:
