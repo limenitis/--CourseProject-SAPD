@@ -21,7 +21,5 @@ public:
 
     friend std::ostream&  operator<< (std::ostream&  out,  Direction &obj);
     friend std::istream&  operator>> (std::istream&  in,   Direction &obj);
-    // friend std::ofstream& operator<< (std::ofstream& fout, Direction &obj);
-    // friend std::ifstream& operator>> (std::ifstream& fin,  Direction &obj);
 };
 
