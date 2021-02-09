@@ -26,37 +26,30 @@ _CrtDumpMemoryLeaks();
 int main()
 {
 
-    {
-        char str[12]{'1', '0', ':', '0', '0', '-', '1', '8', ':', '0', '0', '\0'};
-
-        Time t1;
-        Time t2;
+    // {
+        // char str[12]{'1', '0', ':', '0', '0', '-', '1', '8', ':', '0', '0', '\0'};
+        // Time t1;
+        // Time t2;
         // Time* t1 = new Time;
         // Time* t2 = new Time;
-
-        Schedule s1;
-        Schedule s2(t1, t2);
-        Schedule s3(str);
-
+        // Schedule s1;
+        // Schedule s2(t1, t2);
+        // Schedule s3(str);
         // char* time1 = s1.get_schedule();
         // char* time2 = s2.get_schedule();
         // char* time3 = s3.get_schedule();
-
-        cout << s1 << endl;
-        cout << s2 << endl;
-        cout << s3 << endl;
-        cout << endl;
-
-        s1.set_schedule(t1, t2);
-        s2.set_schedule(str);
-        s3.set_schedule(str);
-
-        cout << s1 << endl;
-        cout << s2 << endl;
-        cout << s3 << endl;
-        cout << endl;
-
-    }
+        // cout << s1 << endl;
+        // cout << s2 << endl;
+        // cout << s3 << endl;
+        // cout << endl;
+        // s1.set_schedule(t1, t2);
+        // s2.set_schedule(str);
+        // s3.set_schedule(str);
+        // cout << s1 << endl;
+        // cout << s2 << endl;
+        // cout << s3 << endl;
+        // cout << endl;
+    // }
 
     DumpMemoryLeaks
 

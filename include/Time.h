@@ -11,7 +11,7 @@ private:
     int  minute;
 
     char* convert_int2str(int hour, int minute);
-    void convert_str2int(char str[6]);
+    void convert_str2int(char str[6]); 
 
 public:
     Time();
