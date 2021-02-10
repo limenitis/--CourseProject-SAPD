@@ -19,6 +19,12 @@ public:
     void set_addres    (char* addres);
     void set_year_born (int year_born);
 
+    RegistrationNumber get_reg_num   ( void );
+    char* get_name      ( void );
+    char* get_work      ( void );
+    char* get_addres    ( void );
+    int   get_year_born ( void );
+
     bool check_patient_data();
 };
 

@@ -51,3 +51,29 @@ bool Patient::check_patient_data()
     else                    { return false; }
 }
 
+RegistrationNumber Patient::get_reg_num ( void )
+{
+    return reg_num;
+}
+
+char* Patient::get_name ( void )
+{
+    return patient_name;
+}
+
+char* Patient::get_work ( void )
+{
+    return work_place;
+}
+
+char* Patient::get_addres ( void )
+{
+    return addres;
+}
+
+int Patient::get_year_born ( void )
+{
+    return year_born;
+}
+
+
