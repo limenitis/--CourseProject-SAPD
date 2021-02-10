@@ -1,23 +1,41 @@
 ﻿#pragma once
 #include <iostream>
+#include ".\..\include\Patient.h"
+#include ".\..\include\RegistrationNumber.h"
+
 using namespace std;
 
+class HashTableNode
+{
+private:
+	RegistrationNumber key;
+	Patient            *data;
+	bool delete_data;
+
+public:
+	HashTableNode();
+	bool intsert (Patient* data);
+	bool remove  ();
+	bool empty   ( void );
+	bool deleted ( void );
+	auto get_key ( void );
+};
 
 
 class HashTable 
 {
 private:
 	int N = 2500;
-	char* segment[2500]{'\0'};
+	HashTableNode* segment[2500];
 
-	bool correct_key (char* key);
-	int get_hash          (char* key);
-	int get_hash_conflict (char* key);
+	bool correct_key       (HashTableNode *data);
+	int  get_hash          (HashTableNode *data);
+	int  get_hash_conflict (HashTableNode *data);
+
 public:
-
-	bool insert	  (char* key);
-	bool remove   (char* key);
-	int  find_key (char* key);
+	bool insert	  (HashTableNode *data);
+	bool remove   (HashTableNode *data);
+	int  find_key (HashTableNode *data);
 	void print    (int from = 0, int to = 2500);
 };
 
