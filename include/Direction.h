@@ -6,7 +6,7 @@
 using namespace std;
 
 
-class Direction : private Patient, private Doctor 
+class Direction
 {
 private:
     Doctor  *doctor_ptr;
@@ -17,9 +17,9 @@ private:
 public:
     Direction(Doctor *doctor, Patient *patient, Date date, Time time);
 
-    void get_data(RegistrationNumber num, char doctor_name[25], Date date, Time time);
+    void set_data(Doctor *doctor, Patient *patient, Date date, Time time);
+    void get_data(RegistrationNumber& num, char* doctor_name, Date& date, Time& time);
 
     friend std::ostream&  operator<< (std::ostream&  out,  Direction &obj);
-    friend std::istream&  operator>> (std::istream&  in,   Direction &obj);
 };
 
