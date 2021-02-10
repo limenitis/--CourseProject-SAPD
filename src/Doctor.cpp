@@ -49,3 +49,23 @@ bool Doctor::check_doctor_data()
     else                                                 { false; }
 }
 
+Schedule Doctor::get_schedule ( void )
+{
+    return schedule;
+}
+
+int Doctor::get_cabinet_number ( void )
+{
+    return cabinet_number;
+}
+
+char* Doctor::get_doctor_name ( void )
+{
+    return doctor_name;
+}
+
+char* Doctor::get_specialization ( void )
+{
+    return specialization;
+}
+
