@@ -1,4 +1,5 @@
 ﻿#include ".\..\include\Doctor.h"
+#include ".\..\include\str-tools.h"
 
 using namespace std;
 
@@ -67,5 +68,65 @@ char* Doctor::get_doctor_name ( void )
 char* Doctor::get_specialization ( void )
 {
     return specialization;
+}
+
+bool operator< (Doctor doc1, Doctor doc2)
+{
+    int i = 0;
+    while ( doc1.doctor_name[i] != '\0' && 
+            doc2.doctor_name[i] != '\0')
+    {
+        if (doc1.doctor_name[i] < doc2.doctor_name[i])
+        {
+            return true;
+        }
+        else if (doc1.doctor_name[i] > doc2.doctor_name[i])
+        {
+            return false;
+        }
+    }
+    return false;
+}
+
+bool operator> (Doctor doc1, Doctor doc2)
+{
+    int i = 0;
+    while ( doc1.doctor_name[i] != '\0' && 
+            doc2.doctor_name[i] != '\0')
+    {
+        if (doc1.doctor_name[i] > doc2.doctor_name[i])
+        {
+            return true;
+        }
+        else if (doc1.doctor_name[i] < doc2.doctor_name[i])
+        {
+            return false;
+        }
+    }
+    return false;
+}
+
+bool operator==(Doctor doc1, Doctor doc2)
+{
+    if (len_str(doc1.doctor_name) != len_str(doc2.doctor_name))
+    {
+        return false;
+    }
+
+    int i = 0;
+    while ( doc1.doctor_name[i] != '\0' && 
+            doc2.doctor_name[i] != '\0')
+    {
+        if (doc1.doctor_name[i] != doc2.doctor_name[i])
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
+std::ostream&  operator<< (std::ostream&  out,  Doctor &obj)
+{
+    outstr(obj.doctor_name);
 }
 

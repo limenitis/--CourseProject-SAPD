@@ -24,5 +24,12 @@ public:
     char*    get_specialization ( void );
 
     bool check_doctor_data();
+
+    friend bool operator< (Doctor doc1, Doctor doc2);
+    friend bool operator> (Doctor doc1, Doctor doc2);
+    friend bool operator==(Doctor doc1, Doctor doc2);
+
+    friend std::ostream&  operator<< (std::ostream&  out,  Doctor &obj);
 };
+
 
