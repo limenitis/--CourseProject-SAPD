@@ -1,9 +1,23 @@
-#include "AVLTree.h"
+#include ".\..\include\AVLTree.h"
+#include ".\..\include\str-tools.h"
 #include <iostream>
-#include <queue>
-#include <vector>
-
 using namespace std;
+
+AVL_Node::AVL_Node(Doctor doc)
+{
+	key =  doc;
+	right = nullptr;
+    left  = nullptr;
+    h = 1;
+}
+
+AVL_Node::AVL_Node(AVL_Node* data)
+{
+	key   = data->key;
+    right = data->right;
+    left  = data->left;
+    h     = data->h;
+}
 
 // конструктор
 AVLTreeClass::AVLTreeClass()
@@ -15,64 +29,72 @@ AVLTreeClass::AVLTreeClass()
 // деструктор
 AVLTreeClass::~AVLTreeClass()
 {
+	// while (count_elements >= 0)
+	// {
+	// 	remove(root);
+	// }
+	
 	// пройти дерево и собрать адреса, а затем удалить (почистить) эти адреса
 }
 
 // вставка в дерево
-void AVLTreeClass::insert(Data d)
+void AVLTreeClass::insert(AVL_Node node)
 {
-	root = insert(root, d);
+	root = insert(root, &node);
 	count_elements += 1;
 }
 
-AVL_Node* AVLTreeClass::insert(AVL_Node* p, Data d)
+AVL_Node* AVLTreeClass::insert(AVL_Node* node, AVL_Node* new_node)
 {
-	if (p == nullptr) 
+	if (node == nullptr) 
 	{
-		return new AVL_Node(d);
+		return new AVL_Node(new_node);
 	}
-	if (d.key < p->data.key)
+	if (new_node->key < node->key)
 	{
-		p->left = insert(p->left, d.key);
+		node->left = insert(node->left, new_node);
 	}
 	else
 	{
-		p->right = insert(p->right, d.key);
+		node->right = insert(node->right, new_node);
 	}
 
-	return balance(p); //балансировка текущего узла
+	return balance(node); //балансировка текущего узла
 }
 
 // удаляем узел
-bool AVLTreeClass::remove (Data d)
+bool AVLTreeClass::remove (AVL_Node node)
 {
 	bool success = false;
-	root = remove(root, d, success);
+	root = remove(root, &node, success);
 
 	return success;
 }
 
-AVL_Node* AVLTreeClass::remove(AVL_Node* p, Data d, bool &success)
+AVL_Node* AVLTreeClass::remove(AVL_Node* node, AVL_Node* remove_node, bool &success)
 {
-	if (p == nullptr)
+	if (node == nullptr)
 	{
 		return 0;
 	}
-	if (d.key < p->data.key)
-		p->left = remove(p->left, d, success);
-	else if (d.key > p->data.key)
-		p->right = remove(p->right, d, success);
-	else // когда k==p->data
+
+	if (remove_node->key < node->key)
 	{
-		AVL_Node* q = p->left; 
-		AVL_Node* r = p->right;
-		delete p; // удаляем наш узел
+		node->left = remove(node->left, remove_node, success);
+	}
+	else if (remove_node->key > node->key)
+	{
+		node->right = remove(node->right, remove_node, success);
+	}
+	else // когда node->key == p->data
+	{
+		AVL_Node* q = node->left; 
+		AVL_Node* r = node->right;
+		delete node; // удаляем наш узел
 		count_elements -= 1;
 		success = true;
 
-		if (r == nullptr)
-
-			return q;
+		if (r == nullptr) { return q; }
 
 		AVL_Node* min = findMin(r); // ищем минимальный в правом поддереве
 		min->right = removeMin(r);
@@ -81,35 +103,29 @@ AVL_Node* AVLTreeClass::remove(AVL_Node* p, Data d, bool &success)
 		return balance(min);
 	}
 
-	return balance(p); // проверяем балансировку
+	return balance(node); // проверяем балансировку
 }
 
-AVL_Node* AVLTreeClass::find(Data d)
+AVL_Node* AVLTreeClass::find(AVL_Node node)
 {
-	return find(root, d);
+	return find(root, &node);
 }
 
-AVL_Node* AVLTreeClass::find(AVL_Node* p, Data d)
+AVL_Node* AVLTreeClass::find(AVL_Node* node, AVL_Node* find_node)
 {
-	if(p)
+	if(node)
 	{
-		if (p->data.key >  d.key) 
+		if (node->key > find_node->key) 
 		{ 
-			if (find(p->left,  d.key) == nullptr) 
-			{
-				return nullptr; 
-			}
+			return find(node->left, find_node);
 		}
-		else if (p->data.key == d.key) 
+		else if (node->key < find_node->key) 
 		{
-			return p;
+			return find(node->right, find_node);
 		}
-		else
+		else  // node->key == find_node->key
 		{
-			if (find(p->right, d.key) == nullptr) 
-			{
-				return nullptr; 
-			}
+			return node;
 		}
 	}
 	else
@@ -130,7 +146,7 @@ void AVLTreeClass::print(AVL_Node* p, int l)
 	{
 		print(p->right, l + 1);
 		for (int i = 0; i <= l; i++) cout << "           ";
-		cout << p->data.key << "|-----------" << endl;
+		cout << p->key << "|-----------" << endl;
 		print(p->left, l + 1);
 	}
 }
@@ -249,5 +265,4 @@ int AVLTreeClass::max_depth(AVL_Node* AVL_node)
 		else return(rDepth + 1);
 	}
 }
-
 
