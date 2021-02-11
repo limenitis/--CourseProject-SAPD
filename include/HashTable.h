@@ -19,6 +19,8 @@ public:
 	bool empty   ( void );
 	bool deleted ( void );
 	auto get_key ( void );
+
+    friend class HashTable;
 };
 
 
