@@ -19,4 +19,7 @@ int  len_num(int);
 int  len_str(char*);
 void outstr(char*);
 
+bool compare_str_left_over(char*, char*);
+bool compare_str_right_over(char*, char*);
+bool compare_str_equal(char*, char*);
 
