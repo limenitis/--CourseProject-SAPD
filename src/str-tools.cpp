@@ -87,7 +87,7 @@ int str2num(char* str)
     int i = 0;
     while (str[i] != '\0')
     {
-        num += char2int(str[i]) * pow(10, len-i-1);
+        num += char2int((int)(str[i] * pow(10, len-i-1)));
         i++;
     }
 
@@ -138,14 +138,14 @@ bool compare_str_left_over(char* str1, char* str2)
     int i = 0;
     while (str1[i] != '\0' && str2[i] != '\0')
     {
-        if (str1[i] < str2[i])
+        if (str1[i] > str2[i])
         {
-            return false;
+            return true;
         }
         i++;
     }
 
-    return true;
+    return false;
 }
 
 bool compare_str_right_over(char* str1, char* str2)
@@ -153,14 +153,14 @@ bool compare_str_right_over(char* str1, char* str2)
     int i = 0;
     while (str1[i] != '\0' && str2[i] != '\0')
     {
-        if (str1[i] > str2[i])
+        if (str1[i] < str2[i])
         {
-            return false;
+            return true;
         }
         i++;
     }
 
-    return true;
+    return false;
 }
 
 bool compare_str_equal(char* str1, char* str2)
