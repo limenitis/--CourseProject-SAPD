@@ -1,21 +1,26 @@
 ﻿#pragma once
 #include <iostream>
 #include <fstream>
+#include ".\..\include\Direction.h"
 
-LinkedListNode* gen_rand_LinkedListNode();
-char            gen_rand_key(bool);
 
 class LinkedListNode
 {
-public:
-    // Data data;
+private:
+    Direction data;
     LinkedListNode* next;
-    LinkedListNode* prev;
+public:
+    LinkedListNode();
+    LinkedListNode(Direction data);
+
+    friend std::ostream&  operator<< (std::ostream&  out,  LinkedListNode &n);
+    friend class LinkedList;
 };
+
 
 class LinkedList {
 protected:
-    void  swap(LinkedListNode *l, LinkedListNode *r);
+    void  swap(LinkedListNode* prev, LinkedListNode *l, LinkedListNode *r);
 
     LinkedListNode* FIRST;
     LinkedListNode* CURRENT;
@@ -32,26 +37,17 @@ public:
     bool remove();
     bool remove(int pos);
 
-    LinkedListNode  get(int pos);
-    LinkedListNode* search(LinkedListNode element);
+    LinkedListNode* get(int pos);
+    LinkedListNode* search(LinkedListNode *element);
 
-    bool edit(LinkedListNode new_element, int pos);
-    void bubble_sort();
+    bool edit(LinkedListNode* new_element, int pos);
+    void sort();
 
-    void read();
-    void read(char str[]);
-    void save();
-    void save(char str[]);
     void print();
 
     int size();
 
     friend std::ostream&  operator<< (std::ostream&  out,  LinkedList& obj);
-
-    friend std::ofstream& operator<< (std::ofstream& fout, LinkedList& obj);
-    friend std::ifstream& operator>> (std::ifstream& fin,  LinkedList& obj);
 };
 
-
-std::ostream&  operator<< (std::ostream&  out,  LinkedListNode &n);
 
