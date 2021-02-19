@@ -43,6 +43,7 @@ void Date::convert_str2int(char str[11])
 {
     day   = char2int(str[0]) * 10 + char2int(str[1]);
     month = char2int(str[3]) * 10 + char2int(str[4]);
+
     year  = char2int(str[6]) * 1000 + 
             char2int(str[7]) * 100  + 
             char2int(str[8]) * 10   + 
