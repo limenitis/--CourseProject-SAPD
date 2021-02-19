@@ -76,7 +76,7 @@ int str2num(char* str)
     int i = 0;
     while (str[i] != '\0')
     {
-        num += char2int((int)(str[i] * pow(10, len-i-1)));
+        num += char2int(str[i]) * pow(10, len-i-1);
         i++;
     }
 
