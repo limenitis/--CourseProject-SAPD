@@ -28,18 +28,7 @@ bool is_int(int num)
 
 bool is_char(char c)
 {
-    if (('a' <= c) && (c <= 'z') || ('A' <= c) && (c <= 'Z'))
-    {
-        return true;
-    }
-    else if (('а' <= c) && (c <= 'я') || ('А' <= c) && (c <= 'Я'))
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    return (('a' <= c) && (c <= 'z') || ('A' <= c) && (c <= 'Z') || ('а' <= c) && (c <= 'я') || ('А' <= c) && (c <= 'Я'));
 }
 
 char int2char(int i) // 48 char == 0 int (ASCII)
