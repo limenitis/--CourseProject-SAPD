@@ -34,7 +34,7 @@ char* Date::convert_int2str(int day, int month, int year)
     date_str[6] = int2char(year / 1000 % 10 );
     date_str[7] = int2char(year / 100  % 10 );
     date_str[8] = int2char(year / 10   % 10 );
-    date_str[9] = int2char(year % 1    % 10 );
+    date_str[9] = int2char(year / 1    % 10 );
 
     return date_str;
 }
@@ -51,9 +51,9 @@ void Date::convert_str2int(char str[11])
 
 Date::Date()
 {
-    day = 1;
-    month = 1;
-    year = 2000;
+    day = 0;
+    month = 0;
+    year = 0;
 }
 
 Date::Date(char str[11])
@@ -80,15 +80,15 @@ void Date::set_date(int d, int m, int y)
     int maxdays[13]{ 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 
     if ( 1 <= y ){ year = y;    }
-    else         { year = 2020; }
+    else         { year = 0; }
 
     if ( isleap(year) ) { maxdays[2] = 29; }
 
     if ( (1 <= m) && (m <= 12) ) { month = m; }
-    else                         { month = 1; }
+    else                         { month = 0; }
 
     if ( (1 <= d) && (d <= maxdays[month]) ){ day = d; }
-    else                                    { day = 1; }
+    else                                    { day = 0; }
 }
 
 void Date::set_date(char str[11])
