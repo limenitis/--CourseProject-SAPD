@@ -1,5 +1,12 @@
 #include "pch.h"
+
 #include ".\..\src\str-tools.cpp"
+#include ".\..\src\Time.cpp"
+#include ".\..\src\Date.cpp"
+#include ".\..\src\Schedule.cpp"
+#include ".\..\src\Time.cpp"
+#include ".\..\src\RegistrationNumber.cpp"
+
 #include <string>
 
 std::string str1 = "";
@@ -74,3 +81,41 @@ namespace test_str_tools
   }
 
 }
+
+namespace test_Structures
+{
+    TEST(TestDate, Constructor_Default) {
+        Date obj;
+        EXPECT_STREQ("00.00.0000", obj.get_date());
+    }
+
+    TEST(TestDate, Constructor_int) {
+        Date obj(12, 1, 2021);
+        EXPECT_STREQ("12.01.2021", obj.get_date());
+    }
+
+    TEST(TestDate, Constructor_str) {
+        char str[11]{ '1','5','.','0','1', '.', '2', '0', '2', '0', '\0' };
+        Date obj(str);
+        EXPECT_STREQ("15.01.2020", obj.get_date());
+    }
+
+    TEST(TestDate, SetDate_str_WithPositive) {
+        Date obj;
+        obj.set_date(80, 80, -100);
+        EXPECT_STREQ("00.00.0000", obj.get_date());
+    }
+
+    TEST(TestDate, SetDate_str_WithNegative) {
+        Date obj;
+        obj.set_date(-1, -1, -10);
+        EXPECT_STREQ("00.00.0000", obj.get_date());
+    }
+
+    TEST(TestDate, SetDate_int) {
+        Date obj;
+        obj.set_date(30, 2, 2002);
+        EXPECT_STREQ("00.02.2002", obj.get_date());
+    }
+}
+
