@@ -235,9 +235,9 @@ namespace test_Structures
     TEST(TestTime, SetDate_str_WithPositive) {
         Time obj;
         obj.set_time(20, 50);
-        EXPECT_STREQ("20.50", obj.get_time());
+        EXPECT_STREQ("20:50", obj.get_time());
         obj.set_time(12, 24);
-        EXPECT_STREQ("12.24", obj.get_time());
+        EXPECT_STREQ("12:24", obj.get_time());
     }
 
     TEST(TestTime, SetDate_int) {

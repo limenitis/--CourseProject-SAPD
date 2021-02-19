@@ -45,7 +45,7 @@ Time::Time()
 {
     hour = 0;
     minute = 0;
-    time_str = convert_int2str(hour, minute);
+    // time_str = convert_int2str(hour, minute);
 }
 
 Time::Time(char str[6])
@@ -69,7 +69,7 @@ void Time::set_time(int h, int m)
     if ( (0 <= h) && (h < 60) ) { hour = h; }
     else                        { hour = 0; }
 
-    if ( (0 <= m) && (m < 60) ) { minute = h; }
+    if ( (0 <= m) && (m < 60) ) { minute = m; }
     else                        { minute = 0; }
 }
 
