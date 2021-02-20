@@ -37,15 +37,15 @@ char* Time::convert_int2str(int hour, int minute)
 
 void Time::convert_str2int(char str[6])
 {
-    hour   = char2int(str[0]) * 10 + char2int(str[1]);
-    minute = char2int(str[3]) * 10 + char2int(str[4]);
+    int h = char2int(str[0]) * 10 + char2int(str[1]);
+    int m = char2int(str[3]) * 10 + char2int(str[4]);
+
+    this->set_time(h, m);
 }
 
 Time::Time()
 {
-    hour = 0;
-    minute = 0;
-    // time_str = convert_int2str(hour, minute);
+    this->set_time(0, 0);
 }
 
 Time::Time(char str[6])
@@ -55,8 +55,7 @@ Time::Time(char str[6])
 
 Time::Time(int h, int m)
 {
-    hour = h;
-    minute = m;
+    this->set_time(h, m);
 }
 
 Time::~Time()
@@ -66,7 +65,7 @@ Time::~Time()
 
 void Time::set_time(int h, int m)
 {
-    if ( (0 <= h) && (h < 60) ) { hour = h; }
+    if ( (0 <= h) && (h < 24) ) { hour = h; }
     else                        { hour = 0; }
 
     if ( (0 <= m) && (m < 60) ) { minute = m; }
@@ -85,7 +84,7 @@ char* Time::get_time()
 
 bool Time::check_time()
 {
-    if ( 0 <= hour && hour < 60 && 0 <= minute && minute < 60 ) { return true; }
+    if ( 0 <= hour && hour < 24 && 0 <= minute && minute < 60 ) { return true; }
     else { return false; }
 }
 
@@ -205,8 +204,13 @@ std::ostream& operator<< (std::ostream& out, Time &obj)
 
 std::istream& operator>> (std::istream& in,  Time &obj)
 {
-    cout << "hour   : "; in >> obj.hour;
-    cout << "minute : "; in >> obj.minute;
+    int h, m;
+
+    cout << "hour   : "; in >> h;
+    cout << "minute : "; in >> m;
+
+    obj.set_time(h, m);
+
     return in;
 }
 
