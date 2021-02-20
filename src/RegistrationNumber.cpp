@@ -6,6 +6,7 @@ using namespace std;
 char* RegistrationNumber::convert_int2str(int area_number, int serial_number)
 {
     // format reg: char str[11] = {'1', '2', '-', '3', '4', '5', '6', '7', '8', '9', '\0'};
+    reg_str[10] = '\0';
 
     char* str = num2str(area_number);
     int i = 1;
@@ -41,19 +42,20 @@ void  RegistrationNumber::convert_str2int(char str[11])
 {
     str[2] = '0'; // repair '-' in str
     int num = str2num(str);
-    area_number   = num / int(pow(10, 8));
-    serial_number = num % int(pow(10, 8));
+    int a = num / int(pow(10, 8));
+    int s = num % int(pow(10, 8));
+
+    this->set_reg(a, s);
 }
 
 RegistrationNumber::RegistrationNumber()
 {
-    area_number = 0;
-    serial_number = 0;
+    this->set_reg(0, 0);
 }
 
 RegistrationNumber::~RegistrationNumber()
 {
-    delete[] reg_str;
+    // delete[] reg_str;
 }
 
 RegistrationNumber::RegistrationNumber(char str[11])
@@ -63,8 +65,7 @@ RegistrationNumber::RegistrationNumber(char str[11])
 
 RegistrationNumber::RegistrationNumber(int a, int s)
 {
-    area_number = a;
-    serial_number = s;
+    this->set_reg(a, s);
 }
 
 void  RegistrationNumber::set_reg(int a, int s)
@@ -110,8 +111,12 @@ std::ostream&  operator<< (std::ostream&  out,  RegistrationNumber &obj)
 
 std::istream&  operator>> (std::istream&  in,   RegistrationNumber &obj)
 {
-    cout << "area_number   : "; in >> obj.area_number;
-    cout << "serial_number : "; in >> obj.serial_number;
+    int a, s;
+    cout << "area_number   : "; in >> a;
+    cout << "serial_number : "; in >> s;
+
+    obj.set_reg(a, s);
+
     return in;
 
 }

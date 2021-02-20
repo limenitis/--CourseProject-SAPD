@@ -7,7 +7,8 @@ private:
     // format reg: char str[11] = {'1', '2', '-', '3', '4', '5', '6', '7', '8', '9', '\0'};
 
     // char* reg_str = new char[11] {'\0'};
-    char* reg_str = new char[11] {'0', '0', '-', '0', '0', '0', '0', '0', '0', '0', '\0'};
+    // char* reg_str = new char[11] {'0', '0', '-', '0', '0', '0', '0', '0', '0', '0', '\0'};
+    char reg_str[11];
     int area_number;
     int serial_number;
 
