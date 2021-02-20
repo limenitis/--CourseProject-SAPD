@@ -6,7 +6,8 @@ class Date
 {
 private:
     // format date: char str[11] = {'0', '0', '.', '0', '0', '.', '0', '0', '0', '0', '\0'};
-    char* date_str = new char[11]{'\0'};
+    // char* date_str = new char[11]{'\0'};
+    char date_str[11];
     int day;
     int month;
     int year;
