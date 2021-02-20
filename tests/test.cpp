@@ -241,7 +241,7 @@ namespace test_str_tools
   	EXPECT_STREQ( "484937985", num2str( 484937985)); 
   	EXPECT_STREQ( "123456789", num2str( 123456789)); 
   	EXPECT_STREQ("1234567890", num2str(1234567890)); 
-  	EXPECT_STREQ("4020572057", num2str(4020572057)); 
+    EXPECT_STREQ("4020572057", num2str(4020572057));
   	EXPECT_STREQ("8402750740", num2str(8402750740)); 
   	EXPECT_STREQ("1111111111", num2str(1111111111)); 
   	EXPECT_STREQ("9857654321", num2str(9857654321)); 
@@ -264,18 +264,76 @@ namespace test_Structures
     }
 
     TEST(TestDate, Constructor_int) {
-        Date obj(12, 1, 2021);
-        EXPECT_STREQ("12.01.2021", obj.get_date());
+        Date obj1(12, 1, 2021);
+        EXPECT_STREQ("12.01.2021", obj1.get_date());
+
+        Date obj2(30, 2, 2021);
+        EXPECT_STREQ("00.02.2021", obj2.get_date());
+
+        Date obj3(32, 1, 2021);
+        EXPECT_STREQ("00.01.2021", obj3.get_date());
+
+        Date obj4(12, 15, 2021);
+        EXPECT_STREQ("00.00.2021", obj4.get_date());
+
+        Date obj5(12, 1, -2021);
+        EXPECT_STREQ("12.01.0000", obj5.get_date());
+
+        Date obj6(32, 15, -2021);
+        EXPECT_STREQ("00.00.0000", obj6.get_date());
     }
 
     TEST(TestDate, Constructor_str) {
-        char str[11]{ '1','5','.','0','1', '.', '2', '0', '2', '0', '\0' };
-        Date obj(str);
-        EXPECT_STREQ("15.01.2020", obj.get_date());
+        std::string str;
+
+        str = "12.01.2021";
+        Date obj1(const_cast<char*>(str.c_str()));
+        EXPECT_STREQ("12.01.2021", obj1.get_date());
+        
+        str = "30.02.2021";
+        Date obj2(const_cast<char*>(str.c_str()));
+        EXPECT_STREQ("00.02.2021", obj2.get_date());
+
+        str = "32.01.2021";
+        Date obj3(const_cast<char*>(str.c_str()));
+        EXPECT_STREQ("00.01.2021", obj3.get_date());
+
+        str = "12.15.2021";
+        Date obj4(const_cast<char*>(str.c_str()));
+        EXPECT_STREQ("00.00.2021", obj4.get_date());
+
+        str = "12.01.-200";
+        Date obj5(const_cast<char*>(str.c_str()));
+        EXPECT_STREQ("12.01.0000", obj5.get_date());
+
+        str = "32.15.-200";
+        Date obj6(const_cast<char*>(str.c_str()));
+        EXPECT_STREQ("00.00.0000", obj6.get_date());        
     }
 
-    TEST(TestDate, SetDate_str) {
+    TEST(TestDate, SetDate_int) {
         Date obj;
+
+        obj.set_date(12, 1, 2021);
+        EXPECT_STREQ("12.01.2021", obj.get_date());
+
+        obj.set_date(30, 2, 2021);
+        EXPECT_STREQ("00.02.2021", obj.get_date());
+
+        obj.set_date(32, 1, 2021);
+        EXPECT_STREQ("00.01.2021", obj.get_date());
+
+        obj.set_date(12, 15, 2021);
+        EXPECT_STREQ("00.00.2021", obj.get_date());
+
+        obj.set_date(12, 1, -2021);
+        EXPECT_STREQ("12.01.0000", obj.get_date());
+
+        obj.set_date(32, 15, -2021);
+        EXPECT_STREQ("00.00.0000", obj.get_date());
+
+        obj.set_date(30, 2, 2002);
+        EXPECT_STREQ("00.02.2002", obj.get_date());
 
         obj.set_date(80, 80, -100);
         EXPECT_STREQ("00.00.0000", obj.get_date());
@@ -284,13 +342,34 @@ namespace test_Structures
         EXPECT_STREQ("00.00.0000", obj.get_date());
     }
 
-    TEST(TestDate, SetDate_int) {
+    TEST(TestDate, SetDate_str) {
+        std::string str;
         Date obj;
-        obj.set_date(30, 2, 2002);
-        EXPECT_STREQ("00.02.2002", obj.get_date());
-    }
 
-    // ==============================================
+        str = "12.01.2021";
+        obj.set_date(const_cast<char*>(str.c_str()));
+        EXPECT_STREQ("12.01.2021", obj.get_date());
+        
+        str = "30.02.2021";
+        obj.set_date(const_cast<char*>(str.c_str()));
+        EXPECT_STREQ("00.02.2021", obj.get_date());
+
+        str = "32.01.2021";
+        obj.set_date(const_cast<char*>(str.c_str()));
+        EXPECT_STREQ("00.01.2021", obj.get_date());
+
+        str = "12.15.2021";
+        obj.set_date(const_cast<char*>(str.c_str()));
+        EXPECT_STREQ("00.00.2021", obj.get_date());
+
+        str = "12.01.-200";
+        obj.set_date(const_cast<char*>(str.c_str()));
+        EXPECT_STREQ("12.01.0000", obj.get_date());
+
+        str = "32.15.-200";
+        obj.set_date(const_cast<char*>(str.c_str()));
+        EXPECT_STREQ("00.00.0000", obj.get_date());        
+    }
 
     TEST(TestTime, Constructor_Default) {
         Time obj;
@@ -298,31 +377,117 @@ namespace test_Structures
     }
 
     TEST(TestTime, Constructor_int) {
-        Time obj(12, 00);
-        EXPECT_STREQ("12:00", obj.get_time());
+        Time obj1(12, 25);
+        EXPECT_STREQ("12:25", obj1.get_time());
+
+        Time obj2(24, 60);
+        EXPECT_STREQ("00:00", obj2.get_time());
+
+        Time obj3(-1, -1);
+        EXPECT_STREQ("00:00", obj3.get_time());
+
+        Time obj4(23, 59);
+        EXPECT_STREQ("23:59", obj4.get_time());
+
+        Time obj5(24, 59);
+        EXPECT_STREQ("00:59", obj5.get_time());
+
+        Time obj6(25, 59);
+        EXPECT_STREQ("00:59", obj6.get_time());
+
+        Time obj7(22, 60);
+        EXPECT_STREQ("22:00", obj7.get_time());
     }
 
     TEST(TestTime, Constructor_str) {
-        char str[6]{ '1','5',':','0','0','\0' };
-        Time obj(str);
-        EXPECT_STREQ("15:00", obj.get_time());
-    }
+        std::string str;
 
-    TEST(TestTime, SetDate_str_WithPositive) {
-        Time obj;
-        obj.set_time(20, 50);
-        EXPECT_STREQ("20:50", obj.get_time());
-        obj.set_time(12, 24);
-        EXPECT_STREQ("12:24", obj.get_time());
+        str = "12:25";
+        Time obj1(const_cast<char*>(str.c_str()));
+        EXPECT_STREQ("12:25", obj1.get_time());
+
+        str = "24:60";
+        Time obj2(const_cast<char*>(str.c_str()));
+        EXPECT_STREQ("00:00", obj2.get_time());
+
+        str = "-1:-1";
+        Time obj3(const_cast<char*>(str.c_str()));
+        EXPECT_STREQ("00:00", obj3.get_time());
+
+        str = "23:59";
+        Time obj4(const_cast<char*>(str.c_str()));
+        EXPECT_STREQ("23:59", obj4.get_time());
+
+        str = "24:59";
+        Time obj5(const_cast<char*>(str.c_str()));
+        EXPECT_STREQ("00:59", obj5.get_time());
+
+        str = "25:59";
+        Time obj6(const_cast<char*>(str.c_str()));
+        EXPECT_STREQ("00:59", obj6.get_time());
+
+        str = "22:60";
+        Time obj7(const_cast<char*>(str.c_str()));
+        EXPECT_STREQ("22:00", obj7.get_time());
     }
 
     TEST(TestTime, SetDate_int) {
         Time obj;
-        obj.set_time(00, 02);
-        EXPECT_STREQ("00:02", obj.get_time());
+
+        obj.set_time(12, 25);
+        EXPECT_STREQ("12:25", obj.get_time());
+
+        obj.set_time(24, 60);
+        EXPECT_STREQ("00:00", obj.get_time());
+
+        obj.set_time(-1, -1);
+        EXPECT_STREQ("00:00", obj.get_time());
+
+        obj.set_time(23, 59);
+        EXPECT_STREQ("23:59", obj.get_time());
+
+        obj.set_time(24, 59);
+        EXPECT_STREQ("00:59", obj.get_time());
+
+        obj.set_time(25, 59);
+        EXPECT_STREQ("00:59", obj.get_time());
+
+        obj.set_time(22, 60);
+        EXPECT_STREQ("22:00", obj.get_time());
     }
 
-    // ==============================================
+    TEST(TestTime, SetDate_str) {
+        std::string str;
+        Time obj;
+
+        str = "12:25";
+        obj.set_time(const_cast<char*>(str.c_str()));
+        EXPECT_STREQ("12:25", obj.get_time());
+
+        str = "24:60";
+        obj.set_time(const_cast<char*>(str.c_str()));
+        EXPECT_STREQ("00:00", obj.get_time());
+
+        str = "-1:-1";
+        obj.set_time(const_cast<char*>(str.c_str()));
+        EXPECT_STREQ("00:00", obj.get_time());
+
+        str = "23:59";
+        obj.set_time(const_cast<char*>(str.c_str()));
+        EXPECT_STREQ("23:59", obj.get_time());
+
+        str = "24:59";
+        obj.set_time(const_cast<char*>(str.c_str()));
+        EXPECT_STREQ("00:59", obj.get_time());
+
+        str = "25:59";
+        obj.set_time(const_cast<char*>(str.c_str()));
+        EXPECT_STREQ("00:59", obj.get_time());
+
+        str = "22:60";
+        obj.set_time(const_cast<char*>(str.c_str()));
+        EXPECT_STREQ("22:00", obj.get_time());
+    }
 
     TEST(TestRegistrationNumber, Constructor_Default) {
         RegistrationNumber obj;
@@ -330,29 +495,103 @@ namespace test_Structures
     }
 
     TEST(TestRegistrationNumber, Constructor_int) {
-        RegistrationNumber obj(12, 353);
-        EXPECT_STREQ("12-0000353", obj.get_reg());
+        RegistrationNumber obj1(12, 3456789);
+        EXPECT_STREQ("12-3456789", obj1.get_reg());
+
+        RegistrationNumber obj2(00, 0);
+        EXPECT_STREQ("00-0000000", obj2.get_reg());
+
+        RegistrationNumber obj3(100, 34567891);
+        EXPECT_STREQ("00-0000000", obj3.get_reg());
+
+        RegistrationNumber obj4(-1, -1);
+        EXPECT_STREQ("00-0000000", obj4.get_reg());
+
+        RegistrationNumber obj5(2, 1020);
+        EXPECT_STREQ("02-0001020", obj5.get_reg());
+
+        RegistrationNumber obj6(12, 353);
+        EXPECT_STREQ("12-0000353", obj6.get_reg());
     }
 
     TEST(TestRegistrationNumber, Constructor_str) {
-        char str[11]{ '1', '2', '-', '3', '4', '5', '6', '7', '8', '9', '\0' };
-        RegistrationNumber obj(str);
-        EXPECT_STREQ("12-3456789", obj.get_reg());
-    }
+        std::string str;
 
-    TEST(TestRegistrationNumber, SetDate_str) {
-        RegistrationNumber obj;
-        obj.set_reg(20, 50);
-        EXPECT_STREQ("20-0000050", obj.get_reg());
+        str = "12-3456789";
+        RegistrationNumber obj1(const_cast<char*>(str.c_str()));
+        EXPECT_STREQ("12-3456789", obj1.get_reg());
+
+        str = "00-0000000";
+        RegistrationNumber obj2(const_cast<char*>(str.c_str()));
+        EXPECT_STREQ("00-0000000", obj2.get_reg());
+
+        str = "00-0000000";
+        RegistrationNumber obj3(const_cast<char*>(str.c_str()));
+        EXPECT_STREQ("00-0000000", obj3.get_reg());
+
+        str = "00-0000000";
+        RegistrationNumber obj4(const_cast<char*>(str.c_str()));
+        EXPECT_STREQ("00-0000000", obj4.get_reg());
+
+        str = "02-0001020";
+        RegistrationNumber obj5(const_cast<char*>(str.c_str()));
+        EXPECT_STREQ("02-0001020", obj5.get_reg());
+
+        str = "12-0000353";
+        RegistrationNumber obj6(const_cast<char*>(str.c_str()));
+        EXPECT_STREQ("12-0000353", obj6.get_reg());
     }
 
     TEST(TestRegistrationNumber, SetDate_int) {
         RegistrationNumber obj;
-        obj.set_reg(00, 2552302);
-        EXPECT_STREQ("00-2552302", obj.get_reg());
+
+        obj.set_reg(12, 3456789);
+        EXPECT_STREQ("12-3456789", obj.get_reg());
+
+        obj.set_reg(00, 0);
+        EXPECT_STREQ("00-0000000", obj.get_reg());
+
+        obj.set_reg(100, 34567891);
+        EXPECT_STREQ("00-0000000", obj.get_reg());
+
+        obj.set_reg(-1, -1);
+        EXPECT_STREQ("00-0000000", obj.get_reg());
+
+        obj.set_reg(2, 1020);
+        EXPECT_STREQ("02-0001020", obj.get_reg());
+
+        obj.set_reg(12, 353);
+        EXPECT_STREQ("12-0000353", obj.get_reg());
     }
 
-    // ==============================================
+    TEST(TestRegistrationNumber, SetDate_str) {
+        std::string str;
+        RegistrationNumber obj;
+
+        str = "12-3456789";
+        obj.set_reg(const_cast<char*>(str.c_str()));
+        EXPECT_STREQ("12-3456789", obj.get_reg());
+
+        str = "00-0000000";
+        obj.set_reg(const_cast<char*>(str.c_str()));
+        EXPECT_STREQ("00-0000000", obj.get_reg());
+
+        str = "00-0000000";
+        obj.set_reg(const_cast<char*>(str.c_str()));
+        EXPECT_STREQ("00-0000000", obj.get_reg());
+
+        str = "00-0000000";
+        obj.set_reg(const_cast<char*>(str.c_str()));
+        EXPECT_STREQ("00-0000000", obj.get_reg());
+
+        str = "02-0001020";
+        obj.set_reg(const_cast<char*>(str.c_str()));
+        EXPECT_STREQ("02-0001020", obj.get_reg());
+
+        str = "12-0000353";
+        obj.set_reg(const_cast<char*>(str.c_str()));
+        EXPECT_STREQ("12-0000353", obj.get_reg());
+    }
 
     TEST(TestSchedule, Constructor_Default) {
         Schedule obj;
@@ -367,15 +606,10 @@ namespace test_Structures
     }
 
     TEST(TestSchedule, Constructor_str) {
-        char str[12] = {'1', '0', ':', '0', '0', '-', '1', '8', ':', '0', '0', '\0'};        
-        Schedule obj(str);
-        EXPECT_STREQ("10:00-18:00", obj.get_schedule());
-    }
+        std::string str = "10:00-18:00";
 
-    TEST(TestSchedule, SetDate_str) {
-        Schedule obj;
-        obj.set_schedule("12:00-15:00");
-        EXPECT_STREQ("12:00-15:00", obj.get_schedule());
+        Schedule obj(const_cast<char*>(str.c_str()));
+        EXPECT_STREQ("10:00-18:00", obj.get_schedule());
     }
 
     TEST(TestSchedule, SetDate_Time) {
@@ -385,4 +619,9 @@ namespace test_Structures
         EXPECT_STREQ("10:00-16:00", obj.get_schedule());
     }
 
+    TEST(TestSchedule, SetDate_str) {
+        Schedule obj;
+        obj.set_schedule("12:00-15:00");
+        EXPECT_STREQ("12:00-15:00", obj.get_schedule());
+    }
 }
