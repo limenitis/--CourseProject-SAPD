@@ -47,7 +47,7 @@ void Patient::set_year_born (int val)
 
 bool Patient::check_patient_data()
 {
-    if (year_born < 1000)   { return true;  }
+    if (year_born > 1000)   { return true;  }
     else                    { return false; }
 }
 
