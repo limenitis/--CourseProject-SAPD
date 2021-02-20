@@ -489,6 +489,22 @@ namespace test_Structures
         EXPECT_STREQ("22:00", obj.get_time());
     }
 
+    TEST(TestTime, operators) {
+        Time t1, t2;
+
+        t1.set_time(12, 00);
+        t2.set_time(15, 00);
+        EXPECT_TRUE(t1 < t2);
+
+        t1.set_time(10, 00);
+        t2.set_time(19, 00);
+        EXPECT_TRUE(t1 < t2);
+
+        t1.set_time(15, 00);
+        t2.set_time(12, 00);
+        EXPECT_TRUE(t1 > t2);
+    }
+
     TEST(TestRegistrationNumber, Constructor_Default) {
         RegistrationNumber obj;
         EXPECT_STREQ("00-0000000", obj.get_reg());
