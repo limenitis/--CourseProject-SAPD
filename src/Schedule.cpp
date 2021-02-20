@@ -63,14 +63,20 @@ Schedule::Schedule(char str[12])
 
 Schedule::Schedule(Time s, Time f)
 {
-    start_time = s;
-    finish_time = f;
+    this->set_schedule(s, f);
 }
 
 void  Schedule::set_schedule(Time s, Time f)
 {
-    start_time = s;
-    finish_time = f;
+    if(s < f)
+    {
+        start_time = s;
+        finish_time = f;
+    }
+    else
+    {
+        // default time : 00:00
+    }
 }
 
 void  Schedule::set_schedule(char str[12])
@@ -85,7 +91,7 @@ char* Schedule::get_schedule()
 
 bool  Schedule::check_schedule()
 {
-    return true;
+    return start_time.check_time() && finish_time.check_time() && (start_time < finish_time);
 }
 
 std::ostream&  operator<< (std::ostream&  out,  Schedule &obj)
@@ -104,8 +110,14 @@ std::ostream&  operator<< (std::ostream&  out,  Schedule &obj)
 
 std::istream&  operator>> (std::istream&  in,   Schedule &obj)
 {
-    cout << "start_time  : "; in >> obj.start_time;
-    cout << "finish_time : "; in >> obj.finish_time;
+    Time t1;
+    Time t2;
+
+    cout << "start_time  : "; in >> t1;
+    cout << "finish_time : "; in >> t2;
+
+    obj.set_schedule(t1, t2);
+
     return in;
 }
 
