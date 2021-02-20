@@ -2,13 +2,12 @@
 
 
 HashTable:
-    ☐ Need resize?
-    ☐ Need correct key?
+    ✔ Need resize?                                         -- yes
+    ✔ Need correct key?                                    -- check to format + unical 
 AVLTree:
-    ☐ Destructor: How delete AVLTree (list or root method)
-LinkedList
-    ☐ What is Данные о выдаче или возврате направлений к врачу
-    ☐ How sorting linked list (compare method)
+    ✔ Destructor: How delete AVLTree (list or root method) -- обратный порядок обхода и удаление
+LinkedList:
+    ✔ How sorting linked list (compare method)             -- int ASCII
 Another:
-    ☐ Need save data??
+    ✘ Need save data??                                     -- no
 

@@ -1,0 +1,208 @@
+class Time:
+{
+    ✔ Tests @done(20-02-21 22:10)
+
+    ✔ int hour; @done(03-02-21 01:57)
+    ✔ int minute; @done(03-02-21 01:57)
+    ✔ void convert_int2str(int hour, int minute); @started(03-02-21 19:05) @done(03-02-21 21:16) @lasted(2h11m52s)
+    ✔ void convert_str2int(char str[6]); @started(03-02-21 19:05) @done(03-02-21 21:16) @lasted(2h11m52s)
+    ✔ Time(); @done(20-02-21 20:02)
+    ✔ Time(char str[6]); @done(20-02-21 20:02)
+    ✔ Time(int hour, int minute); @done(20-02-21 20:02)
+    ✔ void  set_time(int hour, int minute); @done(20-02-21 20:02)
+    ✔ void  set_time(char str[6]); @done(20-02-21 20:02)
+    ✔ char* get_time(); @done(04-02-21 19:01)
+    ✔ bool  check_time(); @done(20-02-21 20:02)
+    ☐ friend bool operator< (Time t1, Time t2);
+    ☐ friend bool operator> (Time t1, Time t2);
+    ☐ friend bool operator<=(Time t1, Time t2);
+    ☐ friend bool operator>=(Time t1, Time t2);
+    ✔ friend std::ostream&  operator<< (std::ostream&  out,  Time &obj); @started(03-02-21 19:02) @done(20-02-21 20:17) @lasted(2w3d1h15m4s)
+    ✔ friend std::istream&  operator>> (std::istream&  in,   Time &obj); @started(03-02-21 19:02) @done(03-02-21 21:16) @lasted(2h14m58s)
+};
+class Date:
+{
+    ✔ Tests @done(20-02-21 20:05)
+
+    ✔ int day; @done(04-02-21 18:58)
+    ✔ int month; @done(04-02-21 18:58)
+    ✔ int year; @done(04-02-21 18:58)
+    ✔ void convert_int2str(int day, int month, int year); @done(04-02-21 18:58)
+    ✔ void convert_str2int(char str[11]); @done(04-02-21 18:58)
+    ✔ Date(); @done(20-02-21 20:02)
+    ✔ Date(char str[11]); @done(20-02-21 20:02)
+    ✔ Date(int day, int month, int year); @done(20-02-21 20:02)
+    ✔ void  set_date(int day, int month, int year); @done(20-02-21 20:02)
+    ✔ void  set_date(char str[11]); @done(20-02-21 20:02)
+    ✔ char* get_date(); @done(04-02-21 18:58)
+    ✔ bool  check_date(); @done(20-02-21 20:02)
+    ✔ friend std::ostream&  operator<< (std::ostream&  out,  Date &obj); @done(04-02-21 18:58)
+    ✔ friend std::istream&  operator>> (std::istream&  in,   Date &obj); @done(04-02-21 18:58)
+};
+class RegistrationNumber:
+{
+    ✔ Tests @done(20-02-21 22:10)
+
+    ✔ int area_number; @done(05-02-21 18:05)
+    ✔ int serial_number; @done(05-02-21 18:05)
+    ✔ void convert_int2str(int area_number, int serial_number); @done(05-02-21 18:05)
+    ✔ void convert_str2int(char str[11]); @done(05-02-21 18:05)
+    ✔ RegistrationNumber(); @done(20-02-21 20:03)
+    ✔ RegistrationNumber(char str[11]); @done(20-02-21 20:03)
+    ✔ RegistrationNumber(int area_number, int serial_number); @done(20-02-21 20:03)
+    ✔ void  set_reg(int area_number, int serial_number); @done(20-02-21 20:03)
+    ✔ void  set_reg(char str[11]); @done(20-02-21 20:03)
+    ✔ char* get_reg(); @done(20-02-21 20:03)
+    ✔ bool  check_reg(); @done(20-02-21 20:03)
+    ✔ friend std::ostream&  operator<< (std::ostream&  out,  RegistrationNumber &obj); @done(05-02-21 18:05)
+    ✔ friend std::istream&  operator>> (std::istream&  in,   RegistrationNumber &obj); @done(05-02-21 18:05)
+};
+class Schedule:
+{
+    ✔ Tests @done(20-02-21 22:10)
+
+    ✔ Time start_time; @done(05-02-21 18:05)
+    ✔ Time finish_time; @done(05-02-21 18:05)
+    ✔ void convert_int2str(Time start_time, Time finish_time); @done(20-02-21 20:04)
+    ✔ void convert_str2int(char str[12]); @done(20-02-21 20:04)
+    ✔ Schedule(); @done(20-02-21 20:04)
+    ✔ Schedule(char str[12]); @done(20-02-21 20:04)
+    ✔ Schedule(Time start_time, Time finish_time); @done(20-02-21 20:04)
+    ✔ void  set_schedule(Time start_time, Time finish_time); @done(20-02-21 20:04)
+    ✔ void  set_schedule(char str[12]); @done(20-02-21 20:04)
+    ✔ char* get_schedule(); @done(05-02-21 18:06)
+    ✔ bool  check_sched(); @done(20-02-21 20:04)
+    ✔ friend std::ostream&  operator<< (std::ostream&  out,  Schedule &obj); @done(05-02-21 18:05)
+    ✔ friend std::istream&  operator>> (std::istream&  in,   Schedule &obj); @done(05-02-21 18:05)
+};
+
+
+
+
+class Doctor:
+{
+    ☐ Schedule schedule;
+    ☐ int cabinet_number;
+    ☐ char doctor_name[25] = {'\0'};
+    ☐ char specialization[50] = {'\0'}; 
+    ☐ Doctor();
+    ☐ Doctor(/* params */);
+    ☐ bool check_doctor_data();
+};
+class Patient:
+{
+    ☐ RegistrationNumber reg_num;
+    ☐ char patient_name[100] = {'\0'};
+    ☐ char work_place[100] = {'\0'};
+    ☐ char addres[120] = {'\0'};
+    ☐ int  year_born;
+    ☐ Patient();
+    ☐ Patient(/* params */);
+    ☐ bool check_patient_data();
+};
+class Direction : private Patient, private Doctor :
+{
+    ☐ Doctor  *doctor_ptr;
+    ☐ Patient *patient_ptr;
+    ☐ Date direction_date;
+    ☐ Time direction_time;
+    ☐ Direction(Doctor *doctor, Patient *patient, Date date, Time time);
+    ☐ void get_data(RegistrationNumber num, char doctor_name[25], Date date, Time time);
+    ☐ friend std::ostream&  operator<< (std::ostream&  out,  Direction &obj);
+    ☐ friend std::istream&  operator>> (std::istream&  in,   Direction &obj);
+};
+class LinkedListNode:
+{
+    ☐ Direction data;
+    ☐ LinkedListNode* next;
+    ☐ LinkedListNode();
+    ☐ LinkedListNode(Direction data);
+    ☐ friend std::ostream&  operator<< (std::ostream&  out,  LinkedListNode &n);
+    ☐ friend class LinkedList;
+};
+class LinkedList:
+{
+    ☐ void  swap(LinkedListNode* prev, LinkedListNode *l, LinkedListNode *r);
+    ☐ LinkedListNode* FIRST;
+    ☐ LinkedListNode* CURRENT;
+    ☐ LinkedListNode* LAST;
+    ☐ int count_elements;
+    ☐ LinkedList(); 
+    ☐ ~LinkedList();
+    ☐ bool insert(LinkedListNode *element);
+    ☐ bool insert(LinkedListNode *element, int pos);
+    ☐ bool remove();
+    ☐ bool remove(int pos);
+    ☐ LinkedListNode* get(int pos);
+    ☐ LinkedListNode* search(LinkedListNode *element);
+    ☐ bool edit(LinkedListNode* new_element, int pos);
+    ☐ void sort();
+    ☐ void print();
+    ☐ int size();
+    ☐ friend std::ostream&  operator<< (std::ostream&  out,  LinkedList& obj);
+};
+class HashTableNode:
+{
+    ☐ RegistrationNumber key;
+    ☐ Patient            *data;
+    ☐ bool delete_data;
+    ☐ HashTableNode();
+    ☐ bool intsert (Patient* data);
+    ☐ bool remove  ();
+    ☐ bool empty   ( void );
+    ☐ bool deleted ( void );
+    ☐ auto get_key ( void );
+    ☐ friend class HashTable;
+};
+class HashTable :
+{
+    ☐ int N = 2500;
+    ☐ HashTableNode* segment[2500];
+    ☐ bool correct_key       (HashTableNode *data);
+    ☐ int  get_hash          (HashTableNode *data);
+    ☐ int  get_hash_conflict (HashTableNode *data);
+    ☐ bool insert	  (HashTableNode *data);
+    ☐ bool remove   (HashTableNode *data);
+    ☐ int  find_key (HashTableNode *data);
+    ☐ void print    (int from = 0, int to = 2500);
+};
+class AVL_Node:
+{
+    ☐ Doctor key;
+    ☐ AVL_Node* right;
+    ☐ AVL_Node* left;
+    ☐ int h;
+    ☐ // AVL_Node();
+    ☐ AVL_Node(Doctor data);
+    ☐ AVL_Node(AVL_Node* data);
+    ☐ friend class AVLTreeClass;
+};
+class AVLTreeClass:
+{
+    ☐ AVL_Node  *insert         (AVL_Node*, AVL_Node*);
+    ☐ AVL_Node  *remove         (AVL_Node*, AVL_Node*, bool&);
+    ☐ AVL_Node  *find 		    (AVL_Node*, AVL_Node*);
+    ☐ AVL_Node  *removeMin	    (AVL_Node*);
+    ☐ AVL_Node  *findMin		(AVL_Node*);
+    ☐ AVL_Node  *balance		(AVL_Node*); 
+    ☐ AVL_Node  *rotateright	(AVL_Node* p);
+    ☐ AVL_Node  *rotateleft	    (AVL_Node* q);
+
+    ☐ void   fixheight        (AVL_Node*);
+    ☐ int    height           (AVL_Node*);
+    ☐ int    bfactor          (AVL_Node*);
+    ☐ int    max_depth        (AVL_Node*);
+    ☐ void   print            (AVL_Node*, int);
+
+    ☐ AVLTreeClass();
+    ☐ ~AVLTreeClass();
+
+    ☐ void        insert  (AVL_Node);
+    ☐ bool        remove  (AVL_Node);
+    ☐ AVL_Node*   find    (AVL_Node);
+    ☐ void        print   (void);
+    ☐ int         count   (void);
+};
+
+
+
