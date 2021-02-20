@@ -36,42 +36,42 @@ char* Date::convert_int2str(int day, int month, int year)
     date_str[8] = int2char(year / 10   % 10 );
     date_str[9] = int2char(year / 1    % 10 );
 
+    date_str[10] = '\0';
+
     return date_str;
 }
 
 void Date::convert_str2int(char str[11])
 {
-    day   = char2int(str[0]) * 10 + char2int(str[1]);
-    month = char2int(str[3]) * 10 + char2int(str[4]);
+    int d   = char2int(str[0]) * 10 + char2int(str[1]);
+    int m = char2int(str[3]) * 10 + char2int(str[4]);
 
-    year  = char2int(str[6]) * 1000 + 
+    int y  = char2int(str[6]) * 1000 + 
             char2int(str[7]) * 100  + 
             char2int(str[8]) * 10   + 
             char2int(str[9]);
+
+    this->set_date(d, m, y);
 }
 
 Date::Date()
 {
-    day = 0;
-    month = 0;
-    year = 0;
+    this->set_date(0, 0, 0);
 }
 
 Date::Date(char str[11])
 {
-    convert_str2int(str);
+    this->set_date(str);
 }
 
 Date::Date(int d, int m, int y)
 {
-    day = d;
-    month = m;
-    year = y;
+    this->set_date(d, m, y);
 }
 
 Date::~Date()
 {
-    delete[] date_str;
+    // delete[] date_str;
 }
 
 bool isleap(int year) { return year % 4 == 0 && (year % 100 != 0 || year % 400 == 0); }
