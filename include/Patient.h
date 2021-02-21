@@ -13,13 +13,15 @@ protected:
 public:
     Patient();
 
-    void set_reg_num   (int area_number, int serial_number);
+    void set_reg       (int area_number, int serial_number);
+    void set_reg       (char* reg);
+    void set_reg       (RegistrationNumber reg);
     void set_name      (char* patient_name);
     void set_work      (char* work_place);
     void set_addres    (char* addres);
     void set_year_born (int year_born);
 
-    RegistrationNumber get_reg_num   ( void );
+    RegistrationNumber get_reg   ( void );
     char* get_name      ( void );
     char* get_work      ( void );
     char* get_addres    ( void );

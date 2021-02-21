@@ -5,9 +5,19 @@ Patient::Patient()
     year_born = 0;
 }
 
-void Patient::set_reg_num (int area_number, int serial_number)
+void Patient::set_reg (int area_number, int serial_number)
 {
     reg_num.set_reg(area_number, serial_number);
+}
+
+void Patient::set_reg (char* reg)
+{
+    reg_num.set_reg(reg);
+}
+
+void Patient::set_reg (RegistrationNumber reg)
+{
+    reg_num = reg;
 }
 
 void Patient::set_name (char* str)
@@ -51,7 +61,7 @@ bool Patient::check_patient_data()
     else                    { return false; }
 }
 
-RegistrationNumber Patient::get_reg_num ( void )
+RegistrationNumber Patient::get_reg ( void )
 {
     return reg_num;
 }
