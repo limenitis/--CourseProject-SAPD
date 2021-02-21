@@ -1,6 +1,7 @@
+﻿#include <Windows.h>
 #include <iostream>
-#include ".\..\include\Schedule.h"
-#include ".\..\include\str-tools.h"
+#include ".\..\include\Hospital.h"
+// #include ".\..\include\str-tools.h"
 
 using namespace std;
 
@@ -25,32 +26,38 @@ _CrtDumpMemoryLeaks();
 
 int main()
 {
+    SetConsoleCP(1251);
+    SetConsoleOutputCP(1251);
 
-    // {
-        // char str[12]{'1', '0', ':', '0', '0', '-', '1', '8', ':', '0', '0', '\0'};
-        // Time t1;
-        // Time t2;
-        // Time* t1 = new Time;
-        // Time* t2 = new Time;
-        // Schedule s1;
-        // Schedule s2(t1, t2);
-        // Schedule s3(str);
-        // char* time1 = s1.get_schedule();
-        // char* time2 = s2.get_schedule();
-        // char* time3 = s3.get_schedule();
-        // cout << s1 << endl;
-        // cout << s2 << endl;
-        // cout << s3 << endl;
-        // cout << endl;
-        // s1.set_schedule(t1, t2);
-        // s2.set_schedule(str);
-        // s3.set_schedule(str);
-        // cout << s1 << endl;
-        // cout << s2 << endl;
-        // cout << s3 << endl;
-        // cout << endl;
-    // }
+    Hospital *hospital = new Hospital;
 
+    int key = 0;
+    while(key != 9)
+    {
+        cout << "| ---------------------------- |" << endl;
+        cout << "|  mode 1 : add patient        |" << endl;
+        cout << "|  mode 2 : del patient        |" << endl;
+        cout << "|  mode 3 : print patient      |" << endl;
+        cout << "| ---------------------------- |" << endl;
+        cin >> key;
+
+        if (key == 1) 
+        {
+            hospital->add_patient();
+        }
+        else if (key == 2) 
+        {
+            hospital->remove_patient();
+        }
+        else if (key == 3) 
+        {
+            hospital->print_patients();
+        }
+        else 
+        {
+            break;
+        }
+    }
     DumpMemoryLeaks
 
     return 0;
