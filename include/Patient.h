@@ -26,5 +26,8 @@ public:
     int   get_year_born ( void );
 
     bool check_patient_data();
+
+    friend std::ostream&  operator<< (std::ostream&  out,  Patient &obj);
+    friend std::istream&  operator>> (std::istream&  in,   Patient &obj);
 };
 

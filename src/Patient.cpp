@@ -77,3 +77,24 @@ int Patient::get_year_born ( void )
 }
 
 
+std::ostream&  operator<< (std::ostream&  out,  Patient &obj)
+{
+    return out;
+}
+
+std::istream&  operator>> (std::istream&  in,   Patient &obj)
+{
+
+    cout << "Patient name : " << endl;
+    in >> obj.patient_name;
+    cout << "Work place   : " << endl;
+    in >> obj.work_place;
+    cout << "Addres       : " << endl;
+    in >> obj.addres;
+    cout << "Year born    : " << endl;
+    in >> obj.year_born;
+    cout << "Registration number : " << endl;
+    in >> obj.reg_num;
+
+    return in;
+}
