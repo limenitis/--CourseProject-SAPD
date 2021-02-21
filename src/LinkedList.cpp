@@ -35,7 +35,7 @@ LinkedList::~LinkedList()
 
 bool LinkedList::insert(LinkedListNode *element)
 {
-    insert(element, count_elements);
+    return insert(element, count_elements);
 }
 
 bool LinkedList::insert(LinkedListNode *new_element, int pos) 
@@ -94,7 +94,7 @@ bool LinkedList::insert(LinkedListNode *new_element, int pos)
 
 bool LinkedList::remove()
 {
-    remove(count_elements);
+    return remove(count_elements);
 }
 
 bool LinkedList::remove(int pos)
