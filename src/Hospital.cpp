@@ -21,8 +21,11 @@ bool Hospital::add_patient ()
 
 bool Hospital::remove_patient ()
 {
+    RegistrationNumber new_reg;
+    cin >> new_reg;
+
     Patient new_patient;
-    cin >> new_patient;
+    new_patient.set_reg(new_reg);
 
     HashTableNode element;
     element.intsert(new_patient);
