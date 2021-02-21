@@ -46,8 +46,8 @@ void Doctor::set_specialization(char* str)
 
 bool Doctor::check_doctor_data()
 {
-    if (cabinet_number > 0 && schedule.check_schedule()) { true;  }
-    else                                                 { false; }
+    if (cabinet_number > 0 && schedule.check_schedule()) { return true;  }
+    else                                                 { return false; }
 }
 
 Schedule Doctor::get_schedule ( void )
@@ -128,5 +128,7 @@ bool operator==(Doctor doc1, Doctor doc2)
 std::ostream&  operator<< (std::ostream&  out,  Doctor &obj)
 {
     outstr(obj.doctor_name);
+
+    return out;
 }
 
