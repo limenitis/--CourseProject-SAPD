@@ -32,5 +32,7 @@ std::ostream&  operator<< (std::ostream&  out,  Direction &obj)
     out << obj.patient_ptr    << "  \n ";
     out << obj.direction_date << " -|- ";
     out << obj.direction_time << "  \n ";
+
+    return out;
 }
 
