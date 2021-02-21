@@ -13,11 +13,11 @@ class Time:
     ✔ void  set_time(char str[6]); @done(20-02-21 20:02)
     ✔ char* get_time(); @done(04-02-21 19:01)
     ✔ bool  check_time(); @done(20-02-21 20:02)
-    ☐ friend bool operator< (Time t1, Time t2);
-    ☐ friend bool operator> (Time t1, Time t2);
-    ☐ friend bool operator<=(Time t1, Time t2);
-    ☐ friend bool operator>=(Time t1, Time t2);
-    ✔ friend std::ostream&  operator<< (std::ostream&  out,  Time &obj); @started(03-02-21 19:02) @done(20-02-21 20:17) @lasted(2w3d1h15m4s)
+    ✔ friend bool operator< (Time t1, Time t2); @done(20-02-21 22:10)
+    ✔ friend bool operator> (Time t1, Time t2); @done(20-02-21 22:10)
+    ✔ friend bool operator<=(Time t1, Time t2); @done(20-02-21 22:10)
+    ✔ friend bool operator>=(Time t1, Time t2); @done(20-02-21 22:10)
+    ✔ friend std::ostream&  operator<< (std::ostream&  out,  Time &obj); @started(03-02-21 19:02) @done(20-02-21 22:10) @lasted(2w3d3h8m56s)
     ✔ friend std::istream&  operator>> (std::istream&  in,   Time &obj); @started(03-02-21 19:02) @done(03-02-21 21:16) @lasted(2h14m58s)
 };
 class Date:
@@ -81,35 +81,34 @@ class Schedule:
 
 class Doctor:
 {
-    ☐ Schedule schedule;
-    ☐ int cabinet_number;
-    ☐ char doctor_name[25] = {'\0'};
-    ☐ char specialization[50] = {'\0'}; 
-    ☐ Doctor();
-    ☐ Doctor(/* params */);
-    ☐ bool check_doctor_data();
+    ✔ Schedule schedule; @done(20-02-21 22:12)
+    ✔ int cabinet_number; @done(20-02-21 22:12)
+    ✔ char doctor_name[25] = {'\0'}; @done(20-02-21 22:12)
+    ✔ char specialization[50] = {'\0'}; @done(20-02-21 22:12)
+    ✔ Doctor(); @done(20-02-21 22:12)
+    ✔ Doctor(/* params */); @done(20-02-21 22:12)
+    ✔ bool check_doctor_data(); @done(20-02-21 22:12)
 };
 class Patient:
 {
-    ☐ RegistrationNumber reg_num;
-    ☐ char patient_name[100] = {'\0'};
-    ☐ char work_place[100] = {'\0'};
-    ☐ char addres[120] = {'\0'};
-    ☐ int  year_born;
-    ☐ Patient();
-    ☐ Patient(/* params */);
-    ☐ bool check_patient_data();
+    ✔ RegistrationNumber reg_num; @done(20-02-21 22:12)
+    ✔ char patient_name[100] = {'\0'}; @done(20-02-21 22:12)
+    ✔ char work_place[100] = {'\0'}; @done(20-02-21 22:12)
+    ✔ char addres[120] = {'\0'}; @done(20-02-21 22:12)
+    ✔ int  year_born; @done(20-02-21 22:12)
+    ✔ Patient(); @done(20-02-21 22:13)
+    ✔ bool check_patient_data(); @done(20-02-21 22:14)
 };
 class Direction : private Patient, private Doctor :
 {
-    ☐ Doctor  *doctor_ptr;
-    ☐ Patient *patient_ptr;
-    ☐ Date direction_date;
-    ☐ Time direction_time;
-    ☐ Direction(Doctor *doctor, Patient *patient, Date date, Time time);
-    ☐ void get_data(RegistrationNumber num, char doctor_name[25], Date date, Time time);
-    ☐ friend std::ostream&  operator<< (std::ostream&  out,  Direction &obj);
-    ☐ friend std::istream&  operator>> (std::istream&  in,   Direction &obj);
+    ✔ Doctor  *doctor_ptr; @done(20-02-21 22:15)
+    ✔ Patient *patient_ptr; @done(20-02-21 22:15)
+    ✔ Date direction_date; @done(20-02-21 22:15)
+    ✔ Time direction_time; @done(20-02-21 22:15)
+    ✔ Direction(Doctor *doctor, Patient *patient, Date date, Time time); @done(20-02-21 22:15)
+    ✔ void get_data(RegistrationNumber num, char doctor_name[25], Date date, Time time); @done(20-02-21 22:15)
+    ✔ friend std::ostream&  operator<< (std::ostream&  out,  Direction &obj); @done(20-02-21 22:15)
+    ✔ friend std::istream&  operator>> (std::istream&  in,   Direction &obj); @done(20-02-21 22:15)
 };
 class LinkedListNode:
 {
@@ -143,7 +142,6 @@ class LinkedList:
 };
 class HashTableNode:
 {
-    ☐ RegistrationNumber key;
     ☐ Patient            *data;
     ☐ bool delete_data;
     ☐ HashTableNode();
