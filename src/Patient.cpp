@@ -1,23 +1,57 @@
 ﻿#include ".\..\include\Patient.h"
+#include ".\..\include\SimpleLogs.h"
 
 Patient::Patient()
 {
+    // reg_num = new RegistrationNumber;
+    // patient_name = new char[100];
+    // work_place = new char[100];
+    // addres = new char[120];
     year_born = 0;
+    log_warning("Patient", "Patient", "constructor work " << this)
 }
+
+// Patient::Patient(const Patient &obj)
+// {
+//     reg_num = new RegistrationNumber;
+//     patient_name = new char[100]{ '\0' };
+//     work_place = new char[100]{ '\0' };
+//     addres = new char[120]{ '\0' };
+
+//     *this->reg_num      = *obj.reg_num;
+//     *this->addres       = *obj.addres;
+//     *this->patient_name = *obj.patient_name;
+//     *this->work_place   = *obj.work_place;
+//     this->year_born     = obj.year_born;
+// }
+
+
+// Patient::~Patient()
+// {
+//     delete reg_num;
+//     delete[] patient_name;
+//     delete[] work_place;
+//     delete[] addres;
+
+//     log_warning("Patient", "Patient", "destructor work " << this)
+// }
 
 void Patient::set_reg (int area_number, int serial_number)
 {
     reg_num.set_reg(area_number, serial_number);
+    // reg_num->set_reg(area_number, serial_number);
 }
 
 void Patient::set_reg (char* reg)
 {
     reg_num.set_reg(reg);
+    // reg_num->set_reg(reg);
 }
 
 void Patient::set_reg (RegistrationNumber reg)
 {
     reg_num = reg;
+    // *reg_num = reg;
 }
 
 void Patient::set_name (char* str)
@@ -62,6 +96,7 @@ bool Patient::check_patient_data()
 }
 
 RegistrationNumber Patient::get_reg ( void )
+// RegistrationNumber* Patient::get_reg ( void )
 {
     return reg_num;
 }
@@ -105,6 +140,7 @@ std::istream&  operator>> (std::istream&  in,   Patient &obj)
     in >> obj.year_born;
     cout << "Registration number : " << endl;
     in >> obj.reg_num;
+    // in >> *obj.reg_num;
 
     return in;
 }
