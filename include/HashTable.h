@@ -8,14 +8,16 @@ using namespace std;
 class HashTableNode
 {
 private:
-	//Patient *data = new Patient;
 	Patient *data;
 	bool empty_data;
 	bool delete_data;
 
+
 public:
 	HashTableNode();
+	HashTableNode(const HashTableNode& obj);
 	~HashTableNode();
+
 	bool intsert (Patient data);
 	bool remove  ();
 	bool empty   ( void );

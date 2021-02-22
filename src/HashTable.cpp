@@ -14,9 +14,16 @@ HashTableNode::HashTableNode()
 	empty_data = true; 
 }
 
+HashTableNode::HashTableNode(const HashTableNode& obj)
+{
+	//? check for nullptr
+	this->data = obj.data; 
+	this->delete_data = obj.delete_data;
+	this->empty_data  = obj.empty_data;
+}
+
 HashTableNode::~HashTableNode()
 {
-	delete data;
 	delete_data = true;
 	empty_data = true;
 }
@@ -45,8 +52,9 @@ bool HashTableNode::remove ()
 
 bool HashTableNode::empty ( void )
 {
-	if (data == nullptr)  { return true;  }
-	else                  { return false; }
+	// if (data == nullptr)  { return true;  }
+	// else                  { return false; }
+	return empty_data;
 }
 
 bool HashTableNode::deleted ( void )
@@ -70,6 +78,13 @@ HashTable::HashTable(int s)
 
 HashTable::~HashTable()
 {
+	for (int i = 0; i < table_size; i++)
+	{
+		if (!segment[i].empty()) 
+		{
+			segment[i].remove();
+		}
+	}
 	table_size = 0;
 	delete[] segment;
 }
