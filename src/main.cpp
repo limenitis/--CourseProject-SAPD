@@ -34,11 +34,11 @@ int main()
         int key = 0;
         while (key != 9)
         {
-            cout << "| ---------------------------- |" << endl;
-            cout << "|  mode 1 : add patient        |" << endl;
-            cout << "|  mode 2 : del patient        |" << endl;
-            cout << "|  mode 3 : print patient      |" << endl;
-            cout << "| ---------------------------- |" << endl;
+            cout << "+----------------------------+" << endl;
+            cout << "|  mode 1 : add patient      |" << endl;
+            cout << "|  mode 2 : del patient      |" << endl;
+            cout << "|  mode 3 : print patient    |" << endl;
+            cout << "+----------------------------+" << endl;
             cin >> key;
 
             if (key == 1)
