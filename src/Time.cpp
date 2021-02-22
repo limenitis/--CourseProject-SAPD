@@ -1,6 +1,7 @@
 #pragma once
 #include ".\..\include\Time.h"
 #include ".\..\include\str-tools.h"
+#include ".\..\include\SimpleLogs.h"
 
 using namespace std;
 
@@ -60,6 +61,7 @@ Time::Time(int h, int m)
 
 Time::~Time()
 {
+    log_warning("Time", "~Time", "destruct work");
     // delete[] time_str;
 }
 

@@ -11,6 +11,7 @@ protected:
 
 public:
     Doctor();
+    ~Doctor();
 
     void set_schedule       (Time start_time, Time finish_time);
     void set_schedule       (char str[12]);

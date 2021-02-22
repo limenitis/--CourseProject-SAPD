@@ -1,5 +1,6 @@
 #include ".\..\include\Date.h"
 #include ".\..\include\str-tools.h"
+#include ".\..\include\SimpleLogs.h"
 
 using namespace std;
 
@@ -71,6 +72,7 @@ Date::Date(int d, int m, int y)
 
 Date::~Date()
 {
+    log_warning("Date", "~Date", "destruct work");
     // delete[] date_str;
 }
 

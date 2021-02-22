@@ -1,8 +1,8 @@
-#ifndef COLOR_MODE_ON
-	#define COLOR_MODE_ON
+#ifndef ENABLE_COLOR
+	#define ENABLE_COLOR
 #endif
 
-#ifdef COLOR_MODE_ON
+#ifdef ENABLE_COLOR
 	#define DEFAULT "\x1b[30m"
 	#define GREEN   "\x1b[32m"
 	#define RED     "\x1b[31m" 
@@ -17,20 +17,18 @@
 #endif
 
 
-#ifndef LOG_MODE_ON
-	#define LOG_MODE_ON
+#ifndef ENABLE_LOGS
+	#define ENABLE_LOGS
 #endif
-#ifdef LOG_MODE_ON
-	#define LOG_MODE_INFO
-	#define LOG_MODE_ERROR
-	#define LOG_MODE_WARNING
+#ifdef ENABLE_LOGS
+	#define ENABLE_INFO
+	#define ENABLE_ERROR
+	#define ENABLE_WARNING
 #endif
 
-#ifdef LOG_MODE_INFO
+#ifdef ENABLE_INFO
 	#define log_info( class_name, func, message);              \
-	cerr << GREEN    << "| [INFO]    [" <<  class_name << "] [" << func << "] : " << message << " "   << RESET << endl;
-	#define log_info_val( class_name, func, message, val);     \
-	cerr << GREEN    << "| [INFO]    [" <<  class_name << "] [" << func << "] : " << message << " | " << val << RESET<< endl;
+	std::cerr << GREEN    << "[INFO]    [" <<  class_name << "] [" << func << "] : " << message << " "   << RESET << endl;
 #else
 	#define log_info( class_name, func, message);              \
 	// nothig do
@@ -38,17 +36,17 @@
 	// nothig do
 #endif
 
-#ifdef LOG_MODE_ERROR
+#ifdef ENABLE_ERROR
 	#define log_error( class_name, func, message );            \
-	cerr << RED      << "| [ERROR]   [" <<  class_name << "] [" << func << "] : " << message << " "   << RESET << endl;
+	std::cerr << RED      << "[ERROR]   [" <<  class_name << "] [" << func << "] : " << message << " "   << RESET << endl;
 #else
 	#define log_error( class_name, func, message );            \
 	// nothig do
 #endif
 
-#ifdef LOG_MODE_WARNING
-	#define log_werning( class_name, func, message );          \
-	cerr << YELLOW   << "| [WARNING] [" <<  class_name << "] [" << func << "] : " << message << " "   << RESET << endl;
+#ifdef ENABLE_WARNING
+	#define log_warning( class_name, func, message );          \
+	std::cerr << YELLOW   << "[WARNING] [" <<  class_name << "] [" << func << "] : " << message << " "   << RESET << endl;
 #else
 	#define log_werning( class_name, func, message );          \
 	// nothig do

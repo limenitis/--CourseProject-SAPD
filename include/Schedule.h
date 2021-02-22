@@ -18,6 +18,7 @@ private:
 
 public:
     Schedule();
+    ~Schedule();
     Schedule(char str[12]);
     Schedule(Time start_time, Time finish_time);
 

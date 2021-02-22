@@ -1,11 +1,17 @@
 ﻿#include ".\..\include\Doctor.h"
 #include ".\..\include\str-tools.h"
+#include ".\..\include\SimpleLogs.h"
 
 using namespace std;
 
 Doctor::Doctor()
 {
     cabinet_number = 0;
+}
+
+Doctor::~Doctor()
+{
+    log_warning("Doctor", "~Doctor", "destruct work");
 }
 
 void Doctor::set_schedule(Time start_time, Time finish_time)

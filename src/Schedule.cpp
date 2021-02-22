@@ -1,6 +1,8 @@
 #include ".\..\include\Schedule.h"
 #include ".\..\include\Time.h"
 #include ".\..\include\str-tools.h"
+#include ".\..\include\SimpleLogs.h"
+
 
 char* Schedule::convert_int2str(Time start_time, Time finish_time)
 {
@@ -54,6 +56,11 @@ void  Schedule::convert_str2int(char str[12])
 Schedule::Schedule()
 {
     // Time constructors work
+}
+
+Schedule::~Schedule()
+{
+    log_warning("Schedule", "~Schedule", "destruct work");
 }
 
 Schedule::Schedule(char str[12])
