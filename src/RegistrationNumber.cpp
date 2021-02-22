@@ -1,4 +1,5 @@
 #include ".\..\include\RegistrationNumber.h"
+#include ".\..\include\SimpleLogs.h"
 #include ".\..\include\str-tools.h"
 
 using namespace std;
@@ -50,22 +51,47 @@ void  RegistrationNumber::convert_str2int(char str[11])
 
 RegistrationNumber::RegistrationNumber()
 {
+    log_warning("RegistrationNumber", "RegistrationNumber", "constructor work " << this)
+    reg_str = new char[11] {'0', '0', '-', '0', '0', '0', '0', '0', '0', '0', '\0'};
     this->set_reg(0, 0);
 }
 
 RegistrationNumber::~RegistrationNumber()
 {
-    // delete[] reg_str;
+    log_warning("RegistrationNumber", "~RegistrationNumber", "destruct work " << this);
+    delete[] reg_str;
 }
 
 RegistrationNumber::RegistrationNumber(char str[11])
 {
+    log_warning("RegistrationNumber", "RegistrationNumber", "constructor work " << this)
+    reg_str = new char[11] {'0', '0', '-', '0', '0', '0', '0', '0', '0', '0', '\0'};
     convert_str2int(str);
 }
 
 RegistrationNumber::RegistrationNumber(int a, int s)
 {
+    log_warning("RegistrationNumber", "RegistrationNumber", "constructor work " << this)
+    reg_str = new char[11] {'0', '0', '-', '0', '0', '0', '0', '0', '0', '0', '\0'};
     this->set_reg(a, s);
+}
+
+RegistrationNumber::RegistrationNumber(const RegistrationNumber &obj)
+{
+    log_warning("RegistrationNumber", "RegistrationNumber", "copy construct work");
+    log_warning("RegistrationNumber", "RegistrationNumber", "copy from " << &obj);
+    log_warning("RegistrationNumber", "RegistrationNumber", "copy to   " << this);
+
+    this->reg_str = new char[11] {'0', '0', '-', '0', '0', '0', '0', '0', '0', '0', '\0'};
+
+    this->area_number   = obj.area_number;
+    this->serial_number = obj.serial_number;
+    int i = 0;
+    while (obj.reg_str[i] != '\0')
+    {
+        this->reg_str[i] = obj.reg_str[i];
+        i++;
+    }
 }
 
 void  RegistrationNumber::set_reg(int a, int s)

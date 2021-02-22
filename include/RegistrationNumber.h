@@ -7,9 +7,8 @@ class RegistrationNumber
 private:
     // format reg: char str[11] = {'1', '2', '-', '3', '4', '5', '6', '7', '8', '9', '\0'};
 
-    // char* reg_str = new char[11] {'\0'};
-    // char* reg_str = new char[11] {'0', '0', '-', '0', '0', '0', '0', '0', '0', '0', '\0'};
-    char reg_str[11];
+    // char reg_str[11];
+    char *reg_str;
     int area_number;
     int serial_number;
 
@@ -21,6 +20,7 @@ public:
     ~RegistrationNumber();
     RegistrationNumber(char str[11]);
     RegistrationNumber(int area_number, int serial_number);
+    RegistrationNumber(const RegistrationNumber &obj);
 
     void  set_reg(int area_number, int serial_number);
     void  set_reg(char str[11]);
