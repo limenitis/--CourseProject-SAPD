@@ -28,35 +28,39 @@ int main()
 {
     SetConsoleCP(1251);
     SetConsoleOutputCP(1251);
-
-    Hospital *hospital = new Hospital;
-
-    int key = 0;
-    while(key != 9)
     {
-        cout << "| ---------------------------- |" << endl;
-        cout << "|  mode 1 : add patient        |" << endl;
-        cout << "|  mode 2 : del patient        |" << endl;
-        cout << "|  mode 3 : print patient      |" << endl;
-        cout << "| ---------------------------- |" << endl;
-        cin >> key;
+        Hospital* hospital = new Hospital;
 
-        if (key == 1) 
+        int key = 0;
+        while (key != 9)
         {
-            hospital->add_patient();
+            cout << "| ---------------------------- |" << endl;
+            cout << "|  mode 1 : add patient        |" << endl;
+            cout << "|  mode 2 : del patient        |" << endl;
+            cout << "|  mode 3 : print patient      |" << endl;
+            cout << "| ---------------------------- |" << endl;
+            cin >> key;
+
+            if (key == 1)
+            {
+                hospital->add_patient();
+            }
+            else if (key == 2)
+            {
+                hospital->remove_patient();
+            }
+            else if (key == 3)
+            {
+                hospital->print_patients();
+            }
+            else
+            {
+                break;
+            }
         }
-        else if (key == 2) 
-        {
-            hospital->remove_patient();
-        }
-        else if (key == 3) 
-        {
-            hospital->print_patients();
-        }
-        else 
-        {
-            break;
-        }
+
+        delete hospital;
+
     }
     DumpMemoryLeaks
 
