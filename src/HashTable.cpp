@@ -11,27 +11,26 @@ HashTableNode::HashTableNode()
 {
 	data = nullptr;
 	delete_data = false;
-	empty_data = true; 
 }
 
 HashTableNode::HashTableNode(const HashTableNode& obj)
 {
-	//? check for nullptr
-	this->data = obj.data; 
+	if (obj.data)
+	{
+		this->data = obj.data;
+	}
+	else
+	{
+		this->data = nullptr;
+	}
 	this->delete_data = obj.delete_data;
-	this->empty_data  = obj.empty_data;
 }
 
-HashTableNode::~HashTableNode()
-{
-	delete_data = true;
-	empty_data = true;
-}
+HashTableNode::~HashTableNode(){}
 
-bool HashTableNode::intsert (Patient d)
+bool HashTableNode::intsert (Patient &d)
 {
 	delete_data = false;
-	empty_data = false;
 
 	data = new Patient{d};
 
@@ -42,7 +41,6 @@ bool HashTableNode::intsert (Patient d)
 bool HashTableNode::remove ()
 {
 	delete_data = true;
-	empty_data = true;
 	delete data;
 	data = nullptr;
 
@@ -50,12 +48,6 @@ bool HashTableNode::remove ()
 	return true;
 }
 
-bool HashTableNode::empty ( void )
-{
-	// if (data == nullptr)  { return true;  }
-	// else                  { return false; }
-	return empty_data;
-}
 
 bool HashTableNode::deleted ( void )
 {
@@ -64,49 +56,50 @@ bool HashTableNode::deleted ( void )
 
 HashTable::HashTable()
 {
-	table_size = 2500;
+	table_size = 10;
 	count_elements = 0;
-	segment = new HashTableNode[table_size];
+	table = new HashTableNode * [table_size] {nullptr};
 }
 
-HashTable::HashTable(int s)
+HashTable::HashTable(int size)
 {
-	table_size = s;
+	table_size = size;
 	count_elements = 0;
-	segment = new HashTableNode[s];
+	table = new HashTableNode * [table_size] {nullptr};
 }
 
 HashTable::~HashTable()
 {
-	for (int i = 0; i < table_size; i++)
+	for (int id = 0; id < table_size; id++)
 	{
-		if (!segment[i].empty()) 
+		if (table[id] != nullptr) 
 		{
-			segment[i].remove();
+			table[id]->remove();
+			delete table[id];
 		}
 	}
 	table_size = 0;
-	delete[] segment;
+	delete table;
 }
 
 bool HashTable::resize()
 {
 	//create new
 	int new_table_size = (int)table_size * 1.5;
-	HashTableNode *new_segment = new HashTableNode[new_table_size];
+	HashTableNode** new_table = new HashTableNode * [new_table_size] {nullptr};
 
 	//copy
 	for (int id = 0; id < table_size; id++)		
 	{
-		if(!segment[id].empty())
+		if(table[id] != nullptr)
 		{
-			new_segment[id] = segment[id];
+			new_table[id] = table[id];
 		}
 	}
 
 	//delete old
-	delete segment;
-	segment = new_segment;
+	delete[] table;
+	table = new_table;
 	table_size = new_table_size;
 
 	log_info("HashTable", "resize", "true");
@@ -118,35 +111,52 @@ bool HashTable::insert(HashTableNode node)
 	if (correct_key(node)) 
 	{	
 		int id = get_hash(node);
-		if ( (segment[id].empty()) || (segment[id].deleted()) ) // is empty or delete
+		if (table[id] == nullptr) // is empty 
 		{
-			segment[id] = node;
-			log_info("HashTable", "insert", "true");
-			log_info_val("HashTable", "insert", "fill percent = ", (int)count_elements/table_size);
+			table[id] = new HashTableNode{node};
 			count_elements += 1;
+			log_info("HashTable", "insert", "true");
+			log_info("HashTable", "insert", "fill percent = " << 100 * count_elements/table_size << "%" );
+			log_info("HashTable", "insert", "count_elements = " << count_elements);
 			return true;
         }
+		else if ( table[id]->deleted() ) // is delete
+		{
+			table[id] = new HashTableNode{node};
+			count_elements += 1;
+			log_info("HashTable", "insert", "true");
+			log_info("HashTable", "insert", "fill percent = " << 100 * count_elements/table_size << "%" );
+			log_info("HashTable", "insert", "count_elements = " << count_elements);
+			return true;
+		}
 		else 
 		{
-			id = (id + get_hash_conflict(node)) % table_size;
-			
-			while (!segment[id].empty() && !segment[id].deleted()) // not empty and not delete
+			while (table[id] != nullptr && !table[id]->deleted()) // not empty and not delete
 			{
 				id = ( id + get_hash_conflict(node) ) % table_size;
 			}
 
-			if ((segment[id].empty()) || (segment[id].deleted()))
+			if ( table[id] == nullptr )
 			{
-				segment[id] = node;
-				log_info("HashTable", "insert", "true");
-				log_info_val("HashTable", "insert", "fill percent = ", (int)count_elements/table_size);
+				table[id] = new HashTableNode{node};
 				count_elements += 1;
+				log_info("HashTable", "insert", "true");
+				log_info("HashTable", "insert", "fill percent = " << 100 * count_elements/table_size << "%" );
+				log_info("HashTable", "insert", "count_elements = " << count_elements);
+				return true;
+			}
+			else if ( table[id]->deleted() )
+			{
+				table[id] = new HashTableNode{node};
+				count_elements += 1;
+				log_info("HashTable", "insert", "true");
+				log_info("HashTable", "insert", "fill percent = " << 100 * count_elements/table_size << "%" );
+				log_info("HashTable", "insert", "count_elements = " << count_elements);
 				return true;
 			}
 			else
 			{
 				log_error("HashTable", "insert", "false");
-				log_error("HashTable", "insert", "busy - ignore element");
 				return false;
 			}
 		}
@@ -159,7 +169,7 @@ bool HashTable::insert(HashTableNode node)
 	}
 }
 
-bool HashTable::remove(const HashTableNode &node) 
+bool HashTable::remove(HashTableNode node) 
 {
 	if (correct_key(node))
 	{
@@ -173,16 +183,17 @@ bool HashTable::remove(const HashTableNode &node)
 		else 
 		{
 			log_info("HashTable", "remove", "key found");
-			if ( segment[pos].remove() )
+			if ( table[pos]->remove() )
 			{
-				log_info_val("HashTable", "remove", "fill percent = ", (int)count_elements/table_size);
+				//delete table[pos];
 				count_elements -= 1;
+				log_info("HashTable", "remove", "fill percent = " << 100 * count_elements/table_size << "%" );
+				log_info("HashTable", "remove", "fill count_element = " << count_elements);
 				return true;
 			}
 			else
 			{
 				log_error("HashTable", "remove", "false");
-				log_error("HashTable", "remove", "id error : x00001");
 				return false;
 			}
 		}
@@ -199,12 +210,12 @@ int HashTable::find_key(const HashTableNode &node)
 {
 	int id = get_hash(node);
 
-	while ( !(segment[id] == node) && !segment[id].empty() ) 
+	while ( !(*table[id] == node) && table[id] != nullptr ) 
 	{
 		id = (id + get_hash_conflict(node)) % table_size;
 	}
 
-	if (segment[id] == node)
+	if (*table[id] == node)
 	{
 		log_info("HashTable", "find_key", "true");
 		return id;
@@ -273,6 +284,7 @@ int HashTable::get_hash_conflict(const HashTableNode &node)
 
 void HashTable::print(int from, int to)
 {
+	if (to == 0) { to = table_size; }
 	if ( (0 <= from) && (to > table_size) ) { cout << "[print] : id don't correct \n"; return; }
 
 	cout << endl << endl;
@@ -281,17 +293,21 @@ void HashTable::print(int from, int to)
 	cout <<  "+ ------------- + --------------------- + ---------------------------------------- + --------- +  " << endl;
 	cout <<  "|      id       |  Registration number  |               Patient name               | Year born |  " << endl;
 
-	for (int i = from; i < to; i++)
+	for (int id = from; id < to; id++)
 	{
-		if (!segment[i].empty()) {
-			cout <<  "+ ------------- + --------------------- + ---------------------------------------- + --------- +  " << endl;
-			cout.setf(ios::left);
-			cout << "|  "
-			<< setw(12) << i 											<< " |  " 
-			<< setw(20) << segment[i].data->get_reg().get_reg() 		<< " |  " 
-			<< setw(39) << segment[i].data->get_name()					<< " |  " 
-			<< setw(8)  << segment[i].data->get_year_born()	 			<< " |  " 
-			<< endl;
+		if (table[id] != nullptr) 
+		{
+			if(table[id]->deleted() != true)
+			{
+				cout << "+ ------------- + --------------------- + ---------------------------------------- + --------- +  " << endl;
+				cout.setf(ios::left);
+				cout << "|  "
+				<< setw(12) << id 											<< " |  " 
+				<< setw(20) << table[id]->data->get_reg().get_reg() 		<< " |  " 
+				<< setw(39) << table[id]->data->get_name()					<< " |  " 
+				<< setw(8)  << table[id]->data->get_year_born()	 			<< " |  " 
+				<< endl;
+			}
 		}
 	}
 

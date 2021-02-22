@@ -9,7 +9,6 @@ class HashTableNode
 {
 private:
 	Patient *data;
-	bool empty_data;
 	bool delete_data;
 
 
@@ -18,9 +17,8 @@ public:
 	HashTableNode(const HashTableNode& obj);
 	~HashTableNode();
 
-	bool intsert (Patient data);
+	bool intsert (Patient &data);
 	bool remove  ();
-	bool empty   ( void );
 	bool deleted ( void );
 
     friend class HashTable;
@@ -33,7 +31,7 @@ class HashTable
 private:
 	int table_size;
 	int count_elements;
-	HashTableNode* segment;
+	HashTableNode** table;
 
 	bool resize();
 	bool correct_key       (const HashTableNode &data);
@@ -46,9 +44,9 @@ public:
 	~HashTable();
 
 	bool insert	  (HashTableNode data);
-	bool remove   (const HashTableNode &data);
+	bool remove   (HashTableNode data);
 	int  find_key (const HashTableNode &data);
-	void print    (int from = 0, int to = 2500);
+	void print    (int from = 0, int to = 0);
 
 	friend class HashTableNode;
 };
