@@ -101,7 +101,7 @@ bool HashTable::resize()
 	{
 		if(table[id] != nullptr)
 		{
-			new_table[id] = table[id];
+			new_table[id] = new HashTableNode{ *table[id] };
 		}
 	}
 
@@ -217,20 +217,20 @@ int HashTable::find_key(const HashTableNode &node)
 {
 	int id = get_hash(node);
 
-	while ( !(*table[id] == node) && table[id] != nullptr ) 
+	while (true)
 	{
-		id = (id + get_hash_conflict(node)) % table_size;
-	}
-
-	if (*table[id] == node)
-	{
-		log_info("HashTable", "find_key", "true");
-		return id;
-	}
-	else
-	{
-		log_error("HashTable", "find_key", "false");
-		log_error("HashTable", "find_key", "key don't found");
+		while ( table[id] != nullptr && table[id]->deleted() ) 
+		{
+			id = (id + get_hash_conflict(node)) % table_size;
+			if ( *table[id] == node )
+			{
+				return id;
+			}
+			else 
+			{
+				continue;
+			}
+		}
 		return -1;
 	}
 }
