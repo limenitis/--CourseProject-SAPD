@@ -24,6 +24,12 @@ _CrtSetReportMode(_CRT_ASSERT, _CRTDBG_MODE_FILE);     \
 _CrtSetReportFile(_CRT_ASSERT, _CRTDBG_FILE_STDOUT);   \
 _CrtDumpMemoryLeaks();
 
+
+void patients_menu(Hospital* hospital);
+void doctors_menu(Hospital* hospital);
+void directions_menu(Hospital* hospital);
+
+
 int main()
 {
     SetConsoleCP(1251);
@@ -31,27 +37,32 @@ int main()
     {
         Hospital* hospital = new Hospital;
 
-        int key = 0;
-        while (key != 9)
+        int key;
+        while (1)
         {
-            cout << "+----------------------------+" << endl;
-            cout << "|  mode 1 : add patient      |" << endl;
-            cout << "|  mode 2 : del patient      |" << endl;
-            cout << "|  mode 3 : print patient    |" << endl;
-            cout << "+----------------------------+" << endl;
+            //cout << "|  mode   :                           |" << endl;
+
+            cout << "+ ----------------------------------- +" << endl;
+            cout << "| :::::::::::: Main menu :::::::::::: |" << endl;
+            cout << "+ ----------------------------------- +" << endl;
+            cout << "|  mode 1 : patients menu             |" << endl;
+            cout << "|  mode 2 : doctors menu              |" << endl;
+            cout << "|  mode 3 : directions menu           |" << endl;
+            cout << "|  mode 4 : exit                      |" << endl;
+            cout << "+ ----------------------------------- +" << endl;
             cin >> key;
 
             if (key == 1)
             {
-                hospital->add_patient();
+                patients_menu(hospital);
             }
             else if (key == 2)
             {
-                hospital->remove_patient();
+                doctors_menu(hospital);
             }
             else if (key == 3)
             {
-                hospital->print_patients();
+                directions_menu(hospital);
             }
             else
             {
@@ -67,3 +78,61 @@ int main()
     return 0;
 }
 
+void patients_menu(Hospital *hospital)
+{
+    int patient_key;
+    while (true)
+    {
+        //cout << "|  mode   :                           |" << endl;
+
+        cout << "+ ----------------------------------- +" << endl;
+        cout << "| :::::::::: Patients menu :::::::::: |" << endl;
+        cout << "+ ----------------------------------- +" << endl;
+        cout << "|  mode 1 : insert patient            |" << endl;
+        cout << "|  mode 2 : remove patient            |" << endl;
+        cout << "|  mode 3 : edit patient              |" << endl;
+        cout << "|  mode 4 : print patient             |" << endl;
+        cout << "|  mode 5 : clear patient             |" << endl;
+        cout << "|  mode 6 : find_patient_by_name      |" << endl;
+        cout << "|  mode 7 : find_patient_by_reg_num   |" << endl;
+        cout << "|  mode 8 : exit                      |" << endl;
+        cout << "+ ----------------------------------- +" << endl;
+        cin >> patient_key;
+
+        if (patient_key == 1)
+        {
+            hospital->insert_patient();
+        }
+        else if (patient_key == 2)
+        {
+            hospital->remove_patient();
+        }
+        else if (patient_key == 3)
+        {
+            hospital->edit_patient();
+        }
+        else if (patient_key == 4)
+        {
+            hospital->print_patients();
+        }
+        else if (patient_key == 5)
+        {
+            hospital->clear_patients();
+        }
+        else if (patient_key == 6)
+        {
+            hospital->find_patient_by_name();
+        }
+        else if (patient_key == 7)
+        {
+            hospital->find_patient_by_reg_num();
+        }
+        else if (patient_key == 8)
+        {
+            break;
+        }
+    }
+}
+
+void doctors_menu(Hospital* hospital){}
+void directions_menu(Hospital* hospital){}

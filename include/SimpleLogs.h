@@ -23,12 +23,12 @@
 #ifdef ENABLE_LOGS
 	#define ENABLE_INFO
 	#define ENABLE_ERROR
-	#define ENABLE_WARNING
+	// #define ENABLE_WARNING
 #endif
 
 #ifdef ENABLE_INFO
 	#define log_info( class_name, func, message);              \
-	std::cerr << GREEN    << "[INFO]    [" <<  class_name << "] [" << func << "] : " << message << " "   << RESET << endl;
+	std::cerr << GREEN    << "[INFO] [" <<  class_name << "] [" << func << "] : " << message << " "   << RESET << endl;
 #else
 	#define log_info( class_name, func, message);              \
 	// nothig do
@@ -36,7 +36,7 @@
 
 #ifdef ENABLE_ERROR
 	#define log_error( class_name, func, message );            \
-	std::cerr << RED      << "[ERROR]   [" <<  class_name << "] [" << func << "] : " << message << " "   << RESET << endl;
+	std::cerr << RED      << "[ERROR] [" <<  class_name << "] [" << func << "] : " << message << " "   << RESET << endl;
 #else
 	#define log_error( class_name, func, message );            \
 	// nothig do

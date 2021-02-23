@@ -19,13 +19,13 @@ using namespace std;
 
 class Hospital{
 private:
-    HashTable *table = new HashTable;
+    HashTable* table;;
 
 public:
     Hospital();
     ~Hospital();
 
-    bool add_patient    ( void );
+    bool insert_patient ( void );
     bool remove_patient ( void );
     bool edit_patient   ( void );
     void print_patients ( void );

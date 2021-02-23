@@ -48,6 +48,8 @@ public:
 	int  find_key (const HashTableNode &data);
 	void print    (int from = 0, int to = 0);
 
+	bool clear    ( void );
+
 	friend class HashTableNode;
 };
 

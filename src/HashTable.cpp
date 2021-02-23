@@ -117,7 +117,12 @@ bool HashTable::resize()
 bool HashTable::insert(const HashTableNode &node) 
 {
 	if (correct_key(node)) 
-	{	
+	{
+		if (table_size - count_elements < 5)
+		{
+			resize();
+		}
+
 		int id = get_hash(node);
 		if (table[id] == nullptr) // is empty 
 		{
@@ -222,15 +227,20 @@ int HashTable::find_key(const HashTableNode &node)
 		while ( table[id] != nullptr && table[id]->deleted() ) 
 		{
 			id = (id + get_hash_conflict(node)) % table_size;
-			if ( *table[id] == node )
+			if (table[id])
 			{
-				return id;
-			}
-			else 
-			{
-				continue;
+				if (*table[id] == node)
+				{
+					log_info("HashTable", "find_key", "return " << id );
+					return id;
+				}
+				else
+				{
+					continue;
+				}
 			}
 		}
+		log_info("HashTable", "find_key", "return " << "error : key don't found" );
 		return -1;
 	}
 }
@@ -255,8 +265,17 @@ int HashTable::get_hash(const HashTableNode &node)
 			sum_key += key[i] * pow(2, i);
 		}
 
-		if (sum_key < 0) { return -1; }
-		else { return(sum_key) % table_size; }
+		if (sum_key < 0) 
+		{
+			log_error("HashTable", "get_hash", "false");
+			log_error("HashTable", "get_hash", "sum key less zero");
+			return -1;
+		}
+		else 
+		{
+			log_info("HashTable", "get_hash", "return " << sum_key % table_size );
+			return sum_key % table_size;
+		}
 	}
 	else
 	{
@@ -278,8 +297,17 @@ int HashTable::get_hash_conflict(const HashTableNode &node)
 			sum_key += key[i] * pow(5, i);
 		}
 
-		if (sum_key < 0) { return -1; }
-		else { return(sum_key) % table_size; }
+		if (sum_key < 0) 
+		{
+			log_error("HashTable", "get_hash_conflict", "false");
+			log_error("HashTable", "get_hash_conflict", "sum key less zero");
+			return -1;
+		}
+		else 
+		{
+			log_info("HashTable", "get_hash_conflict", "return " << sum_key % table_size );
+			return sum_key % table_size;
+		}
 	}
 	else
 	{
@@ -293,6 +321,10 @@ void HashTable::print(int from, int to)
 {
 	if (to == 0) { to = table_size; }
 	if ( (0 <= from) && (to > table_size) ) { cout << "[print] : id don't correct \n"; return; }
+
+	log_info("HashTable", "print", "range");
+	log_info("HashTable", "print", "from " << from);
+	log_info("HashTable", "print", "to   " << to);
 
 	cout << endl << endl;
 	cout <<  "/ -------------------------------------------------------------------------------------------- \\ " << endl;
@@ -323,6 +355,20 @@ void HashTable::print(int from, int to)
 	cout << endl << endl;
 }
 
+bool HashTable::clear( void )
+{
+	for (int id = 0; id < table_size; id++)
+	{
+		if (table[id] != nullptr) 
+		{
+			table[id]->remove();
+		}
+	}
+	count_elements = 0;
+
+	log_info("HashTable", "clear", "true")
+	return true;
+}
 
 
 bool operator==(const HashTableNode &p1, const HashTableNode &p2)
