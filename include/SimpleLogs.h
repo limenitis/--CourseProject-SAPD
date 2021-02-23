@@ -32,8 +32,6 @@
 #else
 	#define log_info( class_name, func, message);              \
 	// nothig do
-	#define log_info_val( class_name, func, message, val);     \
-	// nothig do
 #endif
 
 #ifdef ENABLE_ERROR
@@ -48,6 +46,6 @@
 	#define log_warning( class_name, func, message );          \
 	std::cerr << YELLOW   << "[WARNING] [" <<  class_name << "] [" << func << "] : " << message << " "   << RESET << endl;
 #else
-	#define log_werning( class_name, func, message );          \
+	#define log_warning( class_name, func, message );          \
 	// nothig do
 #endif
