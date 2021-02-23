@@ -17,12 +17,12 @@ public:
 	HashTableNode(const HashTableNode& obj);
 	~HashTableNode();
 
-	bool intsert (Patient &data);
+	bool intsert (const Patient &data);
 	bool remove  ();
 	bool deleted ( void );
 
     friend class HashTable;
-	friend bool operator==(HashTableNode p1, HashTableNode p2);
+	friend bool operator==(const HashTableNode &p1, const HashTableNode &p2);
 };
 
 
@@ -43,8 +43,8 @@ public:
 	HashTable(int size);
 	~HashTable();
 
-	bool insert	  (HashTableNode data);
-	bool remove   (HashTableNode data);
+	bool insert	  (const HashTableNode &data);
+	bool remove   (const HashTableNode &data);
 	int  find_key (const HashTableNode &data);
 	void print    (int from = 0, int to = 0);
 

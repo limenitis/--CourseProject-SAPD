@@ -15,9 +15,13 @@ HashTableNode::HashTableNode()
 
 HashTableNode::HashTableNode(const HashTableNode& obj)
 {
+    log_warning("HashTableNode", "HashTableNode", "copy constructor work ");
+    log_warning("HashTableNode", "HashTableNode", "copy from " << &obj);
+	log_warning("HashTableNode", "HashTableNode", "copy to   " << this);
+
 	if (obj.data)
 	{
-		this->data = obj.data;
+		this->data = new Patient{ *obj.data };
 	}
 	else
 	{
@@ -26,12 +30,17 @@ HashTableNode::HashTableNode(const HashTableNode& obj)
 	this->delete_data = obj.delete_data;
 }
 
-HashTableNode::~HashTableNode(){}
+HashTableNode::~HashTableNode()
+{
+	if (data) delete data;
+	data = nullptr;
+}
 
-bool HashTableNode::intsert (Patient &d)
+bool HashTableNode::intsert (const Patient &d)
 {
 	delete_data = false;
 
+	if(data) delete data;
 	data = new Patient{d};
 
 	log_info("HashTableNode", "insert", "true");
@@ -41,7 +50,7 @@ bool HashTableNode::intsert (Patient &d)
 bool HashTableNode::remove ()
 {
 	delete_data = true;
-	delete data;
+	if (data) delete data;
 	data = nullptr;
 
 	log_info("HashTableNode", "remove", "true");
@@ -74,12 +83,11 @@ HashTable::~HashTable()
 	{
 		if (table[id] != nullptr) 
 		{
-			table[id]->remove();
 			delete table[id];
 		}
 	}
 	table_size = 0;
-	delete table;
+	delete[] table;
 }
 
 bool HashTable::resize()
@@ -106,7 +114,7 @@ bool HashTable::resize()
 	return true;
 }
 
-bool HashTable::insert(HashTableNode node) 
+bool HashTable::insert(const HashTableNode &node) 
 {
 	if (correct_key(node)) 
 	{	
@@ -169,7 +177,7 @@ bool HashTable::insert(HashTableNode node)
 	}
 }
 
-bool HashTable::remove(HashTableNode node) 
+bool HashTable::remove(const HashTableNode &node) 
 {
 	if (correct_key(node))
 	{
@@ -185,7 +193,6 @@ bool HashTable::remove(HashTableNode node)
 			log_info("HashTable", "remove", "key found");
 			if ( table[pos]->remove() )
 			{
-				//delete table[pos];
 				count_elements -= 1;
 				log_info("HashTable", "remove", "fill percent = " << 100 * count_elements/table_size << "%" );
 				log_info("HashTable", "remove", "fill count_element = " << count_elements);
@@ -237,7 +244,7 @@ bool HashTable::correct_key(const HashTableNode &node)
 
 int HashTable::get_hash(const HashTableNode &node)
 {
-	char* key = node.data->get_reg().get_reg();
+	char* key = node.data->get_reg()->get_reg();
 
 	if (correct_key(node))
 	{
@@ -261,7 +268,7 @@ int HashTable::get_hash(const HashTableNode &node)
 
 int HashTable::get_hash_conflict(const HashTableNode &node) 
 {
-	char* key = node.data->get_reg().get_reg();
+	char* key = node.data->get_reg()->get_reg();
 
 	if (correct_key(node))
 	{
@@ -303,11 +310,12 @@ void HashTable::print(int from, int to)
 				cout.setf(ios::left);
 				cout << "|  "
 				<< setw(12) << id 											<< " |  " 
-				<< setw(20) << table[id]->data->get_reg().get_reg() 		<< " |  " 
+				<< setw(20) << table[id]->data->get_reg()->get_reg() 		<< " |  " 
 				<< setw(39) << table[id]->data->get_name()					<< " |  " 
 				<< setw(8)  << table[id]->data->get_year_born()	 			<< " |  " 
 				<< endl;
 			}
+			log_warning("HashTable", "print", "element addres " << table[id]);
 		}
 	}
 
@@ -317,7 +325,7 @@ void HashTable::print(int from, int to)
 
 
 
-bool operator==(HashTableNode p1, HashTableNode p2)
+bool operator==(const HashTableNode &p1, const HashTableNode &p2)
 {
-	return compare_str_equal(p1.data->get_reg().get_reg(), p2.data->get_reg().get_reg());
+	return compare_str_equal(p1.data->get_reg()->get_reg(), p2.data->get_reg()->get_reg());
 }

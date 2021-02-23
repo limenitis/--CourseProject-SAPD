@@ -4,31 +4,26 @@
 class Patient
 {
 protected:
-    RegistrationNumber reg_num;
-    char patient_name[100] = {'\0'};
-    char work_place[100] = {'\0'};
-    char addres[120] = {'\0'};
-    // RegistrationNumber* reg_num;
-    // char* patient_name;
-    // char* work_place;
-    // char* addres;
-    int  year_born;
+    RegistrationNumber* reg_num;
+    char* patient_name;
+    char* work_place;
+    char* addres;
+    int year_born;
 
 public:
     Patient();
-    // Patient(const Patient &obj);
-    // ~Patient();
+    Patient(const Patient &obj);
+    ~Patient();
 
     void set_reg       (int area_number, int serial_number);
     void set_reg       (char* reg);
-    void set_reg       (RegistrationNumber reg);
+    void set_reg       (const RegistrationNumber &reg);
     void set_name      (char* patient_name);
     void set_work      (char* work_place);
     void set_addres    (char* addres);
     void set_year_born (int year_born);
 
-    RegistrationNumber get_reg   ( void );
-    // RegistrationNumber* get_reg   ( void );
+    RegistrationNumber* get_reg   ( void );
     char* get_name      ( void );
     char* get_work      ( void );
     char* get_addres    ( void );

@@ -25,7 +25,8 @@ bool Hospital::remove_patient ()
     cin >> new_reg;
 
     Patient new_patient;
-    new_patient.set_reg(new_reg);
+    //new_patient.set_reg(new_reg);
+    new_patient.set_reg(new_reg.get_reg());
 
     HashTableNode element;
     element.intsert(new_patient);

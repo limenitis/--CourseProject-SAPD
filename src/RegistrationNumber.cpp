@@ -82,16 +82,12 @@ RegistrationNumber::RegistrationNumber(const RegistrationNumber &obj)
     log_warning("RegistrationNumber", "RegistrationNumber", "copy from " << &obj);
     log_warning("RegistrationNumber", "RegistrationNumber", "copy to   " << this);
 
-    this->reg_str = new char[11] {'0', '0', '-', '0', '0', '0', '0', '0', '0', '0', '\0'};
+    //this->reg_str = new char[11] {*obj.reg_str};
+    this->reg_str = new char[11]{ '0', '0', '-', '0', '0', '0', '0', '0', '0', '0', '\0' };
 
     this->area_number   = obj.area_number;
     this->serial_number = obj.serial_number;
-    int i = 0;
-    while (obj.reg_str[i] != '\0')
-    {
-        this->reg_str[i] = obj.reg_str[i];
-        i++;
-    }
+
 }
 
 void  RegistrationNumber::set_reg(int a, int s)

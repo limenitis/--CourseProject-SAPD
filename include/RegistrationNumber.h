@@ -7,7 +7,6 @@ class RegistrationNumber
 private:
     // format reg: char str[11] = {'1', '2', '-', '3', '4', '5', '6', '7', '8', '9', '\0'};
 
-    // char reg_str[11];
     char *reg_str;
     int area_number;
     int serial_number;
@@ -29,6 +28,4 @@ public:
 
     friend std::ostream&  operator<< (std::ostream&  out,  RegistrationNumber &obj);
     friend std::istream&  operator>> (std::istream&  in,   RegistrationNumber &obj);
-    // friend std::ofstream& operator<< (std::ofstream& fout, RegistrationNumber &obj);
-    // friend std::ifstream& operator>> (std::ifstream& fin,  RegistrationNumber &obj);
 };
