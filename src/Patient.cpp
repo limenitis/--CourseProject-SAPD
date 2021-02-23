@@ -48,7 +48,7 @@ void Patient::set_reg (char* reg)
 
 void Patient::set_reg (const RegistrationNumber &reg)
 {
-    delete reg_num; //? maybe 
+    delete reg_num;
     reg_num = new RegistrationNumber{ reg };
 }
 

@@ -82,7 +82,6 @@ RegistrationNumber::RegistrationNumber(const RegistrationNumber &obj)
     log_warning("RegistrationNumber", "RegistrationNumber", "copy from " << &obj);
     log_warning("RegistrationNumber", "RegistrationNumber", "copy to   " << this);
 
-    //this->reg_str = new char[11] {*obj.reg_str};
     this->reg_str = new char[11]{ '0', '0', '-', '0', '0', '0', '0', '0', '0', '0', '\0' };
 
     this->area_number   = obj.area_number;
