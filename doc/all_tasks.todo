@@ -142,27 +142,27 @@ class LinkedList:
 };
 class HashTableNode:
 {
-    ☐ Patient            *data;
-    ☐ bool delete_data;
-    ☐ HashTableNode();
-    ☐ bool intsert (Patient* data);
-    ☐ bool remove  ();
-    ☐ bool empty   ( void );
-    ☐ bool deleted ( void );
-    ☐ auto get_key ( void );
-    ☐ friend class HashTable;
+    ✔ Patient            *data; @done(23-02-21 21:16)
+    ✔ bool delete_data; @done(23-02-21 21:16)
+    ✔ HashTableNode(); @done(23-02-21 21:16)
+    ✔ bool intsert (Patient* data); @done(23-02-21 21:16)
+    ✔ bool remove  (); @done(23-02-21 21:16)
+    ✔ bool empty   ( void ); @done(23-02-21 21:16)
+    ✔ bool deleted ( void ); @done(23-02-21 21:16)
+    ✔ auto get_key ( void ); @done(23-02-21 21:16)
+    ✔ friend class HashTable; @done(23-02-21 21:16)
 };
 class HashTable :
 {
-    ☐ int N = 2500;
-    ☐ HashTableNode* segment[2500];
-    ☐ bool correct_key       (HashTableNode *data);
-    ☐ int  get_hash          (HashTableNode *data);
-    ☐ int  get_hash_conflict (HashTableNode *data);
-    ☐ bool insert	  (HashTableNode *data);
-    ☐ bool remove   (HashTableNode *data);
-    ☐ int  find_key (HashTableNode *data);
-    ☐ void print    (int from = 0, int to = 2500);
+    ✔ int N = 2500; @done(23-02-21 21:16)
+    ✔ HashTableNode* segment[2500]; @done(23-02-21 21:16)
+    ✔ bool correct_key       (HashTableNode *data); @done(23-02-21 21:16)
+    ✔ int  get_hash          (HashTableNode *data); @done(23-02-21 21:16)
+    ✔ int  get_hash_conflict (HashTableNode *data); @done(23-02-21 21:16)
+    ✔ bool insert	  (HashTableNode *data); @done(23-02-21 21:16)
+    ✔ bool remove   (HashTableNode *data); @done(23-02-21 21:16)
+    ✔ int  find_key (HashTableNode *data); @done(23-02-21 21:16)
+    ✔ void print    (int from = 0, int to = 2500); @done(23-02-21 21:16)
 };
 class AVL_Node:
 {
