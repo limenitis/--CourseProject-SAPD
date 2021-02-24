@@ -1,14 +1,18 @@
 ﻿#include ".\..\include\Patient.h"
 #include ".\..\include\SimpleLogs.h"
+#include ".\..\include\str-tools.h"
 
 Patient::Patient()
 {
     log_warning("Patient", "Patient", "constructor work " << this)
 
     reg_num = new RegistrationNumber;
-    patient_name = new char[100]{ '\0' };
-    work_place = new char[100]{ '\0' };
-    addres = new char[120]{ '\0' };
+    patient_name = new char[100];
+    patient_name[100-1] = '\0';
+    work_place = new char[100];
+    work_place[100-1] = '\0';
+    addres = new char[120];
+    addres[120-1] = '\0';
     year_born = 0;
 }
 
@@ -19,9 +23,33 @@ Patient::Patient(const Patient &obj)
     log_warning("Patient", "Patient", "copy to   " << this)
 
     this->reg_num = new RegistrationNumber{ *obj.reg_num };
-    this->patient_name = new char[100]{*obj.patient_name};
-    this->work_place = new char[100]{*obj.work_place};
-    this->addres = new char[120]{*obj.addres};
+
+    int len_patient_name = len_str(obj.patient_name);
+    int len_work_place = len_str(obj.work_place);
+    int len_addres = len_str(obj.addres);
+
+    this->patient_name = new char[len_patient_name];
+    this->work_place = new char[len_work_place];
+    this->addres = new char[len_addres];
+
+    for(int i = 0; i < len_patient_name; i++)
+    {
+        this->patient_name[i] = obj.patient_name[i];
+    }
+    this->patient_name[len_patient_name-1] = '\0';
+
+    for(int i = 0; i < len_work_place; i++)
+    {
+        this->work_place[i] = obj.work_place[i];
+    }
+    this->work_place[len_work_place-1] = '\0';
+
+    for(int i = 0; i < len_addres; i++)
+    {
+        this->addres[i] = obj.addres[i];
+    }
+    this->addres[len_addres-1] = '\0';
+
     this->year_born = obj.year_born;
 }
 

@@ -72,7 +72,7 @@ HashTable::HashTable()
 
 HashTable::HashTable(int size)
 {
-	table_size = (int)find_next_prime(size);
+	table_size = size;
 	count_elements = 0;
 	table = new HashTableNode * [table_size] {nullptr};
 }
@@ -92,27 +92,33 @@ HashTable::~HashTable()
 
 bool HashTable::resize()
 {
-	//create new
-	int new_table_size = (int)find_next_prime((int64_t)table_size * 2); // prime number
+	log_info("HashTable", "resize", "start");
 
+	//create new
+	int new_table_size = (int)(table_size * 2); // prime number
 	HashTableNode** new_table = new HashTableNode * [new_table_size] {nullptr};
 
-	//copy
-	for (int id = 0; id < table_size; id++)		
+	HashTableNode **old_table = table;
+	int old_table_size = table_size;
+	this->table = new_table;
+	this->table_size = new_table_size;
+
+	// copy
+	for (int id = 0; id < old_table_size; id++)		
 	{
-		if(table[id] != nullptr)
+		if(old_table[id] != nullptr)
 		{
-			new_table[id] = new HashTableNode{ *table[id] };
+			this->insert(*old_table[id]);
+			count_elements -= 1;
 		}
 	}
 
 	//delete old
-	delete[] table;
-	table = new_table;
-	table_size = new_table_size;
+	delete[] old_table;
 
-	log_info("HashTable", "resize", "true");
 	log_info("HashTable", "resize", "new size = " << table_size);
+	log_info("HashTable", "resize", "end");
+
 	return true;
 }
 
@@ -186,37 +192,28 @@ bool HashTable::insert(const HashTableNode &node)
 
 bool HashTable::remove(const HashTableNode &node) 
 {
-	if (correct_key(node))
-	{
-		int pos = find_key(node);
+	int pos = find_key(node);
 
-		if (pos == -1)
-		{
-			log_error("HashTable", "remove", "key don't found");
-			return false;
-		}
-		else 
-		{
-			log_info("HashTable", "remove", "key found");
-			if ( table[pos]->remove() )
-			{
-				count_elements -= 1;
-				log_info("HashTable", "remove", "fill percent = " << 100 * count_elements/table_size << "%" );
-				log_info("HashTable", "remove", "fill count_element = " << count_elements);
-				return true;
-			}
-			else
-			{
-				log_error("HashTable", "remove", "false");
-				return false;
-			}
-		}
+	if (pos == -1)
+	{
+		log_error("HashTable", "remove", "key don't found");
+		return false;
 	}
 	else 
 	{
-		log_error("HashTable", "remove", "false");
-		log_error("HashTable", "remove", "key don't correct");
-		return false;
+		log_info("HashTable", "remove", "key found");
+		if ( table[pos]->remove() )
+		{
+			count_elements -= 1;
+			log_info("HashTable", "remove", "fill percent = " << 100 * count_elements/table_size << "%" );
+			log_info("HashTable", "remove", "fill count_element = " << count_elements);
+			return true;
+		}
+		else
+		{
+			log_error("HashTable", "remove", "false");
+			return false;
+		}
 	}
 }
 
@@ -224,9 +221,9 @@ int HashTable::find_key(const HashTableNode &node)
 {
 	int id = get_hash(node);
 
-	while (true)
+	while ( table[id] != nullptr )
 	{
-		if (table[id])
+		if ( table[id]->deleted() != true )
 		{
 			if (*table[id] == node)
 			{
@@ -234,38 +231,32 @@ int HashTable::find_key(const HashTableNode &node)
 				return id;
 			}
 		}
-
-		while ( table[id] != nullptr && table[id]->deleted() )
-		{
-			if (table[id])
-			{
-				if (*table[id] == node)
-				{
-					log_info("HashTable", "find_key", "return " << id );
-					return id;
-				}
-				else
-				{
-					continue;
-				}
-			}
-			id = (id + get_hash_conflict(node)) % table_size;
-		}
-		log_error("HashTable", "find_key", "return " << "error : key don't found" );
-		return -1;
+		id = (id + get_hash_conflict(node)) % table_size;
 	}
+	log_error("HashTable", "find_key", "return " << "error : key don't found" );
+	return -1;
 }
 
 bool HashTable::correct_key(const HashTableNode &node)
 {
 	if( find_key(node) == -1 ) // don't found
 	{
-		log_info("HashTable", "correct_key", "true");
-		return true;
+		char* str = new char[11]{ '0', '0', '-', '0', '0', '0', '0', '0', '0', '0', '\0' };
+		if ( !compare_str_equal(node.data->get_reg()->get_reg(), str) )
+		{
+			log_info("HashTable", "correct_key", "true");
+			delete[] str;
+			return true;
+		}
+		log_error("HashTable", "correct_key", "false");
+		log_error("HashTable", "correct_key", "key 00-0000000");
+		delete[] str;
+		return false;
 	}
 	else
 	{
 		log_error("HashTable", "correct_key", "false");
+		log_error("HashTable", "correct_key", "key don't found");
 		return false;
 	}
 }
@@ -274,13 +265,14 @@ int HashTable::get_hash(const HashTableNode &node)
 {
 	char* key = node.data->get_reg()->get_reg();
 
-	int sum_key = 0;
-	int len = len_str(key);
-	for (int i = 0; i < len; i++) 
-	{
-		sum_key += key[i] * pow(2, i);
-		// sum_key += key[i];
-	}
+	// int sum_key = 0;
+	// int len = len_str(key);
+	// for (int i = 0; i < len; i++) 
+	// {
+	// 	// sum_key += key[i] * pow(2, i);
+	// }
+
+	int sum_key = len_str(key);
 
 	if (sum_key < 0) 
 	{
@@ -291,14 +283,14 @@ int HashTable::get_hash(const HashTableNode &node)
 	else 
 	{
 		log_info("HashTable", "get_hash", "return " << sum_key % table_size );
-		return sum_key % table_size; //? pow(i,n) % n
+		return sum_key % table_size; 
 	}
 }
 
 int HashTable::get_hash_conflict(const HashTableNode &node) 
 {
-	// int sum_key = 333; //! need check
-	int sum_key = 3;
+	int sum_key = 101;
+	// int sum_key = 3;
 	log_info("HashTable", "get_hash_conflict", "return " << sum_key % table_size );
 	return sum_key % table_size;
 }
@@ -360,25 +352,4 @@ bool HashTable::clear( void )
 bool operator==(const HashTableNode &p1, const HashTableNode &p2)
 {
 	return compare_str_equal(p1.data->get_reg()->get_reg(), p2.data->get_reg()->get_reg());
-}
-
-
-bool prime(int64_t n)
-{
-	int64_t i = 2;
-	while (i * i <= n)
-	{
-		if (n % i == 0) return false;
-		i++;
-    }
-    return true;
-}
-
-int64_t find_next_prime(int64_t n)
-{
-	while (prime(n) == false)
-	{
-		n += 1;
-	}
-	return n;
 }

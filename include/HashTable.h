@@ -5,8 +5,6 @@
 
 using namespace std;
 
-bool prime(int64_t n);
-int64_t find_next_prime(int64_t n);
 
 class HashTableNode
 {
