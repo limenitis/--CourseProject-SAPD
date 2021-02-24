@@ -1,10 +1,16 @@
 #include "pch.h"
 
-#include ".\..\src\str-tools.cpp"
 #include ".\..\src\Time.cpp"
 #include ".\..\src\Date.cpp"
 #include ".\..\src\Schedule.cpp"
 #include ".\..\src\RegistrationNumber.cpp"
+#include ".\..\src\HashTable.cpp"
+#include ".\..\src\LinkedList.cpp"
+#include ".\..\src\AVLTree.cpp"
+#include ".\..\src\str-tools.cpp"
+#include ".\..\src\Doctor.cpp"
+#include ".\..\src\Patient.cpp"
+#include ".\..\src\Direction.cpp"
 
 #include <string>
 
@@ -639,5 +645,42 @@ namespace test_Structures
         Schedule obj;
         obj.set_schedule("12:00-15:00");
         EXPECT_STREQ("12:00-15:00", obj.get_schedule());
+    }
+}
+
+namespace test_prime
+{
+    TEST(TestPrime, Prime) {
+        EXPECT_FALSE(prime(561));
+        EXPECT_FALSE(prime(1105));
+        EXPECT_FALSE(prime(1729));
+        EXPECT_FALSE(prime(2465));
+        EXPECT_FALSE(prime(2821));
+        EXPECT_FALSE(prime(6601));
+        EXPECT_FALSE(prime(8911));
+        EXPECT_FALSE(prime(10585));
+        EXPECT_FALSE(prime(15841));
+        EXPECT_FALSE(prime(29341));
+        EXPECT_FALSE(prime(41041));
+        EXPECT_FALSE(prime(46657));
+        EXPECT_FALSE(prime(52633));
+        EXPECT_FALSE(prime(62745));
+        EXPECT_FALSE(prime(63973));
+        EXPECT_FALSE(prime(10000000000));
+    }
+
+    TEST(TestFindPrime, Prime) {
+      cout << find_next_prime(11) << endl;
+      cout << find_next_prime(1000) << endl;
+      cout << find_next_prime(2500) << endl;
+      cout << find_next_prime(4000) << endl;
+      cout << find_next_prime(6000) << endl;
+      cout << find_next_prime(10000) << endl;
+      cout << find_next_prime(100000) << endl;
+      cout << find_next_prime(1000000) << endl;
+      cout << find_next_prime(10000000) << endl;
+      cout << find_next_prime(100000000) << endl;
+      cout << find_next_prime(1000000000) << endl;  // 1 000 000 000
+      cout << find_next_prime(10000000000) << endl; // 10 000 000 000
     }
 }

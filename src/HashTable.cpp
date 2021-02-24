@@ -65,14 +65,14 @@ bool HashTableNode::deleted ( void )
 
 HashTable::HashTable()
 {
-	table_size = 10;
+	table_size = 7;
 	count_elements = 0;
 	table = new HashTableNode * [table_size] {nullptr};
 }
 
 HashTable::HashTable(int size)
 {
-	table_size = size;
+	table_size = (int)find_next_prime(size);
 	count_elements = 0;
 	table = new HashTableNode * [table_size] {nullptr};
 }
@@ -93,7 +93,8 @@ HashTable::~HashTable()
 bool HashTable::resize()
 {
 	//create new
-	int new_table_size = (int)table_size * 1.5;
+	int new_table_size = (int)find_next_prime((int64_t)table_size * 2); // prime number
+
 	HashTableNode** new_table = new HashTableNode * [new_table_size] {nullptr};
 
 	//copy
@@ -111,6 +112,7 @@ bool HashTable::resize()
 	table_size = new_table_size;
 
 	log_info("HashTable", "resize", "true");
+	log_info("HashTable", "resize", "new size = " << table_size);
 	return true;
 }
 
@@ -224,9 +226,17 @@ int HashTable::find_key(const HashTableNode &node)
 
 	while (true)
 	{
-		while ( table[id] != nullptr && table[id]->deleted() ) 
+		if (table[id])
 		{
-			id = (id + get_hash_conflict(node)) % table_size;
+			if (*table[id] == node)
+			{
+				log_info("HashTable", "find_key", "return " << id);
+				return id;
+			}
+		}
+
+		while ( table[id] != nullptr && table[id]->deleted() )
+		{
 			if (table[id])
 			{
 				if (*table[id] == node)
@@ -239,82 +249,58 @@ int HashTable::find_key(const HashTableNode &node)
 					continue;
 				}
 			}
+			id = (id + get_hash_conflict(node)) % table_size;
 		}
-		log_info("HashTable", "find_key", "return " << "error : key don't found" );
+		log_error("HashTable", "find_key", "return " << "error : key don't found" );
 		return -1;
 	}
 }
 
 bool HashTable::correct_key(const HashTableNode &node)
 {
-	// check to uniq
-
-	return true;
+	if( find_key(node) == -1 ) // don't found
+	{
+		log_info("HashTable", "correct_key", "true");
+		return true;
+	}
+	else
+	{
+		log_error("HashTable", "correct_key", "false");
+		return false;
+	}
 }
 
 int HashTable::get_hash(const HashTableNode &node)
 {
 	char* key = node.data->get_reg()->get_reg();
 
-	if (correct_key(node))
+	int sum_key = 0;
+	int len = len_str(key);
+	for (int i = 0; i < len; i++) 
 	{
-		int sum_key = 0;
-		int len = len_str(key);
-		for (int i = 0; i < len; i++) 
-		{
-			sum_key += key[i] * pow(2, i);
-		}
-
-		if (sum_key < 0) 
-		{
-			log_error("HashTable", "get_hash", "false");
-			log_error("HashTable", "get_hash", "sum key less zero");
-			return -1;
-		}
-		else 
-		{
-			log_info("HashTable", "get_hash", "return " << sum_key % table_size );
-			return sum_key % table_size;
-		}
+		sum_key += key[i] * pow(2, i);
+		// sum_key += key[i];
 	}
-	else
+
+	if (sum_key < 0) 
 	{
 		log_error("HashTable", "get_hash", "false");
-		log_error("HashTable", "get_hash", "key don't correct");
+		log_error("HashTable", "get_hash", "sum key less zero");
 		return -1;
+	}
+	else 
+	{
+		log_info("HashTable", "get_hash", "return " << sum_key % table_size );
+		return sum_key % table_size; //? pow(i,n) % n
 	}
 }
 
 int HashTable::get_hash_conflict(const HashTableNode &node) 
 {
-	char* key = node.data->get_reg()->get_reg();
-
-	if (correct_key(node))
-	{
-		int sum_key = 0;
-		for (int i = 0; i < len_str(key); i++)
-		{
-			sum_key += key[i] * pow(5, i);
-		}
-
-		if (sum_key < 0) 
-		{
-			log_error("HashTable", "get_hash_conflict", "false");
-			log_error("HashTable", "get_hash_conflict", "sum key less zero");
-			return -1;
-		}
-		else 
-		{
-			log_info("HashTable", "get_hash_conflict", "return " << sum_key % table_size );
-			return sum_key % table_size;
-		}
-	}
-	else
-	{
-		log_error("HashTable", "get_hash_conflict", "false");
-		log_error("HashTable", "get_hash_conflict", "key don't correct");		
-		return -1;
-	}
+	// int sum_key = 333; //! need check
+	int sum_key = 3;
+	log_info("HashTable", "get_hash_conflict", "return " << sum_key % table_size );
+	return sum_key % table_size;
 }
 
 void HashTable::print(int from, int to)
@@ -374,4 +360,25 @@ bool HashTable::clear( void )
 bool operator==(const HashTableNode &p1, const HashTableNode &p2)
 {
 	return compare_str_equal(p1.data->get_reg()->get_reg(), p2.data->get_reg()->get_reg());
+}
+
+
+bool prime(int64_t n)
+{
+	int64_t i = 2;
+	while (i * i <= n)
+	{
+		if (n % i == 0) return false;
+		i++;
+    }
+    return true;
+}
+
+int64_t find_next_prime(int64_t n)
+{
+	while (prime(n) == false)
+	{
+		n += 1;
+	}
+	return n;
 }

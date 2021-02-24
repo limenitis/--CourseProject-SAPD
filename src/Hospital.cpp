@@ -75,7 +75,7 @@ bool Hospital::find_patient_by_reg_num ( void )
 
     if (result != -1)
     {
-        table->print(result-5, result+5);
+        table->print(result, result+1);
         return true;
     }
     else
