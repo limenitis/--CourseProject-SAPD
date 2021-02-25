@@ -31,7 +31,7 @@
 	std::cerr << GREEN    << "[INFO] [" <<  class_name << "] [" << func << "] : " << message << " "   << RESET << endl;
 #else
 	#define log_info( class_name, func, message);              \
-	// nothig do
+	// nothing to do
 #endif
 
 #ifdef ENABLE_ERROR
@@ -39,7 +39,7 @@
 	std::cerr << RED      << "[ERROR] [" <<  class_name << "] [" << func << "] : " << message << " "   << RESET << endl;
 #else
 	#define log_error( class_name, func, message );            \
-	// nothig do
+	// nothing to do
 #endif
 
 #ifdef ENABLE_WARNING
@@ -47,5 +47,5 @@
 	std::cerr << YELLOW   << "[WARNING] [" <<  class_name << "] [" << func << "] : " << message << " "   << RESET << endl;
 #else
 	#define log_warning( class_name, func, message );          \
-	// nothig do
+	// nothing to do
 #endif
