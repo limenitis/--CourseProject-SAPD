@@ -42,6 +42,14 @@ bool Hospital::edit_patient ( void )
     return true;
 }
 
+void Hospital::print_patient  ( void )
+{
+    int id;
+    cout << "id : " << endl;
+    cin >> id;
+    table->print(id);
+}
+
 void Hospital::print_patients  ( void )
 {
     table->print();

@@ -47,9 +47,13 @@ public:
 	bool insert	  (const HashTableNode &data);
 	bool remove   (const HashTableNode &data);
 	int  find_key (const HashTableNode &data);
-	void print    (int from = 0, int to = 0);
 
-	bool clear    ( void );
+	void print    (void);
+	void print    (int id);
+	void print    (int from, int to);
+	void print    (bool condition(int id));
+
+	bool clear ( void );
 
 	friend class HashTableNode;
 };

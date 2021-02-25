@@ -28,6 +28,7 @@ public:
     bool insert_patient ( void );
     bool remove_patient ( void );
     bool edit_patient   ( void );
+    void print_patient  ( void );
     void print_patients ( void );
     bool clear_patients ( void );
     bool find_patient_by_name    ( void );

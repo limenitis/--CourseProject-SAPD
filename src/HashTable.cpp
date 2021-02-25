@@ -13,6 +13,7 @@ HashTableNode::HashTableNode()
 	delete_data = false;
 }
 
+
 HashTableNode::HashTableNode(const HashTableNode& obj)
 {
     log_warning("HashTableNode", "HashTableNode", "copy constructor work ");
@@ -30,11 +31,13 @@ HashTableNode::HashTableNode(const HashTableNode& obj)
 	this->delete_data = obj.delete_data;
 }
 
+
 HashTableNode::~HashTableNode()
 {
 	if (data) delete data;
 	data = nullptr;
 }
+
 
 bool HashTableNode::intsert (const Patient &d)
 {
@@ -46,6 +49,7 @@ bool HashTableNode::intsert (const Patient &d)
 	log_info("HashTableNode", "insert", "true");
 	return true;
 }
+
 
 bool HashTableNode::remove ()
 {
@@ -63,6 +67,7 @@ bool HashTableNode::deleted ( void )
 	return delete_data;
 }
 
+
 HashTable::HashTable()
 {
 	table_size = 7;
@@ -70,12 +75,14 @@ HashTable::HashTable()
 	table = new HashTableNode * [table_size] {nullptr};
 }
 
+
 HashTable::HashTable(int size)
 {
 	table_size = size;
 	count_elements = 0;
 	table = new HashTableNode * [table_size] {nullptr};
 }
+
 
 HashTable::~HashTable()
 {
@@ -89,6 +96,7 @@ HashTable::~HashTable()
 	table_size = 0;
 	delete[] table;
 }
+
 
 bool HashTable::resize()
 {
@@ -121,6 +129,7 @@ bool HashTable::resize()
 
 	return true;
 }
+
 
 bool HashTable::insert(const HashTableNode &node) 
 {
@@ -190,6 +199,7 @@ bool HashTable::insert(const HashTableNode &node)
 	}
 }
 
+
 bool HashTable::remove(const HashTableNode &node) 
 {
 	int pos = find_key(node);
@@ -217,6 +227,7 @@ bool HashTable::remove(const HashTableNode &node)
 	}
 }
 
+
 int HashTable::find_key(const HashTableNode &node)
 {
 	int id = get_hash(node);
@@ -236,6 +247,7 @@ int HashTable::find_key(const HashTableNode &node)
 	log_error("HashTable", "find_key", "return " << "error : key don't found" );
 	return -1;
 }
+
 
 bool HashTable::correct_key(const HashTableNode &node)
 {
@@ -260,6 +272,7 @@ bool HashTable::correct_key(const HashTableNode &node)
 		return false;
 	}
 }
+
 
 int HashTable::get_hash(const HashTableNode &node)
 {
@@ -287,6 +300,7 @@ int HashTable::get_hash(const HashTableNode &node)
 	}
 }
 
+
 int HashTable::get_hash_conflict(const HashTableNode &node) 
 {
 	int sum_key = 101;
@@ -295,6 +309,22 @@ int HashTable::get_hash_conflict(const HashTableNode &node)
 	return sum_key % table_size;
 }
 
+/**
+ * @brief print full table
+ * 
+ */
+void HashTable::print (void)
+{
+	print(0, table_size);
+}
+
+
+/**
+ * @brief print part of the HashTable
+ * 
+ * @param from - start  number id
+ * @param to   - finish number id
+ */
 void HashTable::print(int from, int to)
 {
 	if (to == 0) { to = table_size; }
@@ -333,6 +363,83 @@ void HashTable::print(int from, int to)
 	cout << endl << endl;
 }
 
+/**
+ * @brief print the interval
+ * 
+ * @param condition 
+ */
+void HashTable::print ( bool condition(int id) )
+{
+	cout << endl << endl;
+	cout <<  "/ -------------------------------------------------------------------------------------------- \\ " << endl;
+	cout <<  "| ::::::::::::::::::::::::::::::::::::::::: Patients ::::::::::::::::::::::::::::::::::::::::: |  " << endl;
+	cout <<  "+ ------------- + --------------------- + ---------------------------------------- + --------- +  " << endl;
+	cout <<  "|      id       |  Registration number  |               Patient name               | Year born |  " << endl;
+
+	for (int id = 0; id < table_size; id++)
+	{
+		if (table[id] != nullptr) 
+		{
+			if (table[id]->deleted() != true)
+			{
+				if(condition(id))
+				{
+					cout << "+ ------------- + --------------------- + ---------------------------------------- + --------- +  " << endl;
+					cout.setf(ios::left);
+					cout << "|  "
+					<< setw(12) << id 											<< " |  " 
+					<< setw(20) << table[id]->data->get_reg()->get_reg() 		<< " |  " 
+					<< setw(39) << table[id]->data->get_name()					<< " |  " 
+					<< setw(8)  << table[id]->data->get_year_born()	 			<< " |  " 
+					<< endl;
+					log_warning("HashTable", "print", "element addres " << table[id]);
+				}
+			}
+		}
+	}
+
+	cout << "\\ -------------------------------------------------------------------------------------------- /  " << endl;
+	cout << endl << endl;
+}
+
+/**
+ * @brief print detailed information about id
+ * 
+ * @param id - id in HashTable
+ */
+void HashTable::print (int id)
+{
+	cout << endl << endl;
+	if(table[id])
+	{
+		cout <<  "/ --------------------------------------------------------------------------------- \\ " << endl;
+		cout <<  "| :::::::::::::::::::::::::::::::::::: Patient :::::::::::::::::::::::::::::::::::: |  " << endl;
+		cout <<  "+ --------------------- + --------------------------------------------------------- +  " << endl;
+		cout <<  "|  Registration number  |  " << setw(57) << table[id]->data->get_reg()->get_reg() << "|" << endl;
+		cout <<  "+ --------------------- + --------------------------------------------------------- +  " << endl;
+		cout <<  "|  Patient name         |  " << setw(57) << table[id]->data->get_name() <<         "|"   << endl;
+		cout <<  "+ --------------------- + --------------------------------------------------------- +  " << endl;
+		cout <<  "|  Work place           |  " << setw(57) << table[id]->data->get_work() <<         "|"   << endl;
+		cout <<  "+ --------------------- + --------------------------------------------------------- +  " << endl;
+		cout <<  "|  Addres               |  " << setw(57) << table[id]->data->get_addres() <<       "|"   << endl;
+		cout <<  "+ --------------------- + --------------------------------------------------------- +  " << endl;
+		cout <<  "|  Year born            |  " << setw(57) << table[id]->data->get_year_born() <<    "|"   << endl;
+		cout << "\\ --------------------------------------------------------------------------------- /  " << endl;
+	}
+	else
+	{
+		cout << "Empty id" << endl;
+	}
+	cout << endl << endl;
+}
+
+
+/**
+ * @brief clear data in HashTable 
+ * 
+ * @return true  - successful clear
+ * @return false - unsuccessful clear
+ */
 bool HashTable::clear( void )
 {
 	for (int id = 0; id < table_size; id++)
