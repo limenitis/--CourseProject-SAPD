@@ -9,10 +9,10 @@ using namespace std;
 #include <stdlib.h>
 #include <crtdbg.h>
 #ifdef _DEBUG
-#ifndef DBG_NEW
-#define DBG_NEW new ( _NORMAL_BLOCK , __FILE__ , __LINE__ )
-#define newDBG_NEW
-#endif
+    #ifndef DBG_NEW
+    #define DBG_NEW new ( _NORMAL_BLOCK , __FILE__ , __LINE__ )
+    #define newDBG_NEW
+    #endif
 #endif
 
 #define DumpMemoryLeaks                                \
@@ -90,13 +90,12 @@ void patients_menu(Hospital *hospital)
         cout << "+ ----------------------------------- +" << endl;
         cout << "|  mode 1 : insert patient            |" << endl;
         cout << "|  mode 2 : remove patient            |" << endl;
-        cout << "|  mode 3 : edit patient              |" << endl;
-        cout << "|  mode 4 : print patient             |" << endl;
-        cout << "|  mode 5 : print patients            |" << endl;
-        cout << "|  mode 6 : clear patient             |" << endl;
-        cout << "|  mode 7 : find_patient_by_name      |" << endl;
-        cout << "|  mode 8 : find_patient_by_reg_num   |" << endl;
-        cout << "|  mode 9 : exit                      |" << endl;
+        cout << "|  mode 3 : print patient             |" << endl;
+        cout << "|  mode 4 : print patients            |" << endl;
+        cout << "|  mode 5 : clear patient             |" << endl;
+        cout << "|  mode 6 : find_patient_by_name      |" << endl;
+        cout << "|  mode 7 : find_patient_by_reg_num   |" << endl;
+        cout << "|  mode 8 : exit                      |" << endl;
         cout << "+ ----------------------------------- +" << endl;
         cin >> patient_key;
 
@@ -110,29 +109,25 @@ void patients_menu(Hospital *hospital)
         }
         else if (patient_key == 3)
         {
-            hospital->edit_patient();
+            hospital->print_patient();
         }
         else if (patient_key == 4)
         {
-            hospital->print_patient();
+            hospital->print_patients();
         }
         else if (patient_key == 5)
         {
-            hospital->print_patients();
+            hospital->clear_patients();
         }
         else if (patient_key == 6)
         {
-            hospital->clear_patients();
+            hospital->find_patient_by_name();
         }
         else if (patient_key == 7)
         {
-            hospital->find_patient_by_name();
-        }
-        else if (patient_key == 8)
-        {
             hospital->find_patient_by_reg_num();
         }
-        else if (patient_key == 9)
+        else
         {
             break;
         }

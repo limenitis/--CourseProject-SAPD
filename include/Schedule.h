@@ -7,24 +7,23 @@ using namespace std;
 class Schedule
 {
 private:
-    // format Schedule: char str[12] = {'1', '0', ':', '0', '0', '-', '1', '8', ':', '0', '0', '\0'};
-    // char* schedule_str = new char[12] {'0', '0', ':', '0', '0', '-', '0', '0', ':', '0', '0', '\0'};
-    char schedule_str[12] {'0', '0', ':', '0', '0', '-', '0', '0', ':', '0', '0', '\0'};
+    // format Schedule: 10:00-18:00
+    string schedule_str = "00:00-00:00";
     Time start_time;
     Time finish_time;
 
-    char* convert_int2str(Time start_time, Time finish_time);
-    void convert_str2int(char str[12]);
+    string convert_int2str(Time start_time, Time finish_time);
+    void   convert_str2int(string str);
 
 public:
     Schedule();
     ~Schedule();
-    Schedule(char str[12]);
+    Schedule(string str);
     Schedule(Time start_time, Time finish_time);
 
     void  set_schedule(Time start_time, Time finish_time);
-    void  set_schedule(char str[12]);
-    char* get_schedule();
+    void  set_schedule(string str);
+    string get_schedule();
     bool  check_schedule();
 
     friend std::ostream&  operator<< (std::ostream&  out,  Schedule &obj);

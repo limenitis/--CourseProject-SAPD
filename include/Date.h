@@ -1,29 +1,29 @@
 #pragma once
 #include <iostream>
+#include <string>
 using namespace std;
 
 class Date
 {
 private:
-    // format date: char str[11] = {'0', '0', '.', '0', '0', '.', '0', '0', '0', '0', '\0'};
-    // char* date_str = new char[11]{'\0'};
-    char date_str[11];
+    // format date: 00.00.0000
+    string date_str;
     int day;
     int month;
     int year;
 
-    char* convert_int2str(int day, int month, int year);
-    void convert_str2int(char str[11]);
+    string convert_int2str(int day, int month, int year);
+    void convert_str2int(string str);
 
 public:
     Date();
     ~Date();
-    Date(char str[11]);
+    Date(string str);
     Date(int day, int month, int year);
 
     void  set_date(int day, int month, int year);
-    void  set_date(char str[11]);
-    char* get_date();
+    void  set_date(string str);
+    string get_date();
     bool  check_date();
 
     friend std::ostream&  operator<< (std::ostream&  out,  Date &obj);

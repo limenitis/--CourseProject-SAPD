@@ -1,11 +1,10 @@
-#pragma once
 #include ".\..\include\Time.h"
 #include ".\..\include\str-tools.h"
 #include ".\..\include\SimpleLogs.h"
 
 using namespace std;
 
-char* Time::convert_int2str(int hour, int minute)
+string Time::convert_int2str(int hour, int minute)
 {
     if(hour / 10 == 0) // one-digit number
     {
@@ -36,7 +35,7 @@ char* Time::convert_int2str(int hour, int minute)
     return time_str;
 }
 
-void Time::convert_str2int(char str[6])
+void Time::convert_str2int(string str)
 {
     int h = char2int(str[0]) * 10 + char2int(str[1]);
     int m = char2int(str[3]) * 10 + char2int(str[4]);
@@ -49,7 +48,7 @@ Time::Time()
     this->set_time(0, 0);
 }
 
-Time::Time(char str[6])
+Time::Time(string str)
 {
     convert_str2int(str);
 }
@@ -62,7 +61,6 @@ Time::Time(int h, int m)
 Time::~Time()
 {
     log_warning("Time", "~Time", "destruct work");
-    // delete[] time_str;
 }
 
 void Time::set_time(int h, int m)
@@ -74,12 +72,12 @@ void Time::set_time(int h, int m)
     else                        { minute = 0; }
 }
 
-void Time::set_time(char str[6])
+void Time::set_time(string str)
 {
     convert_str2int(str);
 }
 
-char* Time::get_time()
+string Time::get_time()
 {
     return convert_int2str(hour, minute);
 }
@@ -192,14 +190,7 @@ bool operator>=(Time t1, Time t2)
 
 std::ostream& operator<< (std::ostream& out, Time &obj)
 {
-    char* str = obj.convert_int2str(obj.hour, obj.minute);
-
-    int i = 0;
-    while (str[i] != '\0')
-    {
-        out << str[i];
-        i++;
-    }
+    out << obj.convert_int2str(obj.hour, obj.minute);
    
     return out;
 }

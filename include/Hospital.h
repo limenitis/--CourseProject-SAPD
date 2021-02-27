@@ -4,7 +4,7 @@
 // #include ".\..\include\Schedule.h"
 // #include ".\..\include\RegistrationNumber.h"
 #include ".\..\include\HashTable.h"
-#include ".\..\include\LinkedList.h"
+// #include ".\..\include\LinkedList.h"
 #include ".\..\include\AVLTree.h"
 // #include ".\..\include\str-tools.h"
 
@@ -19,7 +19,7 @@ using namespace std;
 
 class Hospital{
 private:
-    HashTable* table;;
+    HashTable* table;
 
 public:
     Hospital();
@@ -27,7 +27,6 @@ public:
 
     bool insert_patient ( void );
     bool remove_patient ( void );
-    bool edit_patient   ( void );
     void print_patient  ( void );
     void print_patients ( void );
     bool clear_patients ( void );

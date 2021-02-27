@@ -4,7 +4,7 @@
 
 using namespace std;
 
-char* Date::convert_int2str(int day, int month, int year)
+string Date::convert_int2str(int day, int month, int year)
 {
     if (day / 10 == 0) // one-digit number
     {
@@ -37,17 +37,15 @@ char* Date::convert_int2str(int day, int month, int year)
     date_str[8] = int2char(year / 10   % 10 );
     date_str[9] = int2char(year / 1    % 10 );
 
-    date_str[10] = '\0';
-
     return date_str;
 }
 
-void Date::convert_str2int(char str[11])
+void Date::convert_str2int(string str)
 {
     int d   = char2int(str[0]) * 10 + char2int(str[1]);
-    int m = char2int(str[3]) * 10 + char2int(str[4]);
+    int m   = char2int(str[3]) * 10 + char2int(str[4]);
 
-    int y  = char2int(str[6]) * 1000 + 
+    int y = char2int(str[6]) * 1000 + 
             char2int(str[7]) * 100  + 
             char2int(str[8]) * 10   + 
             char2int(str[9]);
@@ -60,7 +58,7 @@ Date::Date()
     this->set_date(0, 0, 0);
 }
 
-Date::Date(char str[11])
+Date::Date(string str)
 {
     this->set_date(str);
 }
@@ -73,7 +71,6 @@ Date::Date(int d, int m, int y)
 Date::~Date()
 {
     log_warning("Date", "~Date", "destruct work");
-    // delete[] date_str;
 }
 
 bool isleap(int year) { return year % 4 == 0 && (year % 100 != 0 || year % 400 == 0); }
@@ -94,12 +91,12 @@ void Date::set_date(int d, int m, int y)
     else                                    { day = 0; }
 }
 
-void Date::set_date(char str[11])
+void Date::set_date(string str)
 {
     convert_str2int(str);
 }
 
-char* Date::get_date()
+string Date::get_date()
 {
     return convert_int2str(day, month, year);
 }
@@ -127,14 +124,9 @@ bool Date::check_date()
 
 std::ostream& operator<< (std::ostream& out, Date &obj)
 {
-    char *str = obj.convert_int2str(obj.day, obj.month, obj.year);
+    string str = obj.convert_int2str(obj.day, obj.month, obj.year);
 
-    int i = 0;
-    while(str[i] != '\0')
-    {
-        out << str[i];
-        i++;
-    }
+    cout << str;
 
     return out;
 }

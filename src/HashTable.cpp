@@ -253,16 +253,15 @@ bool HashTable::correct_key(const HashTableNode &node)
 {
 	if( find_key(node) == -1 ) // don't found
 	{
-		char* str = new char[11]{ '0', '0', '-', '0', '0', '0', '0', '0', '0', '0', '\0' };
-		if ( !compare_str_equal(node.data->get_reg()->get_reg(), str) )
+		string str = "00-0000000";
+		if ( !compare_str_equal(const_cast<char*>(node.data->get_reg()->get_reg().c_str()), 
+								const_cast<char*>(str.c_str())) )
 		{
 			log_info("HashTable", "correct_key", "true");
-			delete[] str;
 			return true;
 		}
 		log_error("HashTable", "correct_key", "false");
 		log_error("HashTable", "correct_key", "key 00-0000000");
-		delete[] str;
 		return false;
 	}
 	else
@@ -276,7 +275,7 @@ bool HashTable::correct_key(const HashTableNode &node)
 
 int HashTable::get_hash(const HashTableNode &node)
 {
-	char* key = node.data->get_reg()->get_reg();
+	string key = node.data->get_reg()->get_reg();
 
 	// int sum_key = 0;
 	// int len = len_str(key);
@@ -285,7 +284,7 @@ int HashTable::get_hash(const HashTableNode &node)
 	// 	// sum_key += key[i] * pow(2, i);
 	// }
 
-	int sum_key = len_str(key);
+	int sum_key = key.size();
 
 	if (sum_key < 0) 
 	{
@@ -458,5 +457,6 @@ bool HashTable::clear( void )
 
 bool operator==(const HashTableNode &p1, const HashTableNode &p2)
 {
-	return compare_str_equal(p1.data->get_reg()->get_reg(), p2.data->get_reg()->get_reg());
+	return compare_str_equal(const_cast<char*>(p1.data->get_reg()->get_reg().c_str()), 
+							 const_cast<char*>(p2.data->get_reg()->get_reg().c_str()));
 }

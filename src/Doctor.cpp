@@ -19,35 +19,28 @@ void Doctor::set_schedule(Time start_time, Time finish_time)
     schedule.set_schedule(start_time, finish_time);
 }
 
-void Doctor::set_schedule(char str[12])
+void Doctor::set_schedule(string str)
 {
     schedule.set_schedule(str);
 }
 
 void Doctor::set_cabinet_number(int number)
 {
-    cabinet_number = number;
+    if (cabinet_number > 0) { cabinet_number = number; }
+    else                    { cabinet_number = 0; }
 }
 
-void Doctor::set_doctor_name(char* str)
+void Doctor::set_doctor_name(string str)
 {
-    int i = 0;
-    while(str[i] != '\0')
+    if(str.size() < 26)
     {
-        doctor_name[i] = str[i];
+        this->doctor_name = str;
     }
-    doctor_name[i] = '\0';
 }
 
-void Doctor::set_specialization(char* str)
+void Doctor::set_specialization(string str)
 {
-    int i = 0;
-    while(str[i] != '\0')
-    {
-        specialization[i] = str[i];
-    }
-    specialization[i] = '\0';
-
+    this->specialization = str;
 }
 
 bool Doctor::check_doctor_data()
@@ -66,12 +59,12 @@ int Doctor::get_cabinet_number ( void )
     return cabinet_number;
 }
 
-char* Doctor::get_doctor_name ( void )
+string Doctor::get_doctor_name ( void )
 {
     return doctor_name;
 }
 
-char* Doctor::get_specialization ( void )
+string Doctor::get_specialization ( void )
 {
     return specialization;
 }
@@ -79,8 +72,7 @@ char* Doctor::get_specialization ( void )
 bool operator< (Doctor doc1, Doctor doc2)
 {
     int i = 0;
-    while ( doc1.doctor_name[i] != '\0' && 
-            doc2.doctor_name[i] != '\0')
+    while ( doc1.doctor_name.size() > i && doc2.doctor_name.size() > i )
     {
         if (doc1.doctor_name[i] < doc2.doctor_name[i])
         {
@@ -97,8 +89,7 @@ bool operator< (Doctor doc1, Doctor doc2)
 bool operator> (Doctor doc1, Doctor doc2)
 {
     int i = 0;
-    while ( doc1.doctor_name[i] != '\0' && 
-            doc2.doctor_name[i] != '\0')
+    while ( doc1.doctor_name.size() > i && doc2.doctor_name.size() > i )
     {
         if (doc1.doctor_name[i] > doc2.doctor_name[i])
         {
@@ -114,14 +105,13 @@ bool operator> (Doctor doc1, Doctor doc2)
 
 bool operator==(Doctor doc1, Doctor doc2)
 {
-    if (len_str(doc1.doctor_name) != len_str(doc2.doctor_name))
+    if ( doc1.doctor_name.size() != doc2.doctor_name.size() )
     {
         return false;
     }
 
-    int i = 0;
-    while ( doc1.doctor_name[i] != '\0' && 
-            doc2.doctor_name[i] != '\0')
+    int i = doc1.doctor_name.size();
+    while (i--)
     {
         if (doc1.doctor_name[i] != doc2.doctor_name[i])
         {
@@ -133,7 +123,7 @@ bool operator==(Doctor doc1, Doctor doc2)
 
 std::ostream&  operator<< (std::ostream&  out,  Doctor &obj)
 {
-    outstr(obj.doctor_name);
+    cout << obj.doctor_name;
 
     return out;
 }

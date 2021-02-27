@@ -4,34 +4,36 @@
 #include ".\..\include\SimpleLogs.h"
 
 
-char* Schedule::convert_int2str(Time start_time, Time finish_time)
+string Schedule::convert_int2str(Time start_time, Time finish_time)
 {
-    char *time1 = start_time.get_time();
-    char *time2 = finish_time.get_time();
+    string time1 = start_time.get_time();
+    string time2 = finish_time.get_time();
 
-    int i = 0;
-    while (time1[i] != '\0')
-    {
-        schedule_str[i] = time1[i];
-        i++;
-    }
+    // int i = 0;
+    // while (time1[i] != '\0')
+    // {
+    //     schedule_str[i] = time1[i];
+    //     i++;
+    // }
 
-    schedule_str[i] = '-';
-    i++;
+    // schedule_str[i] = '-';
+    // i++;
 
-    while (time2[i-6] != '\0')
-    {
-        schedule_str[i] = time2[i-6];
-        i++;
-    }
+    // while (time2[i-6] != '\0')
+    // {
+    //     schedule_str[i] = time2[i-6];
+    //     i++;
+    // }
+
+    schedule_str = time1 + "-" + time2;
 
     return schedule_str;
 }
 
-void  Schedule::convert_str2int(char str[12])
+void  Schedule::convert_str2int(string str)
 {
-    char *str1 = new char[6]{'\0'};
-    char *str2 = new char[6]{'\0'};
+    string str1 = "00:00";
+    string str2 = "00:00";
 
     int i = 0;
     while (str[i] != '-')
@@ -40,7 +42,7 @@ void  Schedule::convert_str2int(char str[12])
         i++;
     }
     i++;
-    while (str[i] != '\0')
+    while (i < str.size())
     {
         str2[i-6] = str[i];
         i++;
@@ -48,9 +50,6 @@ void  Schedule::convert_str2int(char str[12])
 
     start_time.set_time(str1);
     finish_time.set_time(str2);
-
-    delete[] str1;
-    delete[] str2;   
 }
 
 Schedule::Schedule()
@@ -63,7 +62,7 @@ Schedule::~Schedule()
     log_warning("Schedule", "~Schedule", "destruct work");
 }
 
-Schedule::Schedule(char str[12])
+Schedule::Schedule(string str)
 {
     convert_str2int(str);
 }
@@ -86,12 +85,12 @@ void  Schedule::set_schedule(Time s, Time f)
     }
 }
 
-void  Schedule::set_schedule(char str[12])
+void  Schedule::set_schedule(string str)
 {
     convert_str2int(str);
 }
 
-char* Schedule::get_schedule()
+string Schedule::get_schedule()
 {
     return convert_int2str(start_time, finish_time);
 }
@@ -103,14 +102,7 @@ bool  Schedule::check_schedule()
 
 std::ostream&  operator<< (std::ostream&  out,  Schedule &obj)
 {
-    char* str = obj.convert_int2str(obj.start_time, obj.finish_time);
-
-    int i = 0;
-    while (str[i] != '\0')
-    {
-        out << str[i];
-        i++;
-    }
+    out << obj.convert_int2str(obj.start_time, obj.finish_time);
    
     return out;
 }

@@ -18,7 +18,7 @@ public:
     Direction(Doctor *doctor, Patient *patient, Date date, Time time);
 
     void set_data(Doctor *doctor, Patient *patient, Date date, Time time);
-    void get_data(RegistrationNumber& num, char* doctor_name, Date& date, Time& time);
+    void get_data(RegistrationNumber& num, string doctor_name, Date& date, Time& time);
 
     friend std::ostream&  operator<< (std::ostream&  out,  Direction &obj);
 };

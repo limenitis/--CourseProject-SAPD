@@ -18,7 +18,7 @@ void Direction::set_data(Doctor *doc, Patient *pat, Date date, Time time)
     direction_time = time;
 }
 
-void Direction::get_data(RegistrationNumber& num, char* doctor_name, Date& date, Time& time)
+void Direction::get_data(RegistrationNumber& num, string doctor_name, Date& date, Time& time)
 {
     num = *patient_ptr->get_reg();
     doctor_name = doctor_ptr->get_doctor_name();

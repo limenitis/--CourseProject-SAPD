@@ -36,12 +36,6 @@ bool Hospital::remove_patient ()
     return table->remove(element);
 }
 
-bool Hospital::edit_patient ( void )
-{
-    cout << "Empty implementation" << endl;
-    return true;
-}
-
 void Hospital::print_patient  ( void )
 {
     int id;
