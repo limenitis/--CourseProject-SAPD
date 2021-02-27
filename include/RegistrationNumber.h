@@ -6,7 +6,7 @@ using namespace std;
 class RegistrationNumber
 {
 private:
-    // format reg: 12-3456789
+    // format reg: 00-0000000
 
     string reg_str;
     int area_number;

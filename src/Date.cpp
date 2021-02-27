@@ -55,16 +55,19 @@ void Date::convert_str2int(string str)
 
 Date::Date()
 {
+    this->date_str = "00.00.0000";
     this->set_date(0, 0, 0);
 }
 
 Date::Date(string str)
 {
+    this->date_str = "00.00.0000";
     this->set_date(str);
 }
 
 Date::Date(int d, int m, int y)
 {
+    this->date_str = "00.00.0000";
     this->set_date(d, m, y);
 }
 
@@ -124,9 +127,7 @@ bool Date::check_date()
 
 std::ostream& operator<< (std::ostream& out, Date &obj)
 {
-    string str = obj.convert_int2str(obj.day, obj.month, obj.year);
-
-    cout << str;
+    cout << obj.convert_int2str(obj.day, obj.month, obj.year);
 
     return out;
 }

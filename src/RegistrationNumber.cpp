@@ -11,11 +11,25 @@ string RegistrationNumber::convert_int2str(int area_number, int serial_number)
     int j = str.size()-1;
     while (i >= 0)
     {
-        if( is_int_char(str[j]) && j>=0 ) { this->reg_str[i] = str[j]; }
-        else                              { this->reg_str[i] = '0';    }
+        if(j >= 0)
+        {
+            if( is_int_char(str[j]) )
+            {
+                this->reg_str[i] = str[j]; 
+            }
+            else
+            {
+                this->reg_str[i] = '0';
+            }
+        }
+        else
+        {
+            this->reg_str[i] = '0';
+        }
         i--;
         j--;
     }
+
     this->reg_str[2] = '-';
 
     str = num2str(serial_number);
@@ -23,8 +37,21 @@ string RegistrationNumber::convert_int2str(int area_number, int serial_number)
     j = str.size()-1;
     while (i > 2)
     {
-        if( is_int_char(str[j]) && j>=0 ) { this->reg_str[i] = str[j]; }
-        else                              { this->reg_str[i] = '0';    }
+        if(j >= 0)
+        {
+            if( is_int_char(str[j]) )
+            {
+                this->reg_str[i] = str[j]; 
+            }
+            else
+            {
+                this->reg_str[i] = '0';
+            }
+        }
+        else
+        {
+            this->reg_str[i] = '0';
+        }
         i--;
         j--;
     }

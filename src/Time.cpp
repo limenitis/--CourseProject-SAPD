@@ -30,8 +30,6 @@ string Time::convert_int2str(int hour, int minute)
         time_str[4] = int2char(minute % 10);
     }
 
-    time_str[5] = '\0';
-
     return time_str;
 }
 
@@ -45,16 +43,19 @@ void Time::convert_str2int(string str)
 
 Time::Time()
 {
+    this->time_str = "00:00";
     this->set_time(0, 0);
 }
 
 Time::Time(string str)
 {
+    this->time_str = "00:00";
     convert_str2int(str);
 }
 
 Time::Time(int h, int m)
 {
+    this->time_str = "00:00";
     this->set_time(h, m);
 }
 
