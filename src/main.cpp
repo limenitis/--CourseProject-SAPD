@@ -5,24 +5,24 @@
 
 using namespace std;
 
-#define _CRTDBG_MAP_ALLOC
-#include <stdlib.h>
-#include <crtdbg.h>
-#ifdef _DEBUG
-    #ifndef DBG_NEW
-    #define DBG_NEW new ( _NORMAL_BLOCK , __FILE__ , __LINE__ )
-    #define newDBG_NEW
-    #endif
-#endif
+// #define _CRTDBG_MAP_ALLOC
+// #include <stdlib.h>
+// #include <crtdbg.h>
+// #ifdef _DEBUG
+//     #ifndef DBG_NEW
+//     #define DBG_NEW new ( _NORMAL_BLOCK , __FILE__ , __LINE__ )
+//     #define newDBG_NEW
+//     #endif
+// #endif
 
-#define DumpMemoryLeaks                                \
-_CrtSetReportMode(_CRT_WARN, _CRTDBG_MODE_FILE);       \
-_CrtSetReportFile(_CRT_WARN, _CRTDBG_FILE_STDOUT);     \
-_CrtSetReportMode(_CRT_ERROR, _CRTDBG_MODE_FILE);      \
-_CrtSetReportFile(_CRT_ERROR, _CRTDBG_FILE_STDOUT);    \
-_CrtSetReportMode(_CRT_ASSERT, _CRTDBG_MODE_FILE);     \
-_CrtSetReportFile(_CRT_ASSERT, _CRTDBG_FILE_STDOUT);   \
-_CrtDumpMemoryLeaks();
+// #define DumpMemoryLeaks                                \
+// _CrtSetReportMode(_CRT_WARN, _CRTDBG_MODE_FILE);       \
+// _CrtSetReportFile(_CRT_WARN, _CRTDBG_FILE_STDOUT);     \
+// _CrtSetReportMode(_CRT_ERROR, _CRTDBG_MODE_FILE);      \
+// _CrtSetReportFile(_CRT_ERROR, _CRTDBG_FILE_STDOUT);    \
+// _CrtSetReportMode(_CRT_ASSERT, _CRTDBG_MODE_FILE);     \
+// _CrtSetReportFile(_CRT_ASSERT, _CRTDBG_FILE_STDOUT);   \
+// _CrtDumpMemoryLeaks();
 
 
 void patients_menu(Hospital* hospital);
@@ -73,7 +73,7 @@ int main()
         delete hospital;
 
     }
-    DumpMemoryLeaks
+    // DumpMemoryLeaks
 
     return 0;
 }
