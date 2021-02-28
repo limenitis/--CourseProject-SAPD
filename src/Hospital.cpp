@@ -57,8 +57,27 @@ bool Hospital::clear_patients  ( void )
 
 bool Hospital::find_patient_by_name ( void )
 {
-    cout << "Empty implementation" << endl;
-    return true;
+    string name;
+    cout << "name : ";
+    cin >> name;
+
+    Patient new_patient;
+    new_patient.set_name(name);
+
+    HashTableNode element;
+    element.intsert(new_patient);
+
+    int result = table->find_by_name(element);
+
+    if (result != -1)
+    {
+        table->print(result);
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
 bool Hospital::find_patient_by_reg_num ( void )
@@ -77,7 +96,7 @@ bool Hospital::find_patient_by_reg_num ( void )
 
     if (result != -1)
     {
-        table->print(result, result+1);
+        table->print(result);
         return true;
     }
     else
@@ -98,10 +117,9 @@ bool Hospital::remove_doctor ( void )
     return true;
 }
 
-bool Hospital::edit_doctor ( void )
+void print_doctor  ( void )
 {
     cout << "Empty implementation" << endl;
-    return true;
 }
 
 void Hospital::print_doctors  ( void )

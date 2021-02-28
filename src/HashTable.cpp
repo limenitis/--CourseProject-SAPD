@@ -103,7 +103,7 @@ bool HashTable::resize()
 	log_info("HashTable", "resize", "start");
 
 	//create new
-	int new_table_size = (int)(table_size * 2); // prime number
+	int new_table_size = (int)(table_size * 2);
 	HashTableNode** new_table = new HashTableNode * [new_table_size] {nullptr};
 
 	HashTableNode **old_table = table;
@@ -243,6 +243,31 @@ int HashTable::find_key(const HashTableNode &node)
 			}
 		}
 		id = (id + get_hash_conflict(node)) % table_size;
+	}
+	log_error("HashTable", "find_key", "return " << "error : key don't found" );
+	return -1;
+}
+
+int HashTable::find_by_name (const HashTableNode &node)
+{
+	// int id = get_hash(node);
+	int id = 0;
+
+	while(id < table_size)
+	{
+		if ( table[id] != nullptr )
+		{
+			if ( table[id]->deleted() != true )
+			{
+				if (table[id]->data->get_name() == node.data->get_name())
+				{
+					log_info("HashTable", "find_key", "return " << id);
+					return id;
+				}
+			}
+			// id = (id + get_hash_conflict(node)) % table_size;
+		}
+ 		id +=1;
 	}
 	log_error("HashTable", "find_key", "return " << "error : key don't found" );
 	return -1;
@@ -411,6 +436,7 @@ void HashTable::print (int id)
 	cout << endl << endl;
 	if(table[id])
 	{
+		cout.setf(ios::left);
 		cout <<  "/ --------------------------------------------------------------------------------- \\ " << endl;
 		cout <<  "| :::::::::::::::::::::::::::::::::::: Patient :::::::::::::::::::::::::::::::::::: |  " << endl;
 		cout <<  "+ --------------------- + --------------------------------------------------------- +  " << endl;

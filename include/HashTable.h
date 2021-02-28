@@ -48,6 +48,8 @@ public:
 	bool remove   (const HashTableNode &data);
 	int  find_key (const HashTableNode &data);
 
+	int  find_by_name (const HashTableNode &data);
+
 	void print    (void);
 	void print    (int id);
 	void print    (int from, int to);

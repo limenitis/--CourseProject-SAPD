@@ -36,7 +36,7 @@ public:
 
     bool add_doctor    ( void );
     bool remove_doctor ( void );
-    bool edit_doctor   ( void );
+    void print_doctor  ( void );
     void print_doctors ( void );
     bool clear_doctors ( void );
     bool find_doctor_by_name ( void );
