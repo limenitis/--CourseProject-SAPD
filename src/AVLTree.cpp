@@ -1,5 +1,5 @@
-#include ".\..\include\AVLTree.h"
-#include ".\..\include\str-tools.h"
+#include ".\..\headers\AVLTree.h"
+#include ".\..\headers\str-tools.h"
 #include <iostream>
 #include <iomanip>
 using namespace std;
@@ -30,12 +30,6 @@ AVLTreeClass::AVLTreeClass()
 // деструктор
 AVLTreeClass::~AVLTreeClass()
 {
-	// while (count_elements >= 0)
-	// {
-	// 	remove(root);
-	// }
-	
-	// пройти дерево и собрать адреса, а затем удалить (почистить) эти адреса
 }
 
 // вставка в дерево

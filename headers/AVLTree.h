@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include <iostream>
-#include ".\..\include\Doctor.h"
+#include ".\..\headers\Doctor.h"
 using namespace std;
 
 class AVL_Node

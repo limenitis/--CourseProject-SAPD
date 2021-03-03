@@ -1,8 +1,8 @@
 #pragma once
 #include <iostream>
-#include ".\..\include\Patient.h"
-#include ".\..\include\Doctor.h"
-#include ".\..\include\Date.h"
+#include ".\..\headers\Patient.h"
+#include ".\..\headers\Doctor.h"
+#include ".\..\headers\Date.h"
 using namespace std;
 
 

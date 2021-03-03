@@ -1,6 +1,6 @@
-#include ".\..\include\Time.h"
-#include ".\..\include\str-tools.h"
-#include ".\..\include\SimpleLogs.h"
+#include ".\..\headers\Time.h"
+#include ".\..\headers\str-tools.h"
+#include ".\..\headers\SimpleLogs.h"
 
 using namespace std;
 

@@ -1,5 +1,5 @@
 #include <iostream>
-#include ".\..\include\str-tools.h"
+#include ".\..\headers\str-tools.h"
 
 bool is_int_char(char num)
 {

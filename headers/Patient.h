@@ -1,5 +1,5 @@
 #pragma once
-#include ".\..\include\RegistrationNumber.h"
+#include ".\..\headers\RegistrationNumber.h"
 
 class Patient
 {

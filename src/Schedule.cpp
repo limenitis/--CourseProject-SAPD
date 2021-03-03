@@ -1,7 +1,7 @@
-#include ".\..\include\Schedule.h"
-#include ".\..\include\Time.h"
-#include ".\..\include\str-tools.h"
-#include ".\..\include\SimpleLogs.h"
+#include ".\..\headers\Schedule.h"
+#include ".\..\headers\Time.h"
+#include ".\..\headers\str-tools.h"
+#include ".\..\headers\SimpleLogs.h"
 
 
 string Schedule::convert_int2str(Time start_time, Time finish_time)

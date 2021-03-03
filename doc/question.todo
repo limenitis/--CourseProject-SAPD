@@ -1,13 +1,4 @@
-﻿
-
-
-HashTable:
-    ✔ Need resize?                                         -- yes
-    ✔ Need correct key?                                    -- check to format + unical 
-AVLTree:
+﻿AVLTree:
     ✔ Destructor: How delete AVLTree (list or root method) -- обратный порядок обхода и удаление
 LinkedList:
     ✔ How sorting linked list (compare method)             -- int ASCII
-Another:
-    ✘ Need save data??                                     -- no
-

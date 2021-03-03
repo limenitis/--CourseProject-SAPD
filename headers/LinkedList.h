@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include <iostream>
 #include <fstream>
-#include ".\..\include\Direction.h"
+#include ".\..\headers\Direction.h"
 
 
 class LinkedListNode

@@ -1,6 +1,6 @@
-﻿#include ".\..\include\HashTable.h"
-#include ".\..\include\str-tools.h"
-#include ".\..\include\SimpleLogs.h"
+﻿#include ".\..\headers\HashTable.h"
+#include ".\..\headers\str-tools.h"
+#include ".\..\headers\SimpleLogs.h"
 #include <iostream>
 #include <iomanip>
 

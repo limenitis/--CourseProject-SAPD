@@ -1,4 +1,4 @@
-#include ".\..\include\Hospital.h"
+#include ".\..\headers\Hospital.h"
 
 Hospital::Hospital()
 {

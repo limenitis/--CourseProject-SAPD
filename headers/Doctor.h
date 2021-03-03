@@ -1,5 +1,5 @@
 #pragma once
-#include ".\..\include\Schedule.h"
+#include ".\..\headers\Schedule.h"
 
 class Doctor
 {

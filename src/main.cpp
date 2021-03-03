@@ -1,6 +1,6 @@
 ﻿#include <Windows.h>
 #include <iostream>
-#include ".\..\include\Hospital.h"
+#include ".\..\headers\Hospital.h"
 // #include ".\..\include\str-tools.h"
 
 using namespace std;

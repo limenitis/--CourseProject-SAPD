@@ -1,6 +1,6 @@
-#include ".\..\include\RegistrationNumber.h"
-#include ".\..\include\SimpleLogs.h"
-#include ".\..\include\str-tools.h"
+#include ".\..\headers\RegistrationNumber.h"
+#include ".\..\headers\SimpleLogs.h"
+#include ".\..\headers\str-tools.h"
 
 using namespace std;
 

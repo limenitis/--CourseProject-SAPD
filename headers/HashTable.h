@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include <iostream>
-#include ".\..\include\Patient.h"
-#include ".\..\include\RegistrationNumber.h"
+#include ".\..\headers\Patient.h"
+#include ".\..\headers\RegistrationNumber.h"
 
 using namespace std;
 

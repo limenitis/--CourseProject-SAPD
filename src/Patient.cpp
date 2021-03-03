@@ -1,6 +1,6 @@
-﻿#include ".\..\include\Patient.h"
-#include ".\..\include\SimpleLogs.h"
-#include ".\..\include\str-tools.h"
+﻿#include ".\..\headers\Patient.h"
+#include ".\..\headers\SimpleLogs.h"
+#include ".\..\headers\str-tools.h"
 
 Patient::Patient()
 {

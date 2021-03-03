@@ -5,13 +5,13 @@
 // #include ".\..\include\RegistrationNumber.h"
 // #include ".\..\include\str-tools.h"
 
-#include ".\..\include\HashTable.h"
-#include ".\..\include\LinkedList.h"
-#include ".\..\include\AVLTree.h"
+#include ".\..\headers\HashTable.h"
+#include ".\..\headers\LinkedList.h"
+#include ".\..\headers\AVLTree.h"
 
-#include ".\..\include\Doctor.h"
-#include ".\..\include\Patient.h"
-#include ".\..\include\Direction.h"
+#include ".\..\headers\Doctor.h"
+#include ".\..\headers\Patient.h"
+#include ".\..\headers\Direction.h"
 
 #include <iostream>
 // #include <fstream>
