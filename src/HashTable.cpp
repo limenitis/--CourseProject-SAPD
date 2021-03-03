@@ -390,7 +390,7 @@ void HashTable::print(int from, int to)
 /**
  * @brief print the interval
  * 
- * @param condition 
+ * @param condition - function with condition
  */
 void HashTable::print ( bool condition(int id) )
 {

@@ -128,3 +128,17 @@ std::ostream&  operator<< (std::ostream&  out,  Doctor &obj)
     return out;
 }
 
+std::istream&  operator>> (std::istream&  in,   Doctor &obj)
+{
+    cout << "Doctor name" << endl;
+    cin >> obj.doctor_name;
+    cout << "Specialization" << endl;
+    cin >> obj.specialization;
+    cout << "Cabinet number" << endl;
+    cin >> obj.cabinet_number;
+    cout << "Schedule" << endl;
+    cin >> obj.schedule;
+
+    return in;
+}
+

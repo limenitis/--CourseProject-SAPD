@@ -3,11 +3,15 @@
 Hospital::Hospital()
 {
     table = new HashTable;
+    tree  = new AVLTreeClass;
+    // list  = new LinkedList;
 }
 
 Hospital::~Hospital()
 {
     delete table;
+    delete tree;
+    // delete list;
 }
 
 bool Hospital::insert_patient()
@@ -105,26 +109,46 @@ bool Hospital::find_patient_by_reg_num ( void )
     }
 }
 
-bool Hospital::add_doctor ( void )
+bool Hospital::insert_doctor ( void )
 {
-    cout << "Empty implementation" << endl;
+    Doctor doc;
+    cin >> doc;
+
+    AVL_Node node(doc);
+    tree->insert(node);
+
     return true;
 }
 
 bool Hospital::remove_doctor ( void )
 {
-    cout << "Empty implementation" << endl;
+    string name;
+    cin >> name;
+
+    Doctor doc;
+    doc.set_doctor_name(name);
+
+    AVL_Node node(doc);
+    tree->insert(node);
+
     return true;
 }
 
-void print_doctor  ( void )
+void Hospital::print_doctor  ( void )
 {
-    cout << "Empty implementation" << endl;
+    string name;
+    cin >> name;
+
+    Doctor doc;
+    doc.set_doctor_name(name);
+
+    AVL_Node node(doc);
+    tree->print(node);
 }
 
 void Hospital::print_doctors  ( void )
 {
-    cout << "Empty implementation" << endl;
+    tree->print_list();
 }
 
 bool Hospital::clear_doctors  ( void )

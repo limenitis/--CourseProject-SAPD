@@ -31,6 +31,7 @@ public:
     friend bool operator==(Doctor doc1, Doctor doc2);
 
     friend std::ostream&  operator<< (std::ostream&  out,  Doctor &obj);
+    friend std::istream&  operator>> (std::istream&  in,   Doctor &obj);
 };
 
 

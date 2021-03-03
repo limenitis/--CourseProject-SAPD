@@ -90,11 +90,11 @@ void patients_menu(Hospital *hospital)
         cout << "+ ----------------------------------- +" << endl;
         cout << "|  mode 1 : insert patient            |" << endl;
         cout << "|  mode 2 : remove patient            |" << endl;
-        cout << "|  mode 3 : print patient             |" << endl;
-        cout << "|  mode 4 : print patients            |" << endl;
-        cout << "|  mode 5 : clear patient             |" << endl;
-        cout << "|  mode 6 : find_patient_by_name      |" << endl;
-        cout << "|  mode 7 : find_patient_by_reg_num   |" << endl;
+        cout << "|  mode 3 : print  patient            |" << endl;
+        cout << "|  mode 4 : print  patients           |" << endl;
+        cout << "|  mode 5 : clear  patients           |" << endl;
+        cout << "|  mode 6 : find patient by name      |" << endl;
+        cout << "|  mode 7 : find patient by reg num   |" << endl;
         cout << "|  mode 8 : exit                      |" << endl;
         cout << "+ ----------------------------------- +" << endl;
         cin >> patient_key;
@@ -134,5 +134,61 @@ void patients_menu(Hospital *hospital)
     }
 }
 
-void doctors_menu(Hospital* hospital){}
+void doctors_menu(Hospital* hospital)
+{
+    int doctors_key;
+    while (true)
+    {
+        //cout << "|  mode   :                           |" << endl;
+
+        cout << "+ ---------------------------------- +" << endl;
+        cout << "| :::::::::: Doctors menu :::::::::: |" << endl;
+        cout << "+ ---------------------------------- +" << endl;
+        cout << "|  mode 1 : insert doctor            |" << endl;
+        cout << "|  mode 2 : remove doctor            |" << endl;
+        cout << "|  mode 3 : print  doctor            |" << endl;
+        cout << "|  mode 4 : print  doctors           |" << endl;
+        cout << "|  mode 5 : clear  doctors           |" << endl;
+        cout << "|  mode 6 : find doctor by name      |" << endl;
+        cout << "|  mode 7 : find doctor by post      |" << endl;
+        cout << "|  mode 8 : exit                     |" << endl;
+        cout << "+ ---------------------------------- +" << endl;
+        cin >> doctors_key;
+
+        if (doctors_key == 1)
+        {
+            hospital->insert_doctor();
+        }
+        else if (doctors_key == 2)
+        {
+            hospital->remove_doctor();
+        }
+        else if (doctors_key == 3)
+        {
+            hospital->print_doctor();
+        }
+        else if (doctors_key == 4)
+        {
+            hospital->print_doctors();
+        }
+        else if (doctors_key == 5)
+        {
+            hospital->clear_doctors();
+        }
+        else if (doctors_key == 6)
+        {
+            hospital->find_doctor_by_name();
+        }
+        else if (doctors_key == 7)
+        {
+            hospital->find_doctor_by_post();
+        }
+        else
+        {
+            break;
+        }
+    }
+}
+
+
 void directions_menu(Hospital* hospital){}

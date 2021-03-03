@@ -1,5 +1,4 @@
-﻿#pragma once
-#include ".\..\include\LinkedList.h"
+﻿#include ".\..\include\LinkedList.h"
 #include <iostream>
 #include <iomanip>
 #include <fstream>

@@ -7,7 +7,6 @@ class RegistrationNumber
 {
 private:
     // format reg: 00-0000000
-
     string reg_str;
     int area_number;
     int serial_number;
