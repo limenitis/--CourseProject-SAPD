@@ -1,6 +1,7 @@
 #include ".\..\include\AVLTree.h"
 #include ".\..\include\str-tools.h"
 #include <iostream>
+#include <iomanip>
 using namespace std;
 
 AVL_Node::AVL_Node(Doctor doc)
@@ -136,19 +137,38 @@ AVL_Node* AVLTreeClass::find(AVL_Node* node, AVL_Node* find_node)
 
 void AVLTreeClass::print()
 {
-	print(root, 0);
+	print(root, 7);
+}
+
+void AVLTreeClass::print(AVL_Node p)
+{
+    cout << "Empty implementation" << endl;
+}
+void AVLTreeClass::print_list(void)
+{
+    cout << "Empty implementation" << endl;
+
+	this->print();
 }
 
 // вывод дерева на экран
-void AVLTreeClass::print(AVL_Node* p, int l)
+void AVLTreeClass::print(AVL_Node* p, int len_spase)
 {
 	if (p)
 	{
-		print(p->right, l + 1);
-		for (int i = 0; i <= l; i++) cout << "           ";
-		cout << p->key << "|-----------" << endl;
-		print(p->left, l + 1);
+		print(p->right, len_spase + 7 + p->key.get_doctor_name().size()-1);
+		for (int i = 0; i <= len_spase; i++) cout << " ";
+		cout << *p << endl;
+		print(p->left, len_spase + 7 + p->key.get_doctor_name().size()-1);
 	}
+}
+
+std::ostream&  operator<< (std::ostream&  out,  AVL_Node &obj)
+{
+	out.setf(ios::left);
+	out << setw(30) << obj.key.get_doctor_name() + "------|";
+
+	return out;
 }
 
 // количество элементов в дереве

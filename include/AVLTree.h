@@ -18,6 +18,8 @@ public:
     AVL_Node(AVL_Node* data);
 
     friend class AVLTreeClass;
+    friend std::ostream&  operator<< (std::ostream&  out,  AVL_Node &obj);
+    // friend std::istream&  operator>> (std::istream&  in,   AVL_Node &obj);
 };
 
 
@@ -48,7 +50,11 @@ public:
     void        insert		(AVL_Node);        // вставка данных в дерево с корнем p
     bool        remove      (AVL_Node);        // функция удаления узла
     AVL_Node*   find 	    (AVL_Node);        // поиск узла с искомым значением
-    void        print		(void);            // вывод дерева на экран с обходом в высоту
+
+    void        print       (AVL_Node);        //
+    void        print		(void);            //
+    void        print_list  (void);            //
+
     int         count       (void);            // считает количество вершин в дереве
 };
 
