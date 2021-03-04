@@ -63,7 +63,8 @@ bool Hospital::find_patient_by_name ( void )
 {
     string name;
     cout << "name : ";
-    cin >> name;
+    cin.ignore();
+    getline(cin, name, '\n');
 
     Patient new_patient;
     new_patient.set_name(name);
@@ -123,13 +124,15 @@ bool Hospital::insert_doctor ( void )
 bool Hospital::remove_doctor ( void )
 {
     string name;
-    cin >> name;
+    cout << "name : ";
+    cin.ignore();
+    getline(cin, name, '\n');
 
     Doctor doc;
     doc.set_doctor_name(name);
 
     AVL_Node node(doc);
-    tree->insert(node);
+    tree->remove(node);
 
     return true;
 }
@@ -137,7 +140,9 @@ bool Hospital::remove_doctor ( void )
 void Hospital::print_doctor  ( void )
 {
     string name;
-    cin >> name;
+    cout << "name : ";
+    cin.ignore();
+    getline(cin, name, '\n');
 
     Doctor doc;
     doc.set_doctor_name(name);

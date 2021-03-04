@@ -194,7 +194,7 @@ AVL_Node* AVLTreeClass::findMin(AVL_Node* p)
 // балансировка
 AVL_Node* AVLTreeClass::balance(AVL_Node* p)
 {
-	log_info( "AVLTreeClass", "balance", "balance around" << p->key.get_doctor_name() );
+	log_info( "AVLTreeClass", "balance", "balance around " << p->key.get_doctor_name() );
 
 	fixheight(p);
 	if (bfactor(p) == 2)
@@ -219,7 +219,7 @@ AVL_Node* AVLTreeClass::balance(AVL_Node* p)
 // поворот вправо
 AVL_Node* AVLTreeClass::rotateright(AVL_Node* p)
 {
-	log_info( "AVLTreeClass", "rotateright", "rotate left around" << p->key.get_doctor_name() );
+	log_info( "AVLTreeClass", "rotateright", "rotate left around " << p->key.get_doctor_name() );
 	AVL_Node* q = p->left; 	  // выбор левого поддерева
 	if (!q) return p; 	  // если его нет, возвращаем текущий корень
 	p->left = q->right;   // переопределяем левый указатель существующего корня
@@ -233,7 +233,7 @@ AVL_Node* AVLTreeClass::rotateright(AVL_Node* p)
 // поворот влево
 AVL_Node* AVLTreeClass::rotateleft(AVL_Node* q)
 {
-	log_info( "AVLTreeClass", "rotateleft", "rotate left around" << q->key.get_doctor_name() );
+	log_info( "AVLTreeClass", "rotateleft", "rotate left around " << q->key.get_doctor_name() );
 	AVL_Node* p = q->right;
 	if (!p) return q;
 	q->right = p->left;

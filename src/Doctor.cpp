@@ -1,6 +1,8 @@
 ﻿#include ".\..\headers\Doctor.h"
 #include ".\..\headers\str-tools.h"
 #include ".\..\headers\SimpleLogs.h"
+#include <iostream>
+#include <string>
 
 using namespace std;
 
@@ -82,6 +84,7 @@ bool operator< (Doctor doc1, Doctor doc2)
         {
             return false;
         }
+        i++;
     }
     return false;
 }
@@ -99,6 +102,7 @@ bool operator> (Doctor doc1, Doctor doc2)
         {
             return false;
         }
+        i++;
     }
     return false;
 }
@@ -117,6 +121,7 @@ bool operator==(Doctor doc1, Doctor doc2)
         {
             return false;
         }
+        i++;
     }
     return true;
 }
@@ -131,9 +136,13 @@ std::ostream&  operator<< (std::ostream&  out,  Doctor &obj)
 std::istream&  operator>> (std::istream&  in,   Doctor &obj)
 {
     cout << "Doctor name" << endl;
-    cin >> obj.doctor_name;
+    cin.ignore();
+    getline(cin, obj.doctor_name, '\n');
+
     cout << "Specialization" << endl;
-    cin >> obj.specialization;
+    cin.ignore();
+    getline(cin, obj.specialization, '\n');
+
     cout << "Cabinet number" << endl;
     cin >> obj.cabinet_number;
     cout << "Schedule" << endl;
