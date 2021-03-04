@@ -1,5 +1,6 @@
 #include ".\..\headers\AVLTree.h"
 #include ".\..\headers\str-tools.h"
+#include ".\..\headers\SimpleLogs.h"
 #include <iostream>
 #include <iomanip>
 using namespace std;
@@ -112,19 +113,23 @@ AVL_Node* AVLTreeClass::find(AVL_Node* node, AVL_Node* find_node)
 	{
 		if (node->key > find_node->key) 
 		{ 
+			log_info( "AVLTreeClass", "find", "walk left");
 			return find(node->left, find_node);
 		}
 		else if (node->key < find_node->key) 
 		{
+			log_info( "AVLTreeClass", "find", "walk rigth");
 			return find(node->right, find_node);
 		}
 		else  // node->key == find_node->key
 		{
+			log_info( "AVLTreeClass", "find", "true");
 			return node;
 		}
 	}
 	else
 	{
+		log_error( "AVLTreeClass", "find", "false");
 		return nullptr;
 	}
 }
@@ -140,8 +145,6 @@ void AVLTreeClass::print(AVL_Node p)
 }
 void AVLTreeClass::print_list(void)
 {
-    cout << "Empty implementation" << endl;
-
 	this->print();
 }
 
@@ -191,6 +194,8 @@ AVL_Node* AVLTreeClass::findMin(AVL_Node* p)
 // балансировка
 AVL_Node* AVLTreeClass::balance(AVL_Node* p)
 {
+	log_info( "AVLTreeClass", "balance", "balance around" << p->key.get_doctor_name() );
+
 	fixheight(p);
 	if (bfactor(p) == 2)
 	{
@@ -214,6 +219,7 @@ AVL_Node* AVLTreeClass::balance(AVL_Node* p)
 // поворот вправо
 AVL_Node* AVLTreeClass::rotateright(AVL_Node* p)
 {
+	log_info( "AVLTreeClass", "rotateright", "rotate left around" << p->key.get_doctor_name() );
 	AVL_Node* q = p->left; 	  // выбор левого поддерева
 	if (!q) return p; 	  // если его нет, возвращаем текущий корень
 	p->left = q->right;   // переопределяем левый указатель существующего корня
@@ -227,6 +233,7 @@ AVL_Node* AVLTreeClass::rotateright(AVL_Node* p)
 // поворот влево
 AVL_Node* AVLTreeClass::rotateleft(AVL_Node* q)
 {
+	log_info( "AVLTreeClass", "rotateleft", "rotate left around" << q->key.get_doctor_name() );
 	AVL_Node* p = q->right;
 	if (!p) return q;
 	q->right = p->left;
