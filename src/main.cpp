@@ -5,24 +5,24 @@
 
 using namespace std;
 
-// #define _CRTDBG_MAP_ALLOC
-// #include <stdlib.h>
-// #include <crtdbg.h>
-// #ifdef _DEBUG
-//     #ifndef DBG_NEW
-//     #define DBG_NEW new ( _NORMAL_BLOCK , __FILE__ , __LINE__ )
-//     #define newDBG_NEW
-//     #endif
-// #endif
+ #define _CRTDBG_MAP_ALLOC
+ #include <stdlib.h>
+ #include <crtdbg.h>
+ #ifdef _DEBUG
+     #ifndef DBG_NEW
+     #define DBG_NEW new ( _NORMAL_BLOCK , __FILE__ , __LINE__ )
+     #define newDBG_NEW
+     #endif
+ #endif
 
-// #define DumpMemoryLeaks                                \
-// _CrtSetReportMode(_CRT_WARN, _CRTDBG_MODE_FILE);       \
-// _CrtSetReportFile(_CRT_WARN, _CRTDBG_FILE_STDOUT);     \
-// _CrtSetReportMode(_CRT_ERROR, _CRTDBG_MODE_FILE);      \
-// _CrtSetReportFile(_CRT_ERROR, _CRTDBG_FILE_STDOUT);    \
-// _CrtSetReportMode(_CRT_ASSERT, _CRTDBG_MODE_FILE);     \
-// _CrtSetReportFile(_CRT_ASSERT, _CRTDBG_FILE_STDOUT);   \
-// _CrtDumpMemoryLeaks();
+ #define DumpMemoryLeaks                                \
+ _CrtSetReportMode(_CRT_WARN, _CRTDBG_MODE_FILE);       \
+ _CrtSetReportFile(_CRT_WARN, _CRTDBG_FILE_STDOUT);     \
+ _CrtSetReportMode(_CRT_ERROR, _CRTDBG_MODE_FILE);      \
+ _CrtSetReportFile(_CRT_ERROR, _CRTDBG_FILE_STDOUT);    \
+ _CrtSetReportMode(_CRT_ASSERT, _CRTDBG_MODE_FILE);     \
+ _CrtSetReportFile(_CRT_ASSERT, _CRTDBG_FILE_STDOUT);   \
+ _CrtDumpMemoryLeaks();
 
 
 void patients_menu(Hospital* hospital);
@@ -73,7 +73,7 @@ int main()
         delete hospital;
 
     }
-    // DumpMemoryLeaks
+     DumpMemoryLeaks
 
     return 0;
 }
@@ -139,19 +139,18 @@ void doctors_menu(Hospital* hospital)
     int doctors_key;
     while (true)
     {
-        //cout << "|  mode   :                           |" << endl;
-
         cout << "+ ---------------------------------- +" << endl;
         cout << "| :::::::::: Doctors menu :::::::::: |" << endl;
         cout << "+ ---------------------------------- +" << endl;
-        cout << "|  mode 1 : insert doctor            |" << endl;
-        cout << "|  mode 2 : remove doctor            |" << endl;
-        cout << "|  mode 3 : print  doctor            |" << endl;
-        cout << "|  mode 4 : print  doctors           |" << endl;
-        cout << "|  mode 5 : clear  doctors           |" << endl;
-        cout << "|  mode 6 : find doctor by name      |" << endl;
-        cout << "|  mode 7 : find doctor by post      |" << endl;
-        cout << "|  mode 8 : exit                     |" << endl;
+        cout << "| + mode 1 : insert doctor           |" << endl;
+        cout << "| - mode 2 : remove doctor           |" << endl;
+        cout << "| + mode 3 : print  doctor           |" << endl;
+        cout << "| + mode 4 : print  doctors          |" << endl;
+        cout << "| + mode 5 : print  doctors tree     |" << endl;
+        cout << "| - mode 6 : clear  doctors          |" << endl;
+        cout << "| - mode 7 : find doctor by name     |" << endl;
+        cout << "| - mode 8 : find doctor by post     |" << endl;
+        cout << "| + mode 9 : exit                    |" << endl;
         cout << "+ ---------------------------------- +" << endl;
         cin >> doctors_key;
 
@@ -173,13 +172,17 @@ void doctors_menu(Hospital* hospital)
         }
         else if (doctors_key == 5)
         {
-            hospital->clear_doctors();
+            hospital->print_doctors_tree();
         }
         else if (doctors_key == 6)
         {
-            hospital->find_doctor_by_name();
+            hospital->clear_doctors();
         }
         else if (doctors_key == 7)
+        {
+            hospital->find_doctor_by_name();
+        }
+        else if (doctors_key == 8)
         {
             hospital->find_doctor_by_post();
         }

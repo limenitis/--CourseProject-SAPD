@@ -141,7 +141,7 @@ std::istream&  operator>> (std::istream&  in,   Doctor &obj)
 
     cout << "Specialization" << endl;
     cin.ignore();
-    getline(cin, obj.specialization, '\n');
+    getline(cin, obj.specialization, '\n'); // first symb
 
     cout << "Cabinet number" << endl;
     cin >> obj.cabinet_number;

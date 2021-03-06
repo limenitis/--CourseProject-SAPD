@@ -3,7 +3,7 @@
 Hospital::Hospital()
 {
     table = new HashTable;
-    tree  = new AVLTreeClass;
+    tree  = new AVLTree;
     // list  = new LinkedList;
 }
 
@@ -149,6 +149,11 @@ void Hospital::print_doctor  ( void )
 
     AVL_Node node(doc);
     tree->print(node);
+}
+
+void Hospital::print_doctors_tree  ( void )
+{
+    tree->print();
 }
 
 void Hospital::print_doctors  ( void )

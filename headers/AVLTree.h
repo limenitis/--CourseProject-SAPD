@@ -17,13 +17,13 @@ public:
     AVL_Node(Doctor data);
     AVL_Node(AVL_Node* data);
 
-    friend class AVLTreeClass;
+    friend class AVLTree;
     friend std::ostream&  operator<< (std::ostream&  out,  AVL_Node &obj);
     // friend std::istream&  operator>> (std::istream&  in,   AVL_Node &obj);
 };
 
 
-class AVLTreeClass
+class AVLTree
 {
 private:
     AVL_Node  *root;                   // корень
@@ -42,20 +42,21 @@ private:
     int    bfactor          (AVL_Node*);              // баланс-фактор
     int    max_depth        (AVL_Node*);              // смотрим значение высоты всего дерева
     void   print		    (AVL_Node*, int);         // вывод дерева на экран с обходом в высоту
+    void   print_list       (AVL_Node*, bool);        // 
 
 public:
-    AVLTreeClass();    // конструктор
-    ~AVLTreeClass();   // деструктор
+    AVLTree();    // конструктор
+    ~AVLTree();   // деструктор
 
-    void        insert		(AVL_Node);        // вставка данных в дерево с корнем p
+    bool        insert		(AVL_Node);        // вставка данных в дерево с корнем p
     bool        remove      (AVL_Node);        // функция удаления узла
     AVL_Node*   find 	    (AVL_Node);        // поиск узла с искомым значением
 
-    void        print       (AVL_Node);        //
     void        print		(void);            //
-    void        print_list  (void);            //
+    void        print_list  (void);            // 
+    void        print       (AVL_Node);        //
 
-    int         count       (void);            // считает количество вершин в дереве
+    int         size        (void);            // считает количество вершин в дереве
 };
 
 

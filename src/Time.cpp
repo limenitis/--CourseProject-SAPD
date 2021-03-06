@@ -198,12 +198,14 @@ std::ostream& operator<< (std::ostream& out, Time &obj)
 
 std::istream& operator>> (std::istream& in,  Time &obj)
 {
-    int h, m;
+    // int h, m;
+    // cout << "hour   : "; in >> h;
+    // cout << "minute : "; in >> m;
+    // obj.set_time(h, m);
 
-    cout << "hour   : "; in >> h;
-    cout << "minute : "; in >> m;
-
-    obj.set_time(h, m);
+    string s;
+    cout << "time : "; in >> s;
+    obj.set_time(s);
 
     return in;
 }

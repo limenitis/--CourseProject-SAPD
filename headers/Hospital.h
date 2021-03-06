@@ -21,7 +21,7 @@ using namespace std;
 class Hospital{
 private:
     HashTable* table;
-    AVLTreeClass* tree;
+    AVLTree* tree;
     // LinkedList* list;
 
 public:
@@ -42,6 +42,7 @@ public:
     void print_doctor  ( void );
     void print_doctors ( void );
     bool clear_doctors ( void );
+    void print_doctors_tree  ( void );
     bool find_doctor_by_name ( void );
     bool find_doctor_by_post ( void );
 
