@@ -35,6 +35,8 @@ string Time::convert_int2str(int hour, int minute)
 
 void Time::convert_str2int(string str)
 {
+    if (str.size() != 5){ this->set_time(0, 0); }
+    
     int h = char2int(str[0]) * 10 + char2int(str[1]);
     int m = char2int(str[3]) * 10 + char2int(str[4]);
 

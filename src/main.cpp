@@ -143,12 +143,12 @@ void doctors_menu(Hospital* hospital)
         cout << "| :::::::::: Doctors menu :::::::::: |" << endl;
         cout << "+ ---------------------------------- +" << endl;
         cout << "| + mode 1 : insert doctor           |" << endl;
-        cout << "| - mode 2 : remove doctor           |" << endl;
+        cout << "| + mode 2 : remove doctor           |" << endl;
         cout << "| + mode 3 : print  doctor           |" << endl;
         cout << "| + mode 4 : print  doctors          |" << endl;
         cout << "| + mode 5 : print  doctors tree     |" << endl;
         cout << "| - mode 6 : clear  doctors          |" << endl;
-        cout << "| - mode 7 : find doctor by name     |" << endl;
+        cout << "| + mode 7 : find doctor by name     |" << endl;
         cout << "| - mode 8 : find doctor by post     |" << endl;
         cout << "| + mode 9 : exit                    |" << endl;
         cout << "+ ---------------------------------- +" << endl;

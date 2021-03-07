@@ -214,6 +214,7 @@ void AVLTree::print(AVL_Node node)
 	}
 	else
 	{
+		cout << "+ ---------------------------------------------------------------------- +  "      << endl;
 		cout << "| ::::::::::::::::::::::::::::::: Empty :::::::::::::::::::::::::::::::: |  "      << endl;
 	}
 	cout << "\\ ---------------------------------------------------------------------- / "      << endl << endl;
@@ -240,12 +241,12 @@ void AVLTree::print_list(AVL_Node* node, bool print_head = 0)
 		cout <<  "| ::::::::::::::::::::::::::::::::: Doctors :::::::::::::::::::::::::::::::::: | " << endl;
 		cout <<  "+ ----------------------- + ------------------------- + ------- + ------------ + " << endl;
 		cout <<  "|  Specialization         |        Doctor name        | Cabinet |   Schedule   | " << endl;
-		cout <<  "+ ----------------------- + ------------------------- + ------- + ------------ + " << endl;
+		// cout <<  "+ ----------------------- + ------------------------- + ------- + ------------ + " << endl;
 	}
 
 	if (node)
 	{
-		print_list(node->right);
+		cout <<  "+ ----------------------- + ------------------------- + ------- + ------------ + " << endl;
 		// cout << "|" <<
 		cout <<
 		          "|  " << setw(21) << node->key.get_specialization()          << 
@@ -253,6 +254,7 @@ void AVLTree::print_list(AVL_Node* node, bool print_head = 0)
 				"  |  " << setw( 5) << node->key.get_cabinet_number()          << 
 				"  |  " << setw(10) << node->key.get_schedule().get_schedule() << 
 		         " | "   << endl;
+		print_list(node->right);
 		print_list(node->left);
 	}
 }

@@ -169,7 +169,18 @@ bool Hospital::clear_doctors  ( void )
 
 bool Hospital::find_doctor_by_name ( void )
 {
-    cout << "Empty implementation" << endl;
+    string name;
+    cout << "name : ";
+    cin.ignore();
+    getline(cin, name, '\n');
+
+    Doctor doc;
+    doc.set_doctor_name(name);
+
+    AVL_Node node(doc);
+
+    // tree->print(tree->find(node));
+    tree->print(node);
     return true;
 }
 
